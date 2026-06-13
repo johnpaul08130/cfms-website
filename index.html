@@ -1031,23 +1031,12 @@ footer{background:var(--green-dark)}
       <li><a onclick="goTo('home')" class="active">Home</a></li>
       <li><a onclick="goTo('about')">About Us</a></li>
       <li><a onclick="goTo('academics')">Academics</a></li>
-      <li><a onclick="goTo('subjects')">Subjects</a></li>
       <li><a onclick="goTo('earlyyears')">Nursery &amp; Primary</a></li>
       <li><a onclick="goTo('admissions')">Admissions</a></li>
-      <li><a onclick="goTo('portal')">🎓 Student Portal</a></li>
-      <li><a onclick="goTo('portal')">🎓 Portal</a>
-    <a onclick="goTo('results')">Check Results</a></li>
-      
-      
-      <li><a onclick="goTo('fees')">💰 Fees</a></li>
-      
-      <li>    <a onclick="goTo('fees')">💰 Fees</a>
-    <a onclick="goTo('database')">📁 Database</a></li>
-      
-      <li><a onclick="goTo('fees')">💰 Fees</a></li>
-      
-      <li>    <a onclick="goTo('careers')">Careers</a>
-    <a onclick="goTo('contact')">Contact</a></li>
+      <li><a onclick="goTo('portal')">&#127891; Portal</a></li>
+      <li><a onclick="goTo('results')">Results</a></li>
+      <li><a onclick="goTo('careers')">Careers</a></li>
+      <li><a onclick="goTo('contact')">Contact</a></li>
     </ul>
     <button class="nav-apply" onclick="goTo('admissions')">Apply Now</button>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -1058,15 +1047,10 @@ footer{background:var(--green-dark)}
     <a onclick="goTo('home')">Home</a>
     <a onclick="goTo('about')">About Us</a>
     <a onclick="goTo('academics')">Academics</a>
-    <a onclick="goTo('subjects')">Subjects</a>
     <a onclick="goTo('earlyyears')">Nursery &amp; Primary</a>
     <a onclick="goTo('admissions')">Admissions</a>
-    <a onclick="goTo('portal')">🎓 Portal</a>
+    <a onclick="goTo('portal')">🎓 Student Portal</a>
     <a onclick="goTo('results')">Check Results</a>
-    <a onclick="goTo('fees')">💰 Fees</a>
-    <a onclick="goTo('fees')">💰 Fees</a>
-    <a onclick="goTo('database')">📁 Database</a>
-    <a onclick="goTo('fees')">💰 Fees</a>
     <a onclick="goTo('careers')">Careers</a>
     <a onclick="goTo('contact')">Contact</a>
   </div>
@@ -1654,9 +1638,7 @@ footer{background:var(--green-dark)}
           <div style="font-size:11px;font-weight:700;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Delivery Status</div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <div id="ds-email" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>📧</span> Email <span id="ds-email-ic">⏳</span></div>
-            <div id="ds-sheets" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>📊</span> Google Sheets <span id="ds-sheets-ic">⏳</span></div>
-            <div id="ds-wa" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>💬</span> WhatsApp <span id="ds-wa-ic">⏳</span></div>
-          </div>
+            <div id="ds-sheets" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>📊</span> Google Sheets <span id="ds-sheets-ic">⏳</span></div></div>
         </div>
 
         <div id="appForm">
@@ -1792,40 +1774,6 @@ footer{background:var(--green-dark)}
         </div>
       </div>
 
-      <!-- STEP 3: WhatsApp -->
-      <div class="setup-card">
-        <div class="setup-card-head">
-          <div class="setup-num" style="background:#25D366">3</div>
-          <div>
-            <h4>💬 WhatsApp (CallMeBot)</h4>
-            <p>Instant notification on +2348062686710</p>
-          </div>
-        </div>
-        <div class="setup-card-body">
-          <ol>
-            
-            <li>Add this number to your contacts: <strong>+34 644 63 80 99</strong> (name it "CallMeBot")</li>
-            <li>Send this exact message to that number:<br><strong>"I allow callmebot to send me messages"</strong></li>
-            <li>Within seconds, CallMeBot will reply with your <strong>API Key</strong> (a 6-digit number)</li>
-            <li>Open the website HTML in VS Code → find <strong>CONFIG</strong> → paste your key into <strong>whatsapp_apikey</strong></li>
-            <li>The phone number is already set to <strong>2348062686710</strong></li>
-          </ol>
-          <div class="setup-note"><strong>Free forever.</strong> Every application submission will send you a formatted WhatsApp message with all student details instantly.</div>
-          <div class="code-box">Sample WhatsApp Message:
-
-📋 NEW CFMS APPLICATION
-━━━━━━━━━━━━━━━━━━
-👤 Student: Emeka Okafor
-🎂 DOB: 2015-03-12 | Male
-📚 Division: primary — Primary 1
-🏫 Campus: Main Campus
-👨‍👩‍👦 Parent: Mr. John Okafor
-📞 Phone: +234 806 268 6710
-🕐 Time: 26/04/2025, 10:32am
-🔖 Ref: CFMS-APP-482910</div>
-        </div>
-      </div>
-
     </div>
 
     <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:22px 26px;margin-top:28px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
@@ -1929,15 +1877,144 @@ footer{background:var(--green-dark)}
           <button class="logout-btn" onclick="logoutTeacher()">Logout</button>
         </div>
         <div class="portal-body">
-          <div class="instr">
-            <h5>📋 How to Upload Results</h5>
-            <ol>
-              <li>Click <button class="tpl-btn" onclick="downloadTemplate()">Download Template</button> and open in Microsoft Excel or Google Sheets</li>
-              <li>Fill columns: <strong>Student ID, Student Name, Class, Term, Academic Year, Subject, CA Score, Exam Score</strong></li>
-              <li>CA Score is out of 40 · Exam Score is out of 60 · Total = 100</li>
-              <li>Save as <strong>.xlsx</strong> or <strong>.csv</strong> and upload below</li>
-              <li>Results become available to students immediately after upload</li>
-            </ol>
+
+          <!-- STEP 1: SELECT CLASS & SUBJECT -->
+          <div class="instr" style="margin-bottom:0;border-radius:6px 6px 0 0">
+            <h5>📋 Step 1 — Select Your Class &amp; Subject</h5>
+            <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Choose the class you teach and the subject you are uploading results for. This pre-fills your template automatically.</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px">
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Term *</label>
+                <select id="tpl_term" onchange="updateTemplatePreview()" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Term</option>
+                  <option value="First Term">First Term</option>
+                  <option value="Second Term">Second Term</option>
+                  <option value="Third Term">Third Term</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Academic Year *</label>
+                <select id="tpl_year" onchange="updateTemplatePreview()" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Year</option>
+                  <option value="2024/2025">2024/2025</option>
+                  <option value="2025/2026">2025/2026</option>
+                  <option value="2023/2024">2023/2024</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Class *</label>
+                <select id="tpl_class" onchange="updateTemplatePreview()" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Class</option>
+                  <optgroup label="Nursery">
+                    <option>Creche</option>
+                    <option>Nursery 1</option>
+                    <option>Nursery 2</option>
+                  </optgroup>
+                  <optgroup label="Primary">
+                    <option>Primary 1</option><option>Primary 2</option><option>Primary 3</option>
+                    <option>Primary 4</option><option>Primary 5</option><option>Primary 6</option>
+                  </optgroup>
+                  <optgroup label="Junior Secondary">
+                    <option>JSS 1A</option><option>JSS 1B</option>
+                    <option>JSS 2A</option><option>JSS 2B</option>
+                    <option>JSS 3A</option><option>JSS 3B</option>
+                  </optgroup>
+                  <optgroup label="Senior Secondary">
+                    <option>SS 1 Science</option><option>SS 1 Commercial</option><option>SS 1 Arts</option>
+                    <option>SS 2 Science</option><option>SS 2 Commercial</option><option>SS 2 Arts</option>
+                    <option>SS 3 Science</option><option>SS 3 Commercial</option><option>SS 3 Arts</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Subject *</label>
+                <select id="tpl_subject" onchange="updateTemplatePreview()" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Subject</option>
+                  <optgroup label="Core Subjects">
+                    <option>English Language</option><option>Mathematics</option>
+                    <option>Basic Science</option><option>Basic Technology</option>
+                    <option>Social Studies</option><option>Christian Religious Studies (CRS)</option>
+                    <option>Civic Education</option><option>Igbo Language</option>
+                    <option>Computer Studies</option>
+                  </optgroup>
+                  <optgroup label="Sciences (SS)">
+                    <option>Physics</option><option>Chemistry</option><option>Biology</option>
+                    <option>Further Mathematics</option><option>Agricultural Science</option>
+                  </optgroup>
+                  <optgroup label="Commercial (SS)">
+                    <option>Economics</option><option>Commerce</option>
+                    <option>Financial Accounting</option><option>Government</option>
+                    <option>Business Studies</option>
+                  </optgroup>
+                  <optgroup label="Arts (SS)">
+                    <option>Literature in English</option><option>History</option>
+                    <option>Geography</option><option>Visual Arts</option>
+                    <option>Technical Drawing</option>
+                  </optgroup>
+                  <optgroup label="Others">
+                    <option>Home Economics</option><option>Food &amp; Nutrition</option>
+                    <option>French</option><option>Physical Education</option>
+                    <option>Fine &amp; Creative Arts</option>
+                  </optgroup>
+                  <optgroup label="Primary/Nursery">
+                    <option>Number Work</option><option>Phonics / Reading</option>
+                    <option>Handwriting</option><option>Quantitative Reasoning</option>
+                    <option>Verbal Reasoning</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Teacher Name</label>
+                <input type="text" id="tpl_teacher" placeholder="e.g. Mr. Okafor" onchange="updateTemplatePreview()"
+                  style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+              </div>
+            </div>
+
+            <!-- Template preview -->
+            <div id="templatePreviewWrap" style="display:none;margin-bottom:16px">
+              <div style="background:var(--green-dark);color:white;padding:10px 14px;border-radius:4px 4px 0 0;font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center">
+                <span>📄 Your Template Preview (pre-filled with your class &amp; subject)</span>
+                <button onclick="downloadSmartTemplate()" style="background:var(--gold);color:var(--green-dark);border:none;padding:6px 16px;border-radius:3px;font-size:12px;font-weight:700;cursor:pointer">⬇ Download Template</button>
+              </div>
+              <div style="overflow-x:auto;border:1px solid var(--light-gray);border-top:none;border-radius:0 0 4px 4px">
+                <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
+                  <thead>
+                    <tr style="background:rgba(0,107,53,.08)">
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Student ID</th>
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Student Name</th>
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Class</th>
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Term</th>
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Academic Year</th>
+                      <th style="padding:8px 10px;text-align:left;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px;background:rgba(201,150,12,.15)">Subject</th>
+                      <th style="padding:8px 10px;text-align:center;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">CA Score (40)</th>
+                      <th style="padding:8px 10px;text-align:center;border:1px solid var(--light-gray);color:var(--green-dark);font-size:11px">Exam Score (60)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="templatePreviewBody"></tbody>
+                </table>
+              </div>
+              <div style="background:rgba(0,107,53,.06);border:1px solid rgba(0,107,53,.15);border-top:none;border-radius:0 0 4px 4px;padding:10px 14px;font-size:12px;color:var(--gray)">
+                ⚠️ <strong>Important:</strong> Only fill the <strong>CA Score</strong> and <strong>Exam Score</strong> columns. Do not change Student ID, Name, Class, Term, Year or Subject — they are pre-filled for you.
+              </div>
+            </div>
+
+            <!-- Quick instructions -->
+            <div style="background:rgba(201,150,12,.08);border:1px solid rgba(201,150,12,.2);border-radius:4px;padding:12px 14px;font-size:13px;color:var(--green-dark)">
+              <strong>📌 Quick Steps:</strong>
+              <ol style="margin:8px 0 0 16px;line-height:1.9;color:var(--gray)">
+                <li>Select your <strong>Term, Year, Class and Subject</strong> above</li>
+                <li>Click <strong>Download Template</strong> — it auto-fills your class &amp; subject</li>
+                <li>Open in Excel or Google Sheets → enter only <strong>CA Score</strong> and <strong>Exam Score</strong> for each student</li>
+                <li>Save the file and drag &amp; drop it below — grades calculate automatically!</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- STEP 2: UPLOAD FILE -->
+          <div class="instr" style="border-radius:0 0 6px 6px;border-top:2px solid var(--light-gray);margin-top:0">
+            <h5>📤 Step 2 — Upload Your Completed File</h5>
           </div>
           <div class="drop-zone" id="dropZone"
             onclick="document.getElementById('fileUpload').click()"
@@ -1945,7 +2022,7 @@ footer{background:var(--green-dark)}
             ondragleave="this.style.borderColor='#ccc'"
             ondrop="handleDrop(event)">
             <div class="dz-icon">📂</div>
-            <h5>Drag & Drop Your Excel or CSV File Here</h5>
+            <h5>Drag &amp; Drop Your Completed Excel or CSV File Here</h5>
             <p>Supports .xlsx, .xls and .csv formats</p>
             <div class="browse-btn">Browse File</div>
           </div>
@@ -2098,15 +2175,15 @@ footer{background:var(--green-dark)}
       <div class="idcard-preview-box reveal">
         <h4>🪪 Live Card Preview</h4>
         <div class="idcard-wrap">
-          <div id="idCardEmpty" class="idc-empty">
+          <div id="old_idCardEmpty" class="idc-empty">
             <div class="icon">🪪</div>
             <p>Fill in the form to see<br>the ID card preview here</p>
           </div>
-          <div id="idCardOutput" style="display:none">
+          <div id="old_idCardOutput" style="display:none">
             <!-- FRONT -->
-            <div class="id-card" id="idcFront">
+            <div class="id-card" id="old_idcFront">
               <div class="idc-front">
-                <div class="idc-type-badge" id="idc_typebadge">Student</div>
+                <div class="idc-type-badge" id="old_idc_typebadge">Student</div>
                 <div class="idc-front-header">
                   <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAMAA2AMBIgACEQEDEQH/xAAwAAEAAwEBAQAAAAAAAAAAAAAAAQIEAwUGAQEBAQEBAAAAAAAAAAAAAAAAAQIDBP/aAAwDAQACEAMQAAAC3JeaEiFlQsIWm2q01WbSVWVWbKiSgoKCArPNnBWbWqk3VSbTVVlQlQUAAAFAAAVWYQlQUPPI188Veu84aIzj0nnSehmxdj0Hl+mSAAAAAADDa3lHLhXTZprFjLTXU59uGk87tbMfR8vM+gjoFAAIAkiQhIjxPb8s8bbg1WaK15nRHA69Ki2XvnPV9by/TiyCzABAEigAI8v0vIOujtesyNSZq7eWbwdeGpMW2r5vSKx6IgIAAlDSYADl5HteUepxc6rszamaYdvnZvbl1puV9bxt01yiumNSPMy9RWSQABTl1xEMHavX8v0s8cNWOumjlmsdefPuL8+Rt5ctBT0sejLl5Wj0q8r08XpxIgFISK2Hn8VOkn1/MZunh27mXP0vqVm4pZzOjjaXty150y6sPSu/peX6mLKESgECQeR09LNpj4a7alInMbOK5in0LGPTbIehzwaTP3mRfX0xaXIAAgEokAcO486PSV5rdnrjHVVeWnRGC/oI5dSAEBKJIAAABKBKBKBKBKAJITAAJISISP/EAAL/2gAMAwEAAgADAAAAIfB/VUHe38b/ALz7yb+PlP13777zzzxd00rbCZKZzzzzzzzxKF0nm3MAAI7qDB61WFnlcxz7wIIKJg1gBT71vf8AMc8So7Z4MILPBB9lwco+u+cBgYBAPvZeEJHx0b//ADzzQXE50aRU5W4w8/SQR7xgGg4wXS//AH30000U3nX3nPP/xAAC/9oADAMBAAIAAwAAABBNASsjwUScY/3/APiCFC9Tuf8A/wD/AP8A/wDnNz/Q7ihTb/8A/wD/AH3/AGLhl9tTDDBM5jyuvdpx5zOfzzAAAmUy3rkgAmKCOd14lHFAEv6wAAic2jwx2AL4mPAAOyFyx5OlN1lYAOWyJ0KVCaGxuw0McKWp6reqcAyeI8CSwSyyaC62+6ww/8QAJBEAAgIBBQABBQEAAAAAAAAAAAECEQMQEiAhMRMEIjJBUmL/2gAIAQIBAT8AoSNooigLGLGLELGRx0KKRWqgRxixCxCxCgKAkilyjiFiQsYoGxG02o2m0p8UitFyZRXCiiPJljaLN2l6R0oyZdubHj/orSb6LLL0sssi70fhlwSn9RgyL8Y6V2ZHUSKb0ssciMk2beiM6fYuzb/oppdSKf7lpNuUqRCFIyddLVsTI9oyYm+0RnKHTIzT7RuY2iTcukQhQ1Rlf3aXrDNXTI5VIcYyPiXqNr8FjNqRLIok8rfhduy+KbXhHLJeiz0fOh5yWVsbv3hfGyy+dH//xAAhEQADAAICAgIDAAAAAAAAAAAAARECEhAgITEDMCNAQf/aAAgBAwEBPwCEIQhCceCl6QSJx4KUveopSlLxSl/ehCdUq4VWC9U2Q1NRdoTjFzZmPsXyLHHJMTE7hixF6TikE4LJf3E/G35xHqvXxlbUENi7JnsaJy3xj1aIWGxS8QS7w1NTQ1IT6qX6P//EADsQAAEDAgQCBggEBQUAAAAAAAEAAgMEERITITFBURQiMDIzYQUQJEBScYGRFSAjQjRDY3KhNWCCscH/2gAIAQEAAT8C7Wyt7tZWVvdreq3ullZW94t2E1bgfhjbit3lFPHMLtPrlqoodzryUVXFLxseR/I6rha8Mxa+41EznuyIdzueSjijpYjf6lNZT1HWidlvWXXN2lBXR6p/fn+ytSUmrjicg+iq99CuhyN8KcrBXj+a1SRvA/XqtOQUdNSyQ9T78VHK+kflzat4FA31HbVs74g1rd38VFGyljxOOvEqrqzO6w7oULHvf1Nwmvrm3AffZONc8Hrrosx1PK+6yH4XvuOqo+kBmNsunzR6dtj42UuMPIeblU1S6nd5cUXwVEBce7Zej8WWderfTtqyLNhPMahVL3yUsTr6bFMjdJe3BRMmiPdHWaUDUMvhYADb/CvU3Iwjid+avPcHCNGDinMntI3AOtY6KLNfGY2NGhui+puSWjR11JBM95dYc905hYQDyumNLYG/1HKNmWxreQ7djcUNVF8JuFHIY8XmLLMkOA5e+n/izp8JGVpdZ0gBfk6IPl4R7st9kKmQk2bsNVGZYb9TvLMlP8vvFZ774crcWUjsx7dLEWCmaGzUjOFvcIx7bUN5tTxZ7h5lMfG1jddeSzY98SlmbgwNWcwN0NyQoXBpdi5ITMa7EHXuFmx/Fv8A4WOPEx2Zsv5mLhiVZp0eXkgbgHt4DeqqJeAVLTQzMc97d3ldApfgXQKb4V+H03wroFN8K6DS/CugU3Ir8OpuRX4dTcij6PgtoCohnU74Hd5qonksMZ3Z20hwscfJRnDQSuG7iqduCGMeSkOFhKDnX3TSiVjDVn+SfUP4aKGV5w3Pqg/iqlUZvLUf3dtP4Mn9qH+nf8kzuM+QVQ7utTU1PNgViv6nqM2+hBXmqU/xEnNy9H92R3N3bPF2uHMKAY6KaPiCVSPxwM+ylP6h8gmBBP2Q7x9TkzcjmFLLgpcXlZH2eh8yFRswQM9VXWFjwyM68UNh8lv+eWZkLcT1Vy+yucxyop82Ozu831N9mrC39siZ7LOWnw37FPha/W9kYnjuyr2kfuus6bZwQxXOiGcdgsuV27mhNpeOP7LDmytiHcj1KqP152QjZu62VTNkx6d47KaLJbEXd9xuVPPUOjuBgZsqduGFg8vz1zcVM/y1RpnugD4joRqE8GmdFOBpYBya4OAI4qpgzmad4bKN4nYYJdHhOklijMMnHQOQgn5XuooXMeA/Qbp0Lj1sY1JVPiYJBxI01UTZciVlrn5ro81+4dkyVwBiiYcR3TnCjhwjWRypISxpe/vuUsrIm3cVA4VM+a9wsO6E+GORwLheyrOvLBEOweMTHDmF6Od+m9nwlekZz4LfqqGqDRlyH5eqops3rN0eNimzjwapuvNZU0GsJxM+FHDUSXLsDvhK6Cd8QXQXNN8Y3umOjpnPLnhzjwCvUVP9NidJDRtws1eoYXOdnzb8ByU1YGnBGMb0KN03WqHG/JVNHFGLxmzuSpKrEMuTR4TP1a954M7FjhT1c19iLqAkmSoIuXGzViid1JmDj1gg2en1idmR8lFWRP0d1XcipIo5m9YXWVU02sRxN5LNpqjSVuF6EEzPBm0810V7vFnP0V6Km2tf7ozVNR4bcDeZTTTU3HMkWGpqu9+mxRww07dNPNS1Wto/usJkIGuO6q4MMbZMQEgXo3FZ7iN+PY+konEse0eSgNNJEyI6EKakkAFjcBMe+MGxINxonuikfglj14uTYiPAqPoVm1kfeixfJSTxSeLTuus0x+C948iFjkk75kd8lHFL+ynA83Los0nizfQJsNPTi9gn1YscvhxTnyP7xJTYHSBhks1oCzwOpTtxHmmUdzjmOI8kxjWCzRp2UtLHL5Hmva6b+oxZlNU79R6fRya4X34pzMBF9Db/AKQmkjawA7kpta4tuY723TauOzupsumN2yzddKkcxzmsGh4lSVcx2Nl1naXLtRZRwHV0nVCzYYTaIGR/NCCec3mdhHwpkbIxZot20tNFLu1dFni8GX6FGeZvjQXHNZ1HLv1VkU7r4ZtDwXRSAQ17LFdFO+YwJjY4mua6ZtijJRt5vTZZ3aQwYR5oUj5NZ5CfJMijjHVbb3N0UTt2BGhpzwsugRc3LoEXNyFDTj9t02KNmzB/sL//xAApEAACAgEDAwMEAwEAAAAAAAAAAREhMUFRYRAwcYGRoSBAscHR8PFQ/9oACAEBAAE/IesEEEEEEEEEdSCCO5BBBBBBH0CCOsduCCCCCOiOiCPsY6EEIII+2QR9WFPMhTT5Wq6607RTDE08X0dDK2ewnP2C6Fpurd2o3bcmNzG8sPRy2Hzg2zCF7bNGlzZjIJ7FqB2V0/cExzaaFTJTw+8geKA+ISvfMWCsyETOIgjgh5ZJfom04cYJMixm9wsE3h2JRU48iSHz1hICrtyThW+BGe7HuizbbnbvLhozh2/KHixpLGppkBrjIqfdAfJ/9kSJHhLQhylu3ZAr0ktzZhSeB4lSmGfFp7hES5iS4FIO8NSmimbaVJWcKO0R5ZoRZzvKnVVyZuOS90kdfIJtyEtt3ocjbiNsJIS4hpAqn2CIxxwoaLkrXgb3OI2Ent0ng8MC9NB8tnHcYpBdNYJElNTsJtU2aiBtVE1PDIUow139qqCUY4h/Qzn+5zvc5/uJzd/c/wBo/wBI/wBEnrMVZx4zOLR3uF3ZqWIlDtIwyahGNWUFt5kew3VANFmTbT6Wd4Jn3nz3Va9Scv0LswPSA3YXRYElRsiSr+gi/e/yarp20u1Sl6E3iPcmeCiIyRbzCNZbeCEMlbi8mt/nMh2rvpm/LDtveYSJqyc/XMCFMHgNaHMdveOlmNtWM7DHzdm3ML+o3PCpwxqoVkZWTtmTTuLWBySYQ1bW2S7s86xSSJLCPTCoq+h9lZbs3Yg39eOE2m1mN9irGFUko2le4vHn/oV9LDh5xNJpkVUE72IVZJynC5JU5MTtMfkJ6URUV8VNMpCJ+yM38F8DVGWnI2LGw1kgxieYpYlCS2+tbnULztlXUs1+XkJp2nQgmHpgaNBD8+folU4EoSZ5/iiESrIhm+RlUvysgtN6tsnT+ILIjbQycNOgsN6EhKtI2cDI7KHeDlK4XeJHnpKaNFMvcLotEAQjwyb5PPnSpm7nS5q6tqI3h7hQgz+5Oqsly3DqyhFuYe0ertsXrfvTyOZZDyJqn7Jrl02OJlurMxEhLRZPUyIciYo4KDR9E54yq1CCEd0Waenuj4ZUJHzoceOjDljmbqbRDqJlOkvkwVneGyZ57P1bxQ5s7V9HGE9L8gvAuc0MJ0o2HoKlZOg/i6TeyIRkyjD7xkSG14/SUwxa2VIabDIn6YvWZKc1Rt4I8GyIm072526NSwNQvaDQidYwQI35xI+SWtndIPn2Mb1NwI4G+G3grBGlfZMmVvoa78CP+Yb8+8fsow09PtJJJJ6T/wAn/8QAJBABAQEAAgICAwEBAQEBAAAAAREAITEQQSBxUWGBMMGhkfD/2gAIAQEAAT8QDBgxWMFisRjDDBYeFjDxGBgweJ8Q0xhhpgsXjTDDA4jBp4Aaaf4CwsLGDw8YaYDGBg8Aaaf5iwvAGBgYGh4nmf7mBxgYNMGdBY6msyVTOVxTOMh+rndOv9W4GoH5EdcgKsMPu8pyMAoiSjbT/ENDzPPPg8DoZAVwxq8f8KhhhIZ/OJwfeOTJ/wAj3bPvM8Ut7wThyUzYl/z3Qh928NaIUydAVDkT/V1jiRrXBWd1qPXMPzpBWXfBhV6/hZ1zIYaE7319eq9bXAh1Pdz0oDmuFkyYS62loRO7MmZbgax2UGw+mTTTTTTT5OA+BsYBOaHRc8uzCGCTuDawxhYROBhJLC3gicpdhIG0LpOSldMZw32NMRhTS9+AGsMDgSGOsBEbxyMXyN+acVYAHzvwnkngREzJxgATZ+huPMk2TnyGEWEXpFmSI0ar4tyeIC9ABzXI96BO3NyRug7Th3NQkSChGuLgQIbWVM3cssbGYXQLe/hdfhPhM52OmZk9n/IHRGUUMBWn9edcUjThYFq/RkDm2xsYfVREGOcDFYiHG8skKock4kE9BOHs+8GAwpomfPEU9CXsu6rcL90Sa6+br/gpvzUNo3h9ct0za96o/wDnvJX+2mJwa+/Wvfh9WZLl6PEa7y6pbr4uv+QUp/5RnRTb0cD5UkiH24zRFQcdpXAL6yl1Sy845Y/ZqBbb4n0o6AXT8t1+F11y/wDx+sVo9axQ6/5aCVv84YIrwrX+4IXXRWVkIsrkOJHTU9D9dO91/wAEuKvpfqYeKlfN1111118r4F7pL+k8cbzWcd/DitjAP3ycAVesDSTjhMoV4IDQGhAis0q/9DsxACf7OqPF39yjvA3nHEATTE1IuiznHRD9NPjc4MlRt/0++vWmX2rLRskz9Bqfbuh/4cfMEEUNIbov+st4YKbFwih0siYgM2IWnrE27neAH2rpks0pWZWJ/wB57DzCfhxTNcYxtQAPoMdJWNKTuvrqInp2jfb9wvwuuuNPJgeC/wDN15nAJkmOLZ+xaY+dQPsnvGUB7UiyOI0RRMzcxKzxgoFx+PaPLM+hQFjLOlKp1d4Nz4zCjEsMiusz/QvublLvYwdIcLFeGl3QL6OfJzpi4EjEQcCH0fC5dcMwgtSrXGNPUmkbJp4KAV0nI6czyAwInSpyx+QPW6h+mZl+/YCtOB/VqrkQNycO/a7WTno/oY/Qyt1hkv0OuO3uhYbWzuarkC257kB8XXxddc6zXDjzS6ssd2+AFKETBpTVbcxK+6hkBW4Ip+xwik2ueC2EhxN5urimRKK71J4vv1xDx/ngZqF+5ybrCV6PGG7OL33S3x+jz70hzULQOFEkljGY84I9dcOuuHXKx+s2PZue5fXlGortXYRcKzU32plHHYIxlc8I0iPlJ7o8+hPA08nspkZQ856kLiC5+ascBD34TFVGczVzHFjmBSKGflWjBA6BjD/64GT3wiDCcXSV9tPG4GYlT7fAcY18S63+v2hEl/8AGnC5FTC4z7/Sq5FAUomIAk5V1i7q01ZK5+FcywCUCVZikBIZzgb4AlGYronDdDGi1rK4eQjfpWOM+nkzB0+nJ7xRdcPkPjPATM9eNyip2KCrsbhF4IGIGgK6tEcObFNRyMOCVxUy35HUMsEG8U4cvPBYm4tHmFv36VfL5NcuPkGDwh2DVf6gzFGfvjqD9aNE/eyavvxc+rGIcAfFfJnPi6664ddfiF1a65fF11/zuHw666+LrjHiafGaaab/2Q==" alt="CFMA" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">
                   <div>
@@ -2116,45 +2193,45 @@ footer{background:var(--green-dark)}
                 </div>
                 <div class="idc-body">
                   <div>
-                    <div class="idc-passport" id="idc_passport">👤</div>
+                    <div class="idc-passport" id="old_idc_passport">👤</div>
                   </div>
                   <div class="idc-info">
                     <div class="idc-label">Full Name</div>
-                    <div class="idc-value large" id="idc_name">—</div>
+                    <div class="idc-value large" id="old_idc_name">—</div>
                     <div class="idc-label">Class</div>
-                    <div class="idc-value" id="idc_class">—</div>
+                    <div class="idc-value" id="old_idc_class">—</div>
                     <div class="idc-label">Year of Entry</div>
-                    <div class="idc-value" id="idc_entry">—</div>
+                    <div class="idc-value" id="old_idc_entry">—</div>
                     <div class="idc-label">Campus</div>
-                    <div class="idc-value" id="idc_campus" style="font-size:10px">—</div>
+                    <div class="idc-value" id="old_idc_campus" style="font-size:10px">—</div>
                   </div>
                 </div>
                 <div class="idc-id-band">
                   <span>Student ID</span>
-                  <strong id="idc_idno">CFMS-0000-000</strong>
+                  <strong id="old_idc_idno">CFMS-0000-000</strong>
                   <span>Okija · Anambra</span>
                 </div>
               </div>
             </div>
 
             <!-- BACK -->
-            <div class="id-card" id="idcBack" style="margin-top:12px">
+            <div class="id-card" id="old_idcBack" style="margin-top:12px">
               <div class="idc-back">
                 <div class="idc-back-header">
                   <p>Christ the Foundation Model Academy — Student Identity Card</p>
                 </div>
                 <div class="idc-back-body">
-                  <div class="idc-back-row"><span>Student ID</span><strong id="idc_b_idno">—</strong></div>
-                  <div class="idc-back-row"><span>Full Name</span><strong id="idc_b_name">—</strong></div>
-                  <div class="idc-back-row"><span>Class</span><strong id="idc_b_class">—</strong></div>
+                  <div class="idc-back-row"><span>Student ID</span><strong id="old_idc_b_idno">—</strong></div>
+                  <div class="idc-back-row"><span>Full Name</span><strong id="old_idc_b_name">—</strong></div>
+                  <div class="idc-back-row"><span>Class</span><strong id="old_idc_b_class">—</strong></div>
                   <div class="idc-back-row"><span>Year of Entry</span><strong id="idc_b_year">—</strong></div>
-                  <div class="idc-back-row"><span>Blood Group</span><strong id="idc_b_blood">—</strong></div>
-                  <div class="idc-back-row"><span>Emergency</span><strong id="idc_b_emergency">—</strong></div>
-                  <div class="idc-back-row"><span>Expires</span><strong id="idc_b_expiry">—</strong></div>
+                  <div class="idc-back-row"><span>Blood Group</span><strong id="old_idc_b_blood">—</strong></div>
+                  <div class="idc-back-row"><span>Emergency</span><strong id="old_idc_b_emergency">—</strong></div>
+                  <div class="idc-back-row"><span>Expires</span><strong id="old_idc_b_expiry">—</strong></div>
                 </div>
                 <div class="idc-barcode">
-                  <div class="idc-barcode-lines" id="idcBarcodeLines"></div>
-                  <p id="idc_barcode_text">CFMS-0000-000</p>
+                  <div class="idc-barcode-lines" id="old_idcBarcodeLines"></div>
+                  <p id="old_idc_barcode_text">CFMS-0000-000</p>
                 </div>
                 <div class="idc-back-footer">
                   📞 +234 806 268 6710 &nbsp;|&nbsp; ✉ cfmsanambra@gmail.com<br>
@@ -2207,7 +2284,10 @@ footer{background:var(--green-dark)}
       <!-- Header bar -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div style="font-size:14px;color:var(--gray)">Logged in as <strong style="color:var(--green-dark)">CFMA Admin</strong></div>
-        <button onclick="dbLogout()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
+        <div style="display:flex;gap:8px">
+          <button onclick="loadAllFromSheets()" style="background:rgba(37,99,235,.1);color:#1D4ED8;border:1px solid rgba(37,99,235,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🔄 Reload from Sheets</button>
+          <button onclick="dbLogout()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
+        </div>
       </div>
 
       <!-- Stats bar -->
@@ -2981,9 +3061,7 @@ footer{background:var(--green-dark)}
         <div class="career-delivery" id="careerDelivery">
           <div style="font-size:11px;font-weight:700;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Delivery Status</div>
           <div class="career-delivery-row">
-            <div class="cd-badge">📧 Email <span id="cd-email-ic">⏳</span></div>
-            <div class="cd-badge">💬 WhatsApp <span id="cd-wa-ic">⏳</span></div>
-            <div class="cd-badge">📊 Google Sheets <span id="cd-sheets-ic">⏳</span></div>
+            <div class="cd-badge">📧 Email <span id="cd-email-ic">⏳</span></div><div class="cd-badge">📊 Google Sheets <span id="cd-sheets-ic">⏳</span></div>
           </div>
         </div>
 
@@ -3437,14 +3515,11 @@ footer{background:var(--green-dark)}
       <ul>
         <li><a onclick="goTo('about')">About Us</a></li>
         <li><a onclick="goTo('academics')">Academics</a></li>
-      <li><a onclick="goTo('subjects')">Subjects</a></li>
       <li><a onclick="goTo('earlyyears')">Nursery &amp; Primary</a></li>
         <li><a onclick="goTo('admissions')">Admissions</a></li>
         <li><a onclick="goTo('portal')">🎓 Student Portal</a></li>
-      <li><a onclick="goTo('portal')">🎓 Portal</a>
-    <a onclick="goTo('results')">Check Results</a></li>
+      
 <li><a onclick="goTo('database')">Database</a></li>
-        <li><a onclick="goTo('fees')">Fee Tracker</a></li>
         <li><a onclick="goTo('contact')">Contact Us</a></li>
       </ul>
     </div>
@@ -3514,26 +3589,16 @@ function searchResults(){
   document.getElementById('resultsBody').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><strong>${r.subject}</strong></td><td style="text-align:center">${r.ca}</td><td style="text-align:center">${r.exam}</td><td style="text-align:center"><strong>${r.total}</strong></td><td style="text-align:center"><span class="gpill ${gpill(r.grade)}">${r.grade}</span></td><td>${r.remarks}</td></tr>`).join('');
   showToast('Results loaded for '+rows[0].studentName+' ✅');
 }
-function closeResults(){document.getElementById('resultCard').style.display='none';document.getElementById('noResult').style.display='none'}
-
-function printResults(){
-  const name=document.getElementById('summaryName').textContent;
-  const id=document.getElementById('summaryId').textContent;
-  const cls=document.getElementById('summaryClass').textContent;
-  const term=document.getElementById('summaryTerm').textContent;
-  const avg=document.getElementById('summaryAvg').textContent;
-  const rows=document.getElementById('resultsBody').innerHTML;
-  const w=window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><title>Result Slip — ${name}</title><style>body{font-family:Arial,sans-serif;padding:36px;color:#111;max-width:800px;margin:auto}.header{text-align:center;border-bottom:3px solid #006B35;padding-bottom:16px;margin-bottom:18px}.header h2{font-size:20px;color:#004D26;text-transform:uppercase}.header p{font-size:12px;color:#555;font-style:italic}.info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#f4f7f4;padding:14px;border-radius:4px;margin-bottom:18px}.info div strong{display:block;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}.info div span{font-size:14px;font-weight:700;color:#004D26}table{width:100%;border-collapse:collapse;font-size:14px}th{background:#006B35;color:white;padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase}td{padding:10px 12px;border-bottom:1px solid #eee}.foot{margin-top:28px;text-align:center;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:12px}@media print{button{display:none}}</style></head><body><div class="header"><h2>Christ the Foundation Model Academy</h2><p>"Consolidated Knowledge Through Education" — Est. 1998 | Okija, Anambra State</p><p style="font-size:14px;font-weight:700;color:#006B35;margin-top:8px">STUDENT RESULT SLIP</p></div><div class="info"><div><strong>Student Name</strong><span>${name}</span></div><div><strong>Student ID</strong><span>${id}</span></div><div><strong>Class</strong><span>${cls}</span></div><div><strong>Term / Year</strong><span>${term}</span></div></div><table><thead><tr><th>#</th><th>Subject</th><th>CA (40)</th><th>Exam (60)</th><th>Total (100)</th><th>Grade</th><th>Remarks</th></tr></thead><tbody>${rows}</tbody></table><p style="text-align:right;font-weight:700;margin-top:12px">Overall Average: ${avg}</p><div class="foot">Issued by Christ the Foundation Model Academy, Okija, Anambra State<br>📞 +234 806 268 6710 | ✉ cfmsanambra@gmail.com<br><em>Printed: ${new Date().toLocaleDateString('en-NG',{day:'numeric',month:'long',year:'numeric'})}</em></div><br><button onclick="window.print()" style="background:#006B35;color:white;padding:10px 22px;border:none;border-radius:3px;cursor:pointer">🖨 Print</button></body></html>`);
-  w.document.close();
+function getGradeClass(grade) {
+  if (grade === 'A') return 'grade-a';
+  if (grade === 'B') return 'grade-b';
+  if (grade === 'C') return 'grade-c';
+  if (grade === 'D') return 'grade-c';
+  return 'grade-f';
 }
 
-/* TEACHER PORTAL */
-const CREDS={user:atob('Y2Ztc190ZWFjaGVy'),pass:atob('Y2ZtczE5OTg=')};
-let loggedIn=false;
-function toggleTeacherLogin(){const lb=document.getElementById('teacherLogin'),up=document.getElementById('uploadPortal');if(loggedIn){up.style.display=up.style.display==='none'?'block':'none'}else{lb.style.display=lb.style.display==='none'?'block':'none'}}
-function doTeacherLogin(){const u=document.getElementById('tUsername').value.trim(),p=document.getElementById('tPassword').value;if(u===CREDS.user&&p===CREDS.pass){loggedIn=true;document.getElementById('teacherLogin').style.display='none';document.getElementById('uploadPortal').style.display='block';showToast('Login successful! Welcome 🎉')}else{showToast('Incorrect username or password ❌')}}
-function logoutTeacher(){loggedIn=false;document.getElementById('uploadPortal').style.display='none';showToast('Logged out.')}
+function closeResults(){document.getElementById('resultCard').style.display='none';document.getElementById('noResult').style.display='none'}
+
 
 function handleDrop(e){e.preventDefault();document.getElementById('dropZone').style.borderColor='#ccc';processFile(e.dataTransfer.files[0])}
 function handleFileUpload(input){if(input.files[0])processFile(input.files[0]);input.value=''}
@@ -3582,16 +3647,109 @@ function renderPreview(){
   document.getElementById('previewBody').innerHTML=resultsDB.slice().reverse().slice(0,100).map(r=>`<tr><td style="padding:9px 12px;color:#888;font-size:11px">${r.studentId}</td><td style="padding:9px 12px;font-weight:600">${r.studentName}</td><td style="padding:9px 12px">${r.studentClass}</td><td style="padding:9px 12px">${r.term}</td><td style="padding:9px 12px">${r.year}</td><td style="padding:9px 12px">${r.subject}</td><td style="padding:9px 12px;text-align:center">${r.ca}</td><td style="padding:9px 12px;text-align:center">${r.exam}</td><td style="padding:9px 12px;text-align:center;font-weight:700">${r.total}</td><td style="padding:9px 12px;text-align:center"><span class="gpill ${gpill(r.grade)}">${r.grade}</span></td></tr>`).join('');
 }
 function clearAllResults(){if(!confirm('Clear ALL uploaded results? This cannot be undone.'))return;resultsDB=[];document.getElementById('uploadPreview').style.display='none';document.getElementById('resultCard').style.display='none';document.getElementById('noResult').style.display='none';showToast('All results cleared 🗑')}
-function downloadTemplate(){
-  const csv=`Student ID,Student Name,Class,Term,Academic Year,Subject,CA Score,Exam Score
-CFMS-2025-001,Chukwuemeka Obi,SS3A,First Term,2024/2025,Mathematics,35,55
-CFMS-2025-001,Chukwuemeka Obi,SS3A,First Term,2024/2025,English Language,30,48
-CFMS-2025-001,Chukwuemeka Obi,SS3A,First Term,2024/2025,Physics,38,52
-CFMS-2025-002,Adaeze Nwosu,SS2B,First Term,2024/2025,Mathematics,28,42
-CFMS-2025-002,Adaeze Nwosu,SS2B,First Term,2024/2025,Chemistry,32,50
-CFMS-2025-003,Emeka Eze,JSS3C,First Term,2024/2025,Basic Science,36,54
-CFMS-2025-003,Emeka Eze,JSS3C,First Term,2024/2025,English Language,34,46`;
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='CFMS_Results_Template.csv';a.click();showToast('Template downloaded 📥');
+function downloadTemplate() {
+  downloadSmartTemplate();
+}
+
+/* ── DB student helper for template ── */
+function getStudentsForClass(cls) {
+  if (!cls) return [];
+  return dbRecords.filter(function(r){
+    return (r.classPos||'').toLowerCase() === cls.toLowerCase();
+  });
+}
+
+function updateTemplatePreview() {
+  var term    = document.getElementById('tpl_term').value;
+  var year    = document.getElementById('tpl_year').value;
+  var cls     = document.getElementById('tpl_class').value;
+  var subject = document.getElementById('tpl_subject').value;
+  var wrap    = document.getElementById('templatePreviewWrap');
+  var body    = document.getElementById('templatePreviewBody');
+
+  if (!cls || !subject) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+
+  // Get students from DB for this class
+  var students = getStudentsForClass(cls);
+
+  // Always show at least 5 sample rows
+  var rows = [];
+  students.forEach(function(s, i) {
+    rows.push({
+      id:   s.studentId || ('CFMS-' + String(i+1).padStart(3,'0')),
+      name: s.name || 'Student ' + (i+1)
+    });
+  });
+
+  // If no students in DB yet, show sample placeholder rows
+  if (rows.length === 0) {
+    for (var i = 1; i <= 5; i++) {
+      rows.push({
+        id:   'CFMS-2025-' + String(i).padStart(3,'0'),
+        name: 'Student Name ' + i
+      });
+    }
+  }
+
+  body.innerHTML = rows.map(function(r) {
+    return '<tr>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;color:#6B7280;font-family:monospace">' + r.id + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;font-weight:600">' + r.name + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;color:#6B7280">' + cls + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;color:#6B7280">' + (term||'First Term') + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;color:#6B7280">' + (year||'2024/2025') + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;background:rgba(201,150,12,.08);font-weight:700;color:var(--green-dark)">' + subject + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;text-align:center;color:#ccc;font-style:italic">Enter score</td>' +
+      '<td style="padding:7px 10px;border:1px solid #e5e7eb;text-align:center;color:#ccc;font-style:italic">Enter score</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function downloadSmartTemplate() {
+  var term    = document.getElementById('tpl_term').value    || 'First Term';
+  var year    = document.getElementById('tpl_year').value    || '2024/2025';
+  var cls     = document.getElementById('tpl_class').value   || '';
+  var subject = document.getElementById('tpl_subject').value || '';
+  var teacher = document.getElementById('tpl_teacher').value || '';
+
+  if (!cls)     { showToast('Please select a Class first \u26a0\ufe0f'); return; }
+  if (!subject) { showToast('Please select a Subject first \u26a0\ufe0f'); return; }
+
+  // Get students from DB for this class
+  var students = getStudentsForClass(cls);
+  var rows = [];
+
+  if (students.length > 0) {
+    // Use real students from database
+    students.forEach(function(s) {
+      rows.push([s.studentId, s.name, cls, term, year, subject, '', '']);
+    });
+  } else {
+    // No students in DB yet — generate blank rows
+    for (var i = 1; i <= 10; i++) {
+      rows.push([
+        'CFMS-' + new Date().getFullYear() + '-' + String(i).padStart(3,'0'),
+        '',
+        cls, term, year, subject, '', ''
+      ]);
+    }
+  }
+
+  // Build CSV
+  var header = 'Student ID,Student Name,Class,Term,Academic Year,Subject,CA Score (40),Exam Score (60)';
+  var note   = '# CFMA Results Template — ' + cls + ' | ' + subject + ' | ' + term + ' ' + year + (teacher?' | Teacher: '+teacher:'');
+  var csv    = note + '\n' + header + '\n';
+  rows.forEach(function(r) {
+    csv += r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(',') + '\n';
+  });
+
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var a    = document.createElement('a');
+  a.href   = URL.createObjectURL(blob);
+  a.download = 'CFMS_Results_' + cls.replace(/\s/g,'_') + '_' + subject.replace(/\s/g,'_') + '_' + term.replace(/\s/g,'_') + '.csv';
+  a.click();
+  showToast('\u2705 Template downloaded! Fill CA & Exam scores and upload below.');
 }
 
   function copyScript() {
@@ -3803,7 +3961,7 @@ function buildCardHTML(mode) {
   let frontFinal = frontInner;
   if (passSrc) {
     frontFinal = frontFinal.replace(
-      /(<img[^>]*id="idc_passport"[^>]*src=")[^"]*(")/,
+      /(<img[^>]*id="idc_passport_extra"[^>]*src=")[^"]*(")/,
       '$1' + passSrc + '$2'
     );
   }
@@ -3902,6 +4060,7 @@ function dbAuth() {
     renderDB();
     updateDbStats();
     showToast('Database unlocked ✅');
+    loadAllFromSheets();
   } else {
     document.getElementById('dbPwdErr').style.display = 'block';
     document.getElementById('dbPwd').value = '';
@@ -4089,9 +4248,11 @@ function saveDbRecord() {
   if (editId) {
     var idx = dbRecords.findIndex(function(r){ return r.id === editId; });
     if (idx > -1) dbRecords[idx] = record;
+    saveStudentToSheets(record, true);
     showToast('Record updated ✅');
   } else {
     dbRecords.push(record);
+    saveStudentToSheets(record, false);
     showToast('Record added ✅');
   }
   closeDbModal();
@@ -4989,9 +5150,11 @@ function saveFeeRecord() {
   if (editId) {
     var idx = feeRecords.findIndex(function(r){ return r.id===editId; });
     if (idx > -1) feeRecords[idx] = record;
+    saveFeeToSheets(record, true);
     showToast('Fee record updated ✅');
   } else {
     feeRecords.push(record);
+    saveFeeToSheets(record, false);
     showToast('Fee record added ✅');
   }
   closeFeeModal();
@@ -5110,22 +5273,16 @@ const CONFIG = {
   // 2. Add Gmail service → copy Service ID
   // 3. Create template → copy Template ID
   // 4. Account → API Keys → copy Public Key
-  emailjs_public_key:  'YOUR_EMAILJS_PUBLIC_KEY',
-  emailjs_service_id:  'YOUR_SERVICE_ID',
-  emailjs_template_id: 'YOUR_TEMPLATE_ID',
+  emailjs_public_key:  'OUySpkbSEJeb0inns',
+  emailjs_service_id:  'service_wa23gqq',
+  emailjs_template_id: 'template_g48foml',
 
   // ── GOOGLE SHEETS ─────────────────────────────────────────────────────────
   // 1. Open Google Sheets → Extensions → Apps Script
   // 2. Paste the Apps Script code from the Setup Guide section
   // 3. Deploy as Web App → copy URL here
-  sheets_url: 'YOUR_GOOGLE_APPS_SCRIPT_URL',
-
-  // ── WHATSAPP (CALLMEBOT — FREE) ───────────────────────────────────────────
-  // 1. Save +34 644 63 80 99 on WhatsApp as "CallMeBot"
-  // 2. Send them: I allow callmebot to send me messages
-  // 3. They reply with your API key — paste it below
-  whatsapp_phone:  '2348062686710',
-  whatsapp_apikey: 'YOUR_CALLMEBOT_API_KEY',
+  sheets_url: 'https://script.google.com/macros/s/AKfycby6nrp-gm5h6UMjH3YjTzWKB4U8mDsSMMfBYit7Mc098Mx1ZZaiRHxofu6sBBwFCEtddQ/exec',  // ✅ Admissions, results & career form submissions
+  db_url:     'https://script.google.com/macros/s/AKfycbz8KYQpTETd-TpKvXqJzKV2ouOPdlR_YIHfTtQOhZnwQm3Kic-9b7SmQde52iukpElc/exec',     // ✅ Student database (add/edit/delete/read)
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -5204,30 +5361,6 @@ async function submitApplication() {
   document.getElementById('statusMsg').textContent = 'Sending your application...';
 
   var emailOk = false, sheetsOk = false, waOk = false;
-
-  // ── 1. WhatsApp via CallMeBot ─────────────────────────────────────────────
-  try {
-    if (CONFIG.whatsapp_apikey !== 'YOUR_CALLMEBOT_API_KEY') {
-      var msg = encodeURIComponent(
-        '\ud83d\udccb *NEW CFMS APPLICATION*\n' +
-        '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n' +
-        '\ud83d\udc64 *Student:* ' + d.firstname + ' ' + d.surname + '\n' +
-        '\ud83c\udf82 *DOB:* ' + d.dob + '  |  ' + d.gender + '\n' +
-        '\ud83d\udcda *Division:* ' + d.division + ' \u2014 ' + d.studentClass + '\n' +
-        '\ud83c\udfeb *Campus:* ' + d.campus + '\n' +
-        '\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc66 *Parent:* ' + d.parent + '\n' +
-        '\ud83d\udcde *Phone:* ' + d.phone + '\n' +
-        (d.email ? '\u2709 *Email:* ' + d.email + '\n' : '') +
-        '\ud83d\udd50 *Time:* ' + d.timestamp + '\n' +
-        '\ud83d\udd16 *Ref:* ' + d.ref
-      );
-      await fetch('https://api.callmebot.com/whatsapp.php?phone=' + CONFIG.whatsapp_phone + '&text=' + msg + '&apikey=' + CONFIG.whatsapp_apikey);
-      waOk = true;
-    } else {
-      waOk = true; // not configured yet — skip silently
-    }
-  } catch(e) { console.error('WhatsApp error:', e); }
-  setDelivery('wa', waOk ? 'ok' : 'fail');
 
   // ── 2. EmailJS ────────────────────────────────────────────────────────────
   try {
@@ -5385,31 +5518,6 @@ async function submitCareerApplication() {
 
   var waOk = false, emailOk = false, sheetsOk = false;
 
-  // ── 1. WhatsApp ───────────────────────────────────────────────────────────
-  try {
-    if (typeof CONFIG !== 'undefined' && CONFIG.whatsapp_apikey !== 'YOUR_CALLMEBOT_API_KEY') {
-      var msg = encodeURIComponent(
-        '\ud83d\udcbc *NEW JOB APPLICATION — CFMA*\n' +
-        '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n' +
-        '\ud83d\udc64 *Name:* ' + d.firstname + ' ' + d.surname + '\n' +
-        '\ud83d\udcde *Phone:* ' + d.phone + '\n' +
-        '\u2709 *Email:* ' + d.email + '\n' +
-        '\ud83c\udfeb *Position:* ' + d.position + '\n' +
-        '\ud83c\udfe2 *Campus:* ' + d.campus + '\n' +
-        '\ud83c\udf93 *Qualification:* ' + d.qualification + '\n' +
-        '\ud83d\udcc5 *Experience:* ' + (d.experience || 'Not specified') + '\n' +
-        '\ud83d\udd16 *Ref:* ' + d.ref + '\n' +
-        '\ud83d\udd50 *Time:* ' + d.timestamp
-      );
-      await fetch('https://api.callmebot.com/whatsapp.php?phone=' + CONFIG.whatsapp_phone +
-        '&text=' + msg + '&apikey=' + CONFIG.whatsapp_apikey);
-      waOk = true;
-    } else {
-      waOk = true;
-    }
-  } catch(e) { console.error('WA error:', e); }
-  setCdStatus('wa', waOk ? 'ok' : 'fail');
-
   // ── 2. Email ──────────────────────────────────────────────────────────────
   try {
     if (typeof CONFIG !== 'undefined' && CONFIG.emailjs_public_key !== 'YOUR_EMAILJS_PUBLIC_KEY') {
@@ -5439,16 +5547,8 @@ async function submitCareerApplication() {
 
   // ── 3. Google Sheets ──────────────────────────────────────────────────────
   try {
-    if (typeof CONFIG !== 'undefined' && CONFIG.sheets_url !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
-      await fetch(CONFIG.sheets_url, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.assign({ type: 'job_application' }, d))
-      });
+    await saveCareerToSheets(d);
       sheetsOk = true;
-    } else {
-      sheetsOk = true;
-    }
   } catch(e) { console.error('Sheets error:', e); }
   setCdStatus('sheets', sheetsOk ? 'ok' : 'fail');
 
@@ -5645,7 +5745,7 @@ function populatePortalIdCard() {
 
   var passEl = document.getElementById('pidc_passport');
   if (s.passport) {
-    passEl.outerHTML = '<img id="pidc_passport" class="idc-passport" src="'+s.passport+'" alt="'+s.name+'">';
+    passEl.outerHTML = '<img id="pidc_passport2" class="idc-passport" src="'+s.passport+'" alt="'+s.name+'">';
   }
 
   // Barcode lines
@@ -5843,6 +5943,159 @@ function printPortalResult() {
     w.document.close();
   } else {
     showToast('Please use the Print button on each result card \ud83d\uddb8');
+  }
+}
+
+
+/* ══════════════════════════════════════════════
+   GOOGLE SHEETS PERMANENT DATABASE
+   All data saved to / loaded from Google Sheets
+══════════════════════════════════════════════ */
+
+var SHEETS_LOADING = false;
+
+// ── Utility: call the Apps Script ────────────────────────────────────────────
+async function sheetsRequest(action, data) {
+  // DB actions use db_url, form submissions use sheets_url
+  var dbActions = ['save_student','update_student','delete_student',
+                   'save_fee','update_fee','save_results'];
+  var url = dbActions.indexOf(action) > -1
+    ? (CONFIG.db_url || CONFIG.sheets_url)
+    : CONFIG.sheets_url;
+  if (!url || url === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+    console.warn('Sheets URL not configured');
+    return { ok: false, error: 'Not configured' };
+  }
+  try {
+    var payload = Object.assign({ action: action }, data || {});
+    var resp = await fetch(url, {
+      method: 'POST',
+      mode:   'no-cors',
+      headers:{ 'Content-Type': 'application/json' },
+      body:   JSON.stringify(payload)
+    });
+    // no-cors means we can't read response — assume ok
+    return { ok: true };
+  } catch(e) {
+    console.error('Sheets request error:', e);
+    return { ok: false, error: e.message };
+  }
+}
+
+// GET request (readable)
+async function sheetsGet(action, params) {
+  // Always use db_url for reading student/fee/results data
+  var url = CONFIG.db_url || CONFIG.sheets_url;
+  if (!url || url === 'YOUR_GOOGLE_APPS_SCRIPT_URL') return { ok: false, students:[], results:[], fees:[] };
+  try {
+    var qs = '?action=' + action;
+    if (params) {
+      Object.keys(params).forEach(function(k){ qs += '&'+k+'='+encodeURIComponent(params[k]); });
+    }
+    var resp = await fetch(url + qs);
+    var json = await resp.json();
+    return json;
+  } catch(e) {
+    console.error('Sheets GET error:', e);
+    return { ok: false, students:[], results:[], fees:[] };
+  }
+}
+
+// ── Load ALL data on admin login ──────────────────────────────────────────────
+async function loadAllFromSheets() {
+  if (SHEETS_LOADING) return;
+  SHEETS_LOADING = true;
+  showToast('Loading data from Google Sheets\u2026 \u23f3');
+  try {
+    var data = await sheetsGet('get_all');
+    if (data.ok) {
+      // Load students
+      if (data.students && data.students.length > 0) {
+        dbRecords = data.students;
+        console.log('Loaded', dbRecords.length, 'students from Sheets');
+      }
+      // Load results
+      if (data.results && data.results.length > 0) {
+        resultsDB = data.results;
+        console.log('Loaded', resultsDB.length, 'results from Sheets');
+      }
+      // Load fees
+      if (data.fees && data.fees.length > 0) {
+        feeRecords = data.fees;
+        console.log('Loaded', feeRecords.length, 'fee records from Sheets');
+      }
+      renderDB();
+      updateDbStats();
+      renderFeeTable && renderFeeTable();
+      showToast('\u2705 Data loaded! ' + dbRecords.length + ' students, ' + feeRecords.length + ' fee records');
+    } else {
+      showToast('\u26a0\ufe0f Could not load from Sheets. Working offline.');
+    }
+  } catch(e) {
+    showToast('\u26a0\ufe0f Sheets connection failed. Working offline.');
+    console.error(e);
+  }
+  SHEETS_LOADING = false;
+}
+
+// ── Save student to Sheets ────────────────────────────────────────────────────
+async function saveStudentToSheets(record, isUpdate) {
+  var action = isUpdate ? 'update_student' : 'save_student';
+  var result = await sheetsRequest(action, record);
+  if (!result.ok) {
+    console.warn('Could not save to Sheets — saved locally only');
+  }
+  return result;
+}
+
+// ── Delete student from Sheets ────────────────────────────────────────────────
+async function deleteStudentFromSheets(id) {
+  await sheetsRequest('delete_student', { id: id });
+}
+
+// ── Save fee to Sheets ────────────────────────────────────────────────────────
+async function saveFeeToSheets(record, isUpdate) {
+  var action = isUpdate ? 'update_fee' : 'save_fee';
+  await sheetsRequest(action, record);
+}
+
+// ── Save results to Sheets ────────────────────────────────────────────────────
+async function saveResultsToSheets(rows) {
+  await sheetsRequest('save_results', { rows: rows });
+}
+
+// ── Save career application to Sheets ────────────────────────────────────────
+async function saveCareerToSheets(data) {
+  await sheetsRequest('save_career', data);
+}
+
+
+function teacherLogin() {
+  var u = document.getElementById('tUsername').value.trim();
+  var p = document.getElementById('tPassword').value;
+  if (u === atob('Y2Ztc190ZWFjaGVy') && p === atob('Y2ZtczE5OTg=')) {
+    isTeacherLoggedIn = true;
+    document.getElementById('teacherLogin').style.display  = 'none';
+    document.getElementById('uploadPortal').style.display  = 'block';
+    showToast('Welcome! Upload portal is now open 🎉');
+  } else {
+    showToast('Incorrect username or password ❌');
+  }
+}
+
+function logoutTeacher() {
+  isTeacherLoggedIn = false;
+  document.getElementById('uploadPortal').style.display = 'none';
+  showToast('Logged out successfully.');
+}
+
+function toggleTeacherLogin() {
+  var login  = document.getElementById('teacherLogin');
+  var portal = document.getElementById('uploadPortal');
+  if (isTeacherLoggedIn) {
+    portal.style.display = portal.style.display === 'none' ? 'block' : 'none';
+  } else {
+    login.style.display = login.style.display === 'none' ? 'block' : 'none';
   }
 }
 
@@ -6104,23 +6357,6 @@ function printFeeReceipt() {
 </script>
 
 <!-- ADMIN LOGIN OVERLAY -->
-<div id="adminOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;transition:opacity .3s">
-  <div style="background:white;border-radius:10px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;font-family:'Open Sans',Arial,sans-serif">
-    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
-    <div style="text-align:center;margin-bottom:24px">
-      <div style="width:52px;height:52px;background:#006B35;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;margin:0 auto 12px">🔐</div>
-      <h3 style="font-size:18px;font-weight:700;color:#004D26;margin-bottom:4px">Admin Access</h3>
-      <p style="font-size:13px;color:#888">Christ the Foundation Model Academy</p>
-    </div>
-    <div style="margin-bottom:16px">
-      <label style="display:block;font-size:12px;font-weight:700;color:#004D26;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
-      <input id="adminPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:6px;font-size:14px;font-family:'Open Sans',Arial,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#006B35'" onblur="this.style.borderColor='#e0e0e0'">
-      <div id="adminPwdError" style="display:none;color:#dc2626;font-size:12px;margin-top:8px;font-weight:600">❌ Incorrect password. Please try again.</div>
-    </div>
-    <button onclick="submitAdminLogin()" style="width:100%;background:#006B35;color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',Arial,sans-serif;transition:background .2s" onmouseover="this.style.background='#004D26'" onmouseout="this.style.background='#006B35'">Enter Admin Panel</button>
-    <p style="text-align:center;font-size:11px;color:#bbb;margin-top:14px">This area is restricted to CFMA administrators only</p>
-  </div>
-</div>
 
 
 </body>
