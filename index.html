@@ -1862,16 +1862,16 @@ footer{background:var(--green-dark)}
       <div class="t-divider"><span>Staff Access Required</span></div>
       <button class="t-access-btn" onclick="toggleTeacherLogin()">🔐 Open Teacher Login</button>
 
-      <div class="login-box" id="teacherLogin">
+      <div class="login-box" id="teacherLogin" style="display:none">
         <h4>Staff Login</h4>
         <p class="lsub">Enter your credentials to access the upload portal</p>
-        <div class="fg"><label>Username</label><input id="tUsername" type="text" placeholder="Enter username" onkeypress="if(event.key==='Enter') doTeacherLogin()"></div>
-        <div class="fg"><label>Password</label><input id="tPassword" type="password" placeholder="Enter password" onkeypress="if(event.key==='Enter') doTeacherLogin()"></div>
-        <button class="sbtn" onclick="doTeacherLogin()">Login →</button>
+        <div class="fg"><label>Username</label><input id="tUsername" type="text" placeholder="Enter username" onkeypress="if(event.key==='Enter') teacherLogin()"></div>
+        <div class="fg"><label>Password</label><input id="tPassword" type="password" placeholder="Enter password" onkeypress="if(event.key==='Enter') teacherLogin()"></div>
+        <button class="sbtn" onclick="teacherLogin()">Login →</button>
 
       </div>
 
-      <div class="upload-portal" id="uploadPortal">
+      <div class="upload-portal" id="uploadPortal" style="display:none">
         <div class="portal-head">
           <div><h4>Teacher Upload Dashboard</h4><p>Christ the Foundation Model Academy — Results Management</p></div>
           <button class="logout-btn" onclick="logoutTeacher()">Logout</button>
@@ -5033,58 +5033,6 @@ function updateFeeStats() {
   document.getElementById('feeOwingCount').textContent    = subset.filter(function(r){ return r.status==='owing'; }).length;
 }
 
-function renderFeeTable() {
-  var term    = document.getElementById('feeTermSelect').value;
-  var year    = document.getElementById('feeYearSelect').value;
-  var search  = (document.getElementById('feeSearchInput').value  || '').toLowerCase();
-  var campus  = document.getElementById('feeCampusFilter').value;
-  var status  = document.getElementById('feeStatusFilter').value;
-
-  var filtered = feeRecords.filter(function(r) {
-    return r.term === term && r.year === year &&
-      (!search  || r.name.toLowerCase().includes(search) || r.studentId.toLowerCase().includes(search)) &&
-      (!campus  || r.campus === campus) &&
-      (!status  || r.status === status);
-  });
-
-  var body  = document.getElementById('feeTableBody');
-  var empty = document.getElementById('feeEmpty');
-  updateFeeStats();
-
-  if (filtered.length === 0) {
-    body.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
-
-  body.innerHTML = filtered.map(function(r) {
-    var balance  = r.totalFee - r.paidAmt;
-    var pct      = Math.min(100, Math.round((r.paidAmt / r.totalFee) * 100));
-    var barColor = r.status==='paid' ? '#047857' : r.status==='partial' ? '#D97706' : '#B91C1C';
-    var stClass  = r.status==='paid' ? 'fee-paid' : r.status==='partial' ? 'fee-partial' : 'fee-owing';
-    var stLabel  = r.status==='paid' ? 'Fully Paid' : r.status==='partial' ? 'Partial' : 'Owing';
-    return '<tr>' +
-      '<td><strong>' + r.name + '</strong></td>' +
-      '<td style="color:var(--gray);font-family:monospace;font-size:12px">' + r.studentId + '</td>' +
-      '<td><span class="db-campus-badge">' + r.campus + '</span></td>' +
-      '<td>' + r.classPos + '</td>' +
-      '<td style="font-weight:600">₦' + r.totalFee.toLocaleString() + '</td>' +
-      '<td>' +
-        '<div style="font-weight:600;color:' + barColor + '">₦' + r.paidAmt.toLocaleString() + '</div>' +
-        '<div class="fee-progress"><div class="fee-progress-bar" style="width:' + pct + '%;background:' + barColor + '"></div></div>' +
-      '</td>' +
-      '<td style="font-weight:700;color:' + (balance>0?'#B71C1C':'#047857') + '">' + (balance>0?'₦'+balance.toLocaleString():'—') + '</td>' +
-      '<td><span class="fee-status ' + stClass + '">' + stLabel + '</span></td>' +
-      '<td>' +
-        '<button class="fee-action-btn pay" onclick="quickPay(\'' + r.id + '\')">💳 Update</button>' +
-        '<button class="fee-action-btn receipt" onclick="printReceipt(\'' + r.id + '\')">🧾 Receipt</button>' +
-        '<button class="fee-action-btn del" onclick="deleteFeeRecord(\'' + r.id + '\')">🗑</button>' +
-      '</td>' +
-    '</tr>';
-  }).join('');
-}
-
 function openFeeModal(editId) {
   document.getElementById('feeEditId').value = editId || '';
   document.getElementById('feeModalTitle').textContent = editId ? 'Edit Fee Record' : 'Add Fee Record';
@@ -5162,13 +5110,6 @@ function saveFeeRecord() {
 }
 
 function quickPay(id) { openFeeModal(id); }
-
-function deleteFeeRecord(id) {
-  if (!confirm('Delete this fee record?')) return;
-  feeRecords = feeRecords.filter(function(r){ return r.id!==id; });
-  renderFeeTable();
-  showToast('Record deleted 🗑');
-}
 
 function importFromDB() {
   if (dbRecords.length === 0) { showToast('No records in database yet. Add students first ⚠️'); return; }
@@ -6092,11 +6033,38 @@ function logoutTeacher() {
 function toggleTeacherLogin() {
   var login  = document.getElementById('teacherLogin');
   var portal = document.getElementById('uploadPortal');
+  if (!login || !portal) return;
   if (isTeacherLoggedIn) {
     portal.style.display = portal.style.display === 'none' ? 'block' : 'none';
   } else {
     login.style.display = login.style.display === 'none' ? 'block' : 'none';
+    if (login.style.display === 'block') {
+      var u = document.getElementById('tUsername');
+      if (u) setTimeout(function(){ u.focus(); }, 100);
+    }
   }
+}
+
+
+function printResults() {
+  var sid   = document.getElementById('studentId').value.trim().toUpperCase();
+  var term  = document.getElementById('termSelect').value;
+  var year  = document.getElementById('yearSelect').value;
+  var rows  = resultsDB.filter(function(r) {
+    return r.studentId.toUpperCase() === sid &&
+      (!term || r.term === term) &&
+      (!year || r.year === year);
+  });
+  if (rows.length === 0) { showToast('No results to print ⚠️'); return; }
+  var avg  = Math.round(rows.reduce(function(a,r){ return a+r.total; },0)/rows.length);
+  var gi   = calcGrade(avg);
+  var name = rows[0].studentName;
+  var cls  = rows[0].studentClass || '—';
+  var student = { name:name, id:sid, cls:cls, term:term||'All Terms', year:year||'All Years', avg:avg, grade:gi.grade };
+  var html = buildResultSlipHTML(rows, student, false);
+  var w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
 }
 
 /* ── ADMIN SECRET ACCESS ── */
