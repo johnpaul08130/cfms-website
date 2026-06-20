@@ -3811,6 +3811,11 @@ function livePreview() {
   const other     = document.getElementById('id_othername').value.trim();
   if (!surname && !firstname) return;
 
+  // Guard: this legacy ID card section is hidden/superseded — exit safely if elements are missing
+  const emptyEl  = document.getElementById('idCardEmpty');
+  const outputEl = document.getElementById('idCardOutput');
+  if (!emptyEl || !outputEl) return;
+
   const fullName  = [surname.toUpperCase(), firstname, other].filter(Boolean).join(' ');
   const idno      = document.getElementById('id_idno').value.trim() || 'CFMS-0000-000';
   const year      = document.getElementById('id_year').value.trim() || '—';
@@ -3875,7 +3880,8 @@ function generateCard() {
   if (!passportDataURL) { showToast('Please upload a passport photograph ⚠️'); return; }
   livePreview();
   showToast('ID Card generated! Click Print Card to print ✅');
-  document.getElementById('idCardOutput').scrollIntoView({behavior:'smooth', block:'start'});
+  const outputEl = document.getElementById('idCardOutput');
+  if (outputEl) outputEl.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 function buildCardHTML(mode) {
@@ -4434,7 +4440,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ── SUBJECT CHECKBOXES ── */
-var CFMS_SUBJECTS = {
+var CFMS_SUBJECTS_FLAT = {
   nursery: [
     { name:'English Language (Phonics)', core:true },
     { name:'Numbers & Counting', core:true },
@@ -4505,22 +4511,7 @@ var CFMS_SUBJECTS = {
 };
 
 function loadSubjectCheckboxes(role, selected) {
-  var wrap  = document.getElementById('dbSubjectsWrap');
-  var inner = document.getElementById('dbSubjectsInner');
-  if (!role || !CFMS_SUBJECTS[role]) {
-    wrap.style.display = 'none';
-    inner.innerHTML = '';
-    return;
-  }
-  wrap.style.display = 'block';
-  var subjects = CFMS_SUBJECTS[role];
-  inner.innerHTML = subjects.map(function(s) {
-    var checked = selected.indexOf(s.name) > -1 ? 'checked' : '';
-    return '<label class="subj-check-item' + (s.core ? ' core' : '') + '">' +
-      '<input type="checkbox" value="' + s.name + '" ' + checked + '>' +
-      (s.core ? '★ ' : '') + s.name +
-      '</label>';
-  }).join('');
+  return loadDbSubjects(role, selected);
 }
 
 
@@ -4980,164 +4971,291 @@ function switchDbTab(tab, btn) {
 var feeRecords = [];
 var feeAuthenticated = false;
 
-function feeAuth() {
-  var pwd = document.getElementById('feePwd').value;
-  if (pwd === 'cfmsadmin2025') {
-    feeAuthenticated = true;
-    document.getElementById('feeLoginBox').style.display  = 'none';
-    document.getElementById('feeAdminPanel').style.display = 'block';
-    renderFeeTable();
-    updateFeeStats();
-    showToast('Fee Tracker unlocked ✅');
-  } else {
-    document.getElementById('feePwdErr').style.display = 'block';
-    document.getElementById('feePwd').value = '';
-    setTimeout(function(){ document.getElementById('feePwdErr').style.display='none'; }, 3000);
-  }
-}
 
-function feeLogout() {
-  feeAuthenticated = false;
-  document.getElementById('feeAdminPanel').style.display = 'none';
-  document.getElementById('feeLoginBox').style.display   = 'block';
-  document.getElementById('feePwd').value = '';
-  showToast('Logged out of Fee Tracker');
-}
 
-function getFeeStatus(total, paid) {
-  if (paid <= 0)            return 'owing';
-  if (paid >= total)        return 'paid';
+
+/* ══════════════════════════════════════════════
+   FEE PAYMENT TRACKER — Single consistent implementation
+══════════════════════════════════════════════ */
+
+function feeBalance(r) { return (Number(r.totalFee) || 0) - (Number(r.paidAmt) || 0); }
+
+function deriveFeeStatus(total, paid) {
+  if (paid <= 0)     return 'unpaid';
+  if (paid >= total) return 'paid';
   return 'partial';
 }
 
 function updateFeeStatus() {
-  var total  = parseFloat(document.getElementById('feeTotalAmt').value) || 0;
-  var paid   = parseFloat(document.getElementById('feePaidAmt').value)  || 0;
-  var status = getFeeStatus(total, paid);
-  var balance = total - paid;
-  var prev   = document.getElementById('feeStatusPreview');
-  var colors = { paid:'#047857', partial:'#B45309', owing:'#B91C1C' };
-  var labels = { paid:'✅ Fully Paid', partial:'⚠️ Partial Payment — Balance: ₦' + balance.toLocaleString(), owing:'❌ No Payment — Owing: ₦' + balance.toLocaleString() };
-  prev.textContent   = labels[status];
-  prev.style.color   = colors[status];
-  prev.style.background = status==='paid' ? 'rgba(5,150,105,.08)' : status==='partial' ? 'rgba(245,158,11,.08)' : 'rgba(239,68,68,.08)';
+  var total = parseFloat(document.getElementById('fee_amount').value) || 0;
+  var paid  = parseFloat(document.getElementById('fee_paid').value)   || 0;
+  var sel   = document.getElementById('fee_status');
+  if (sel) sel.value = deriveFeeStatus(total, paid);
 }
 
-function updateFeeStats() {
-  var term   = document.getElementById('feeTermSelect').value;
-  var year   = document.getElementById('feeYearSelect').value;
-  var subset = feeRecords.filter(function(r){ return r.term===term && r.year===year; });
-  document.getElementById('feeTotalStudents').textContent = subset.length;
-  document.getElementById('feePaidCount').textContent     = subset.filter(function(r){ return r.status==='paid'; }).length;
-  document.getElementById('feePartialCount').textContent  = subset.filter(function(r){ return r.status==='partial'; }).length;
-  document.getElementById('feeOwingCount').textContent    = subset.filter(function(r){ return r.status==='owing'; }).length;
+/* ── Public: student self-service fee check ── */
+function checkFeeStatus() {
+  var sid  = document.getElementById('feeStudentId').value.trim().toUpperCase();
+  var term = document.getElementById('feeTermSelect').value;
+  var year = document.getElementById('feeYearSelect').value;
+  var box  = document.getElementById('feePublicResult');
+
+  if (!sid)  { showToast('Please enter your Student ID \u26a0\ufe0f'); return; }
+  if (!term) { showToast('Please select a Term \u26a0\ufe0f'); return; }
+  if (!year) { showToast('Please select an Academic Year \u26a0\ufe0f'); return; }
+
+  var r = feeRecords.find(function(f) {
+    return f.studentId.toUpperCase() === sid && f.term === term && f.year === year;
+  });
+
+  box.style.display = 'block';
+  if (!r) {
+    box.innerHTML = '<p style="color:var(--gray);font-size:13px">\u274c No fee record found for <strong>' + sid + '</strong> in ' + term + ', ' + year + '. Please contact the school office.</p>';
+    return;
+  }
+
+  var bal    = feeBalance(r);
+  var labels = { paid:'\u2705 Fully Paid', partial:'\u26a0\ufe0f Partial Payment', unpaid:'\u274c Not Paid' };
+  var colors = { paid:'#047857', partial:'#B45309', unpaid:'#B91C1C' };
+
+  box.innerHTML =
+    '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px">' +
+      '<div><strong style="font-size:16px;color:var(--green-dark)">' + r.name + '</strong><br>' +
+      '<span style="font-size:12px;color:var(--gray)">' + r.studentId + ' \u00b7 ' + (r.classPos||'') + ' \u00b7 ' + (r.campus||'') + '</span></div>' +
+      '<span style="font-weight:700;color:' + colors[r.status] + '">' + labels[r.status] + '</span>' +
+    '</div>' +
+    '<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-top:1px solid var(--light-gray)"><span>Total Fee</span><strong>\u20a6' + Number(r.totalFee).toLocaleString() + '</strong></div>' +
+    '<div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-top:1px solid var(--light-gray)"><span>Amount Paid</span><strong style="color:#047857">\u20a6' + Number(r.paidAmt).toLocaleString() + '</strong></div>' +
+    '<div style="display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-top:2px solid var(--light-gray);font-weight:700"><span>Balance</span><span style="color:' + (bal>0?'#B91C1C':'#047857') + '">' + (bal>0?'\u20a6'+bal.toLocaleString():'Nil') + '</span></div>';
+}
+
+/* ── Admin: search-as-you-type student picker inside Add/Edit modal ── */
+function feeSuggest() {
+  var q   = (document.getElementById('fee_student').value || '').toLowerCase();
+  var box = document.getElementById('feeSuggestBox');
+  if (!q || q.length < 2) { box.style.display = 'none'; return; }
+  var hits = dbRecords.filter(function(r) {
+    return r.name.toLowerCase().includes(q) || r.studentId.toLowerCase().includes(q);
+  }).slice(0, 8);
+  if (hits.length === 0) { box.style.display = 'none'; return; }
+  box.style.display = 'block';
+  box.innerHTML = '';
+  hits.forEach(function(r) {
+    var div = document.createElement('div');
+    div.style.cssText = 'padding:9px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:13px';
+    div.innerHTML = '<strong>' + r.name + '</strong> <span style="color:#666;font-size:11px">\u00b7 ' + r.studentId + ' \u00b7 ' + (r.classPos||r.role) + '</span>';
+    div.addEventListener('mouseover', function(){ this.style.background = '#f0f7f0'; });
+    div.addEventListener('mouseout',  function(){ this.style.background = 'white'; });
+    div.addEventListener('click', function() {
+      document.getElementById('fee_student').value = r.name + ' \u2014 ' + r.studentId;
+      document.getElementById('fee_student').dataset.studentId = r.studentId;
+      document.getElementById('fee_student').dataset.studentName = r.name;
+      document.getElementById('fee_campus').value = r.campus || 'Main Campus';
+      box.style.display = 'none';
+    });
+    box.appendChild(div);
+  });
 }
 
 function openFeeModal(editId) {
   document.getElementById('feeEditId').value = editId || '';
-  document.getElementById('feeModalTitle').textContent = editId ? 'Edit Fee Record' : 'Add Fee Record';
+  document.getElementById('feeModalTitle').textContent = editId ? 'Edit Payment Record' : 'Add Payment Record';
+  var studentField = document.getElementById('fee_student');
+  studentField.removeAttribute('readonly');
+
   if (editId) {
-    var r = feeRecords.find(function(x){ return x.id===editId; });
+    var r = feeRecords.find(function(x){ return x.id === editId; });
     if (!r) return;
-    var parts = r.name.split(' ');
-    document.getElementById('feeSurname').value   = parts[0] || '';
-    document.getElementById('feeFirstname').value = parts.slice(1).join(' ') || '';
-    document.getElementById('feeStudentId').value = r.studentId;
-    document.getElementById('feeClass').value     = r.classPos;
-    document.getElementById('feeCampus').value    = r.campus;
-    document.getElementById('feeTotalAmt').value  = r.totalFee;
-    document.getElementById('feePaidAmt').value   = r.paidAmt;
-    document.getElementById('feePayDate').value   = r.payDate || '';
-    document.getElementById('feeNotes').value     = r.notes   || '';
-    updateFeeStatus();
+    studentField.value = r.name + ' \u2014 ' + r.studentId;
+    studentField.dataset.studentId   = r.studentId;
+    studentField.dataset.studentName = r.name;
+    document.getElementById('fee_term').value   = r.term || '';
+    document.getElementById('fee_year').value   = r.year || '';
+    document.getElementById('fee_amount').value = r.totalFee;
+    document.getElementById('fee_paid').value   = r.paidAmt;
+    document.getElementById('fee_status').value = r.status;
+    document.getElementById('fee_campus').value = r.campus || 'Main Campus';
+    document.getElementById('fee_notes').value  = r.notes || '';
   } else {
-    ['feeSurname','feeFirstname','feeStudentId','feeClass','feeNotes'].forEach(function(id){ document.getElementById(id).value=''; });
-    document.getElementById('feeCampus').value   = '';
-    document.getElementById('feeTotalAmt').value = '';
-    document.getElementById('feePaidAmt').value  = '';
-    document.getElementById('feePayDate').value  = new Date().toISOString().slice(0,10);
-    document.getElementById('feeStatusPreview').textContent = 'Fill in amounts above to auto-calculate status';
-    document.getElementById('feeStatusPreview').style.cssText = '';
+    studentField.value = '';
+    studentField.removeAttribute('data-student-id');
+    delete studentField.dataset.studentId;
+    delete studentField.dataset.studentName;
+    document.getElementById('fee_term').value   = '';
+    document.getElementById('fee_amount').value = '';
+    document.getElementById('fee_paid').value   = '';
+    document.getElementById('fee_status').value = 'unpaid';
+    document.getElementById('fee_notes').value  = '';
   }
   document.getElementById('feeModal').classList.add('open');
 }
 
-function closeFeeModal() { document.getElementById('feeModal').classList.remove('open'); }
+function closeFeeModal() {
+  document.getElementById('feeModal').classList.remove('open');
+  var box = document.getElementById('feeSuggestBox');
+  if (box) box.style.display = 'none';
+}
 
 function saveFeeRecord() {
-  var surname   = document.getElementById('feeSurname').value.trim();
-  var firstname = document.getElementById('feeFirstname').value.trim();
-  var sid       = document.getElementById('feeStudentId').value.trim();
-  var campus    = document.getElementById('feeCampus').value;
-  var total     = parseFloat(document.getElementById('feeTotalAmt').value);
-  var paid      = parseFloat(document.getElementById('feePaidAmt').value);
-  var editId    = document.getElementById('feeEditId').value;
+  var studentField = document.getElementById('fee_student');
+  var studentId   = studentField.dataset.studentId;
+  var studentName = studentField.dataset.studentName;
+  var term   = document.getElementById('fee_term').value;
+  var year   = document.getElementById('fee_year').value;
+  var total  = parseFloat(document.getElementById('fee_amount').value);
+  var paid   = parseFloat(document.getElementById('fee_paid').value);
+  var status = document.getElementById('fee_status').value;
+  var campus = document.getElementById('fee_campus').value;
+  var notes  = document.getElementById('fee_notes').value.trim();
+  var editId = document.getElementById('feeEditId').value;
 
-  if (!surname)      { showToast('Please enter Surname ⚠️'); return; }
-  if (!firstname)    { showToast('Please enter First Name ⚠️'); return; }
-  if (!sid)          { showToast('Please enter Student ID ⚠️'); return; }
-  if (!campus)       { showToast('Please select Campus ⚠️'); return; }
-  if (isNaN(total) || total <= 0) { showToast('Please enter a valid fee amount ⚠️'); return; }
-  if (isNaN(paid)  || paid < 0)   { showToast('Please enter amount paid ⚠️'); return; }
+  if (!studentId || !studentName) { showToast('Please pick a student from the search list \u26a0\ufe0f'); return; }
+  if (!term)  { showToast('Please select a Term \u26a0\ufe0f'); return; }
+  if (!year)  { showToast('Please select an Academic Year \u26a0\ufe0f'); return; }
+  if (isNaN(total) || total <= 0) { showToast('Please enter a valid fee amount \u26a0\ufe0f'); return; }
+  if (isNaN(paid)  || paid < 0)   { showToast('Please enter amount paid \u26a0\ufe0f'); return; }
+
+  var personRecord = dbRecords.find(function(r){ return r.studentId.toUpperCase() === studentId.toUpperCase(); });
 
   var record = {
-    id:       editId || ('fee_' + Date.now()),
-    name:     surname + ' ' + firstname,
-    studentId: sid,
-    classPos: document.getElementById('feeClass').value.trim(),
-    campus:   campus,
-    totalFee: total,
-    paidAmt:  paid,
-    status:   getFeeStatus(total, paid),
-    payDate:  document.getElementById('feePayDate').value,
-    notes:    document.getElementById('feeNotes').value.trim(),
-    term:     document.getElementById('feeTermSelect').value,
-    year:     document.getElementById('feeYearSelect').value
+    id:        editId || ('fee_' + Date.now()),
+    studentId: studentId,
+    name:      studentName,
+    classPos:  personRecord ? (personRecord.classPos || personRecord.role) : '',
+    campus:    campus,
+    totalFee:  total,
+    paidAmt:   paid,
+    status:    status,
+    payDate:   new Date().toISOString().slice(0,10),
+    notes:     notes,
+    term:      term,
+    year:      year
   };
 
   if (editId) {
-    var idx = feeRecords.findIndex(function(r){ return r.id===editId; });
+    var idx = feeRecords.findIndex(function(r){ return r.id === editId; });
     if (idx > -1) feeRecords[idx] = record;
     saveFeeToSheets(record, true);
-    showToast('Fee record updated ✅');
+    showToast('Fee record updated \u2705');
   } else {
     feeRecords.push(record);
     saveFeeToSheets(record, false);
-    showToast('Fee record added ✅');
+    showToast('Fee record added \u2705');
   }
   closeFeeModal();
   renderFeeTable();
+  updateFeeStats();
 }
 
-function quickPay(id) { openFeeModal(id); }
+function deleteFeeRecord(id) {
+  if (!confirm('Delete this fee record? This cannot be undone.')) return;
+  feeRecords = feeRecords.filter(function(r){ return r.id !== id; });
+  renderFeeTable();
+  updateFeeStats();
+  showToast('Fee record deleted \ud83d\uddd1');
+}
+
+function updateFeeStats() {
+  var total      = feeRecords.length;
+  var paidCount  = feeRecords.filter(function(r){ return r.status === 'paid'; }).length;
+  var unpaidCount= feeRecords.filter(function(r){ return r.status === 'unpaid'; }).length;
+  var collected  = feeRecords.reduce(function(s,r){ return s + (Number(r.paidAmt)||0); }, 0);
+  var outstanding= feeRecords.reduce(function(s,r){ return s + feeBalance(r); }, 0);
+
+  var elTotal = document.getElementById('feeTotalCount');
+  var elPaid  = document.getElementById('feePaidCount');
+  var elUnpaid= document.getElementById('feeUnpaidCount');
+  var elColl  = document.getElementById('feeTotalAmount');
+  var elOut   = document.getElementById('feeOutstanding');
+
+  if (elTotal) elTotal.textContent = total;
+  if (elPaid)  elPaid.textContent  = paidCount;
+  if (elUnpaid)elUnpaid.textContent= unpaidCount;
+  if (elColl)  elColl.textContent  = '\u20a6' + collected.toLocaleString();
+  if (elOut)   elOut.textContent   = '\u20a6' + outstanding.toLocaleString();
+}
+
+function renderFeeTable() {
+  var body   = document.getElementById('feeTableBody');
+  var empty  = document.getElementById('feeTableEmpty');
+  if (!body) return;
+
+  var search = (document.getElementById('feeAdminSearch')  || {}).value || '';
+  var status = (document.getElementById('feeStatusFilter') || {}).value || '';
+  var campus = (document.getElementById('feeCampusFilter') || {}).value || '';
+  search = search.toLowerCase();
+
+  var filtered = feeRecords.filter(function(r) {
+    return (!search || r.name.toLowerCase().includes(search) || r.studentId.toLowerCase().includes(search)) &&
+           (!status || r.status === status) &&
+           (!campus || r.campus === campus);
+  });
+
+  if (filtered.length === 0) {
+    body.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    updateFeeStats();
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+
+  var statusLabels = { paid:'\u2705 Paid', partial:'\u26a0\ufe0f Partial', unpaid:'\u274c Unpaid' };
+  var statusColors = { paid:'#047857', partial:'#B45309', unpaid:'#B91C1C' };
+
+  body.innerHTML = filtered.map(function(r) {
+    var bal = feeBalance(r);
+    return '<tr style="border-bottom:1px solid var(--light-gray)">' +
+      '<td style="padding:10px 14px"><strong>' + r.name + '</strong></td>' +
+      '<td style="padding:10px 14px;font-family:monospace;font-size:12px;color:var(--gray)">' + r.studentId + '</td>' +
+      '<td style="padding:10px 14px;font-size:12px">' + (r.campus||'\u2014') + '</td>' +
+      '<td style="padding:10px 14px;font-size:12px">' + r.term + ' / ' + r.year + '</td>' +
+      '<td style="padding:10px 14px;font-weight:600">\u20a6' + Number(r.totalFee).toLocaleString() + '</td>' +
+      '<td style="padding:10px 14px;color:#047857;font-weight:600">\u20a6' + Number(r.paidAmt).toLocaleString() + '</td>' +
+      '<td style="padding:10px 14px;font-weight:700;color:' + (bal>0?'#B91C1C':'#047857') + '">' + (bal>0?'\u20a6'+bal.toLocaleString():'Nil') + '</td>' +
+      '<td style="padding:10px 14px"><span style="font-weight:700;font-size:12px;color:' + statusColors[r.status] + '">' + statusLabels[r.status] + '</span></td>' +
+      '<td style="padding:10px 14px;white-space:nowrap">' +
+        '<button onclick="openFeeModal(\'' + r.id + '\')" style="background:none;border:1px solid var(--green);color:var(--green);border-radius:3px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px">\u270f Edit</button>' +
+        '<button onclick="printReceipt(\'' + r.id + '\')" style="background:none;border:1px solid #2563EB;color:#2563EB;border-radius:3px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px">\ud83e\uddfe Receipt</button>' +
+        '<button onclick="deleteFeeRecord(\'' + r.id + '\')" style="background:none;border:1px solid #B91C1C;color:#B91C1C;border-radius:3px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer">\ud83d\uddd1</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  updateFeeStats();
+}
 
 function importFromDB() {
-  if (dbRecords.length === 0) { showToast('No records in database yet. Add students first ⚠️'); return; }
-  var term = document.getElementById('feeTermSelect').value;
-  var year = document.getElementById('feeYearSelect').value;
+  if (dbRecords.length === 0) { showToast('No records in database yet. Add students first \u26a0\ufe0f'); return; }
+  var term = document.getElementById('feeTermSelect').value || 'First Term';
+  var year = document.getElementById('feeYearSelect').value || '2024/2025';
   var imported = 0;
-  dbRecords.filter(function(r){ return r.role !== 'staff'; }).forEach(function(r) {
-    var exists = feeRecords.find(function(f){ return f.studentId.toUpperCase()===r.studentId.toUpperCase() && f.term===term && f.year===year; });
+  dbRecords.filter(function(r){ return r.role !== 'staff'; }).forEach(function(r, i) {
+    var exists = feeRecords.find(function(f){
+      return f.studentId.toUpperCase() === r.studentId.toUpperCase() && f.term === term && f.year === year;
+    });
     if (!exists) {
-      feeRecords.push({
-        id: 'fee_' + Date.now() + '_' + imported,
-        name: r.name, studentId: r.studentId, classPos: r.classPos || r.role,
+      var rec = {
+        id: 'fee_' + Date.now() + '_' + i,
+        studentId: r.studentId, name: r.name, classPos: r.classPos || r.role,
         campus: r.campus, totalFee: 50000, paidAmt: 0,
-        status: 'owing', payDate: '', notes: '', term: term, year: year
-      });
+        status: 'unpaid', payDate: '', notes: '', term: term, year: year
+      };
+      feeRecords.push(rec);
+      saveFeeToSheets(rec, false);
       imported++;
     }
   });
   renderFeeTable();
-  showToast(imported + ' students imported from database ✅');
+  updateFeeStats();
+  showToast(imported + ' students imported from database \u2705');
 }
 
 function printReceipt(id) {
-  var r = feeRecords.find(function(x){ return x.id===id; });
+  var r = feeRecords.find(function(x){ return x.id === id; });
   if (!r) return;
-  var balance = r.totalFee - r.paidAmt;
+  var bal = feeBalance(r);
   var w = window.open('', '_blank');
-  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Fee Receipt — ' + r.name + '</title>' +
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Fee Receipt \u2014 ' + r.name + '</title>' +
     '<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:30px;max-width:500px;margin:0 auto}' +
     '.receipt{border:2px solid #006B35;border-radius:8px;overflow:hidden}' +
     '.r-head{background:#004D26;padding:18px 22px;text-align:center}' +
@@ -5150,41 +5268,70 @@ function printReceipt(id) {
     '.r-row span{color:#666;font-size:12px}.r-row strong{color:#222}' +
     '.r-total{background:#f5f5f5;padding:14px 22px;display:flex;justify-content:space-between;align-items:center}' +
     '.r-total span{font-size:13px;font-weight:700;color:#004D26}' +
-    '.r-total strong{font-size:20px;font-weight:900;color:' + (balance>0?'#B71C1C':'#047857') + '}' +
+    '.r-total strong{font-size:20px;font-weight:900;color:' + (bal>0?'#B71C1C':'#047857') + '}' +
     '.r-stamp{text-align:center;padding:14px;border-top:2px dashed #ccc}' +
     '.stamp{display:inline-block;border:2px solid #006B35;border-radius:4px;padding:6px 18px;color:#006B35;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px}' +
     '.btn{display:block;width:fit-content;margin:16px auto 0;background:#006B35;color:white;border:none;padding:10px 28px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer}' +
     '@media print{.btn{display:none}}</style></head><body>' +
     '<div class="receipt">' +
-    '<div class="r-head"><h1>Christ the Foundation Model Academy</h1><p>cfmsanambra.org · +234 806 268 6710 · Okija, Anambra</p></div>' +
+    '<div class="r-head"><h1>Christ the Foundation Model Academy</h1><p>cfmsanambra.org \u00b7 +234 806 268 6710 \u00b7 Okija, Anambra</p></div>' +
     '<div class="r-title">School Fee Receipt</div>' +
     '<div class="r-body">' +
     '<div class="r-row"><span>Receipt No.</span><strong>CFMS-' + r.id.slice(-6).toUpperCase() + '</strong></div>' +
     '<div class="r-row"><span>Student Name</span><strong>' + r.name + '</strong></div>' +
     '<div class="r-row"><span>Student ID</span><strong>' + r.studentId + '</strong></div>' +
-    '<div class="r-row"><span>Class</span><strong>' + r.classPos + '</strong></div>' +
-    '<div class="r-row"><span>Campus</span><strong>' + r.campus + '</strong></div>' +
-    '<div class="r-row"><span>Term / Year</span><strong>' + r.term + ' — ' + r.year + '</strong></div>' +
-    '<div class="r-row"><span>Total Fee</span><strong>₦' + r.totalFee.toLocaleString() + '</strong></div>' +
-    '<div class="r-row"><span>Amount Paid</span><strong style="color:#047857">₦' + r.paidAmt.toLocaleString() + '</strong></div>' +
+    '<div class="r-row"><span>Class</span><strong>' + (r.classPos||'\u2014') + '</strong></div>' +
+    '<div class="r-row"><span>Campus</span><strong>' + (r.campus||'\u2014') + '</strong></div>' +
+    '<div class="r-row"><span>Term / Year</span><strong>' + r.term + ' \u2014 ' + r.year + '</strong></div>' +
+    '<div class="r-row"><span>Total Fee</span><strong>\u20a6' + Number(r.totalFee).toLocaleString() + '</strong></div>' +
+    '<div class="r-row"><span>Amount Paid</span><strong style="color:#047857">\u20a6' + Number(r.paidAmt).toLocaleString() + '</strong></div>' +
     '<div class="r-row"><span>Payment Date</span><strong>' + (r.payDate || 'N/A') + '</strong></div>' +
     (r.notes ? '<div class="r-row"><span>Notes</span><strong>' + r.notes + '</strong></div>' : '') +
     '</div>' +
-    '<div class="r-total"><span>Outstanding Balance</span><strong>' + (balance>0?'₦'+balance.toLocaleString():'FULLY PAID') + '</strong></div>' +
-    '<div class="r-stamp"><div class="stamp">' + (r.status==='paid'?'✅ Payment Complete':r.status==='partial'?'⚠️ Partial Payment':'❌ Payment Pending') + '</div></div>' +
+    '<div class="r-total"><span>Outstanding Balance</span><strong>' + (bal>0?'\u20a6'+bal.toLocaleString():'FULLY PAID') + '</strong></div>' +
+    '<div class="r-stamp"><div class="stamp">' + (r.status==='paid'?'\u2705 Payment Complete':r.status==='partial'?'\u26a0\ufe0f Partial Payment':'\u274c Payment Pending') + '</div></div>' +
     '</div>' +
-    '<button class="btn" onclick="window.print()">🖨 Print Receipt</button>' +
+    '<button class="btn" onclick="window.print()">\ud83d\uddb8 Print Receipt</button>' +
     '</body></html>');
   w.document.close();
 }
 
+function printFeeReport() {
+  if (feeRecords.length === 0) { showToast('No fee records to print \u26a0\ufe0f'); return; }
+  var rows = feeRecords.map(function(r) {
+    var bal = feeBalance(r);
+    return '<tr>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd">' + r.name + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd;font-family:monospace;font-size:11px">' + r.studentId + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd">' + (r.campus||'') + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd">' + r.term + ' / ' + r.year + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd;text-align:right">\u20a6' + Number(r.totalFee).toLocaleString() + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd;text-align:right;color:#047857">\u20a6' + Number(r.paidAmt).toLocaleString() + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd;text-align:right;color:' + (bal>0?'#B91C1C':'#047857') + '">' + (bal>0?'\u20a6'+bal.toLocaleString():'Nil') + '</td>' +
+      '<td style="padding:7px 10px;border:1px solid #ddd;text-transform:capitalize">' + r.status + '</td>' +
+    '</tr>';
+  }).join('');
+
+  var w = window.open('', '_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CFMA Fee Report</title>' +
+    '<style>body{font-family:Arial,sans-serif;padding:24px}h1{font-size:18px;color:#004D26}table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}' +
+    'th{background:#004D26;color:white;padding:8px 10px;text-align:left}' +
+    '.btn{margin-top:18px;background:#006B35;color:white;border:none;padding:10px 24px;border-radius:4px;font-weight:700;cursor:pointer}' +
+    '@media print{.btn{display:none}}</style></head><body>' +
+    '<h1>Christ the Foundation Model Academy \u2014 Fee Payment Report</h1>' +
+    '<p style="font-size:12px;color:#666">Generated: ' + new Date().toLocaleDateString('en-NG') + '</p>' +
+    '<table><thead><tr><th>Name</th><th>ID</th><th>Campus</th><th>Term/Year</th><th>Fee</th><th>Paid</th><th>Balance</th><th>Status</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>' +
+    '<button class="btn" onclick="window.print()">\ud83d\uddb8 Print Report</button></body></html>');
+  w.document.close();
+}
+
 function exportFeeCSV() {
-  if (feeRecords.length === 0) { showToast('No fee records to export ⚠️'); return; }
+  if (feeRecords.length === 0) { showToast('No fee records to export \u26a0\ufe0f'); return; }
   var rows = ['Name,Student ID,Class,Campus,Term,Year,Total Fee,Amount Paid,Balance,Status,Payment Date,Notes'];
   feeRecords.forEach(function(r) {
-    var balance = r.totalFee - r.paidAmt;
     rows.push([r.name, r.studentId, r.classPos, r.campus, r.term, r.year,
-      r.totalFee, r.paidAmt, balance, r.status, r.payDate||'', r.notes||'']
+      r.totalFee, r.paidAmt, feeBalance(r), r.status, r.payDate||'', r.notes||'']
       .map(function(v){ return '"' + String(v||'').replace(/"/g,'""') + '"'; }).join(','));
   });
   var blob = new Blob([rows.join('\n')], { type:'text/csv' });
@@ -5192,15 +5339,13 @@ function exportFeeCSV() {
   a.href = URL.createObjectURL(blob);
   a.download = 'CFMS_Fees_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
-  showToast('Fee records exported ✅');
+  showToast('Fee records exported \u2705');
 }
 
-// Close fee modal on overlay click
 document.addEventListener('DOMContentLoaded', function() {
   var feeOverlay = document.getElementById('feeModal');
   if (feeOverlay) feeOverlay.addEventListener('click', function(e){ if(e.target===feeOverlay) closeFeeModal(); });
 });
-
 
 /* ══════════════════════════════════════════════
    APPLICATION FORM SUBMISSION
@@ -6010,6 +6155,7 @@ async function saveCareerToSheets(data) {
   await sheetsRequest('save_career', data);
 }
 
+var isTeacherLoggedIn = false;
 
 function teacherLogin() {
   var u = document.getElementById('tUsername').value.trim();
@@ -6095,6 +6241,11 @@ let adminAuthenticated = false;
 function openAdminLogin() {
   if (adminAuthenticated) {
     document.getElementById('setupguide').style.display = 'block';
+    var feePanel = document.getElementById('feeAdminPanel');
+    var feePrompt = document.getElementById('feeLoginPrompt');
+    if (feePanel)  feePanel.style.display  = 'block';
+    if (feePrompt) feePrompt.style.display = 'none';
+    if (feePanel) { renderFeeTable(); updateFeeStats(); }
     goTo('setupguide');
     return;
   }
@@ -6119,6 +6270,11 @@ function submitAdminLogin() {
     adminAuthenticated = true;
     closeAdminOverlay();
     document.getElementById('setupguide').style.display = 'block';
+    var feePanel = document.getElementById('feeAdminPanel');
+    var feePrompt = document.getElementById('feeLoginPrompt');
+    if (feePanel)  feePanel.style.display  = 'block';
+    if (feePrompt) feePrompt.style.display = 'none';
+    if (feePanel) { renderFeeTable(); updateFeeStats(); }
     setTimeout(function(){ goTo('setupguide'); }, 350);
     showToast('Admin access granted ✅');
   } else {
@@ -6161,166 +6317,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* ═══════════════════════════════════════════════
-   FEE PAYMENT TRACKER
-═══════════════════════════════════════════════ */
-var feeRecords = [];
 
-function lookupFees() {
-  var id   = (document.getElementById('feeStudentId').value || '').trim().toUpperCase();
-  var year = document.getElementById('feeYear').value;
-  var term = document.getElementById('feeTerm').value;
-  var res  = document.getElementById('feeResult');
-  var none = document.getElementById('feeNotFound');
-  if (!id) { showToast('Please enter a Student ID ⚠️'); return; }
 
-  var records = feeRecords.filter(function(r){
-    return r.studentId.toUpperCase() === id && r.year === year && r.term === term;
-  });
 
-  if (records.length === 0) {
-    if (res)  res.style.display  = 'none';
-    if (none) none.style.display = 'block';
-    showToast('No fee record found ❌');
-    return;
-  }
-  if (none) none.style.display = 'none';
-  if (res)  res.style.display  = 'block';
 
-  // Student info from DB
-  var person = dbRecords.find(function(r){ return r.studentId.toUpperCase() === id; });
-  var nameEl = document.getElementById('feeStudentName');
-  var metaEl = document.getElementById('feeStudentMeta');
-  var photoEl= document.getElementById('feeStudentPhoto');
-  if (nameEl) nameEl.textContent = person ? person.name : id;
-  if (metaEl) metaEl.textContent = person ? (person.classPos || person.role) + ' · ' + person.campus : 'CFMA Student';
-  if (photoEl) {
-    if (person && person.passport) {
-      photoEl.innerHTML = '<img src="'+person.passport+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-    } else {
-      photoEl.textContent = '👤';
-    }
-  }
-
-  // Fee items
-  var itemsEl  = document.getElementById('feeItems');
-  var balanceEl= document.getElementById('feeBalance');
-  var statusColors = { paid:'#06A94D', owing:'#E53E3E', partial:'#D97706' };
-  var statusLabels = { paid:'✅ Paid', owing:'❌ Owing', partial:'⚠ Partial' };
-  var totalOwing = 0;
-  if (itemsEl) {
-    itemsEl.innerHTML = records.map(function(r) {
-      if (r.status === 'owing' || r.status === 'partial') totalOwing += Number(r.amount);
-      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--light-gray)">' +
-        '<div><div style="font-size:13px;font-weight:700">' + r.feeType + '</div>' +
-        '<div style="font-size:11px;color:var(--gray)">' + r.term + ' · ' + r.year + '</div></div>' +
-        '<div style="text-align:right">' +
-        '<div style="font-size:14px;font-weight:700">₦' + Number(r.amount).toLocaleString() + '</div>' +
-        '<div style="font-size:11px;font-weight:700;color:' + (statusColors[r.status]||'#666') + '">' + (statusLabels[r.status]||r.status) + '</div>' +
-        '</div></div>';
-    }).join('');
-  }
-  if (balanceEl) balanceEl.textContent = '₦' + totalOwing.toLocaleString();
-  showToast('Fee status loaded ✅');
-}
-
-function recordFeePayment() {
-  var id     = (document.getElementById('feeAdminStudentId').value || '').trim().toUpperCase();
-  var type   = document.getElementById('feeAdminType').value;
-  var amount = document.getElementById('feeAdminAmount').value;
-  var status = document.getElementById('feeAdminStatus').value;
-  var term   = document.getElementById('feeAdminTerm').value;
-  var year   = document.getElementById('feeAdminYear').value;
-
-  if (!id)     { showToast('Please enter Student ID ⚠️'); return; }
-  if (!amount) { showToast('Please enter amount ⚠️'); return; }
-
-  // Check if record exists → update it
-  var idx = feeRecords.findIndex(function(r){
-    return r.studentId === id && r.feeType === type && r.term === term && r.year === year;
-  });
-  var record = { id:'fee_'+Date.now(), studentId:id, feeType:type, amount:Number(amount), status:status, term:term, year:year, date: new Date().toLocaleDateString('en-NG') };
-  if (idx > -1) feeRecords[idx] = record;
-  else feeRecords.push(record);
-
-  renderFeeTable();
-  updateFeeStats();
-  document.getElementById('feeAdminStudentId').value = '';
-  document.getElementById('feeAdminAmount').value    = '';
-  showToast('Fee record saved ✅');
-}
-
-function renderFeeTable() {
-  var body    = document.getElementById('feeAdminTable');
-  var searchQ = (document.getElementById('feeAdminSearch') || {}).value || '';
-  if (!body) return;
-  var filtered = feeRecords.filter(function(r){
-    return !searchQ || r.studentId.toLowerCase().includes(searchQ.toLowerCase());
-  });
-  if (filtered.length === 0) { body.innerHTML = '<tr><td colspan="6" style="padding:20px;text-align:center;color:var(--gray)">No fee records yet</td></tr>'; return; }
-  var statusColors = { paid:'#06A94D', owing:'#E53E3E', partial:'#D97706' };
-  var statusLabels = { paid:'✅ Paid', owing:'❌ Owing', partial:'⚠ Partial' };
-  body.innerHTML = filtered.map(function(r) {
-    return '<tr style="border-bottom:1px solid var(--light-gray)">' +
-      '<td style="padding:9px 12px;font-size:12px;font-family:monospace">' + r.studentId + '</td>' +
-      '<td style="padding:9px 12px;font-size:12px">' + r.feeType + '</td>' +
-      '<td style="padding:9px 12px;font-size:12px;font-weight:700">₦' + Number(r.amount).toLocaleString() + '</td>' +
-      '<td style="padding:9px 12px"><span style="font-size:11px;font-weight:700;color:' + (statusColors[r.status]||'#666') + '">' + (statusLabels[r.status]||r.status) + '</span></td>' +
-      '<td style="padding:9px 12px;font-size:11px;color:var(--gray)">' + r.term + '</td>' +
-      '<td style="padding:9px 12px"><button onclick="deleteFeeRecord(\''+r.id+'\')" style="background:rgba(229,62,62,.1);color:#E53E3E;border:none;border-radius:3px;padding:3px 8px;font-size:11px;font-weight:700;cursor:pointer">🗑 Del</button></td>' +
-    '</tr>';
-  }).join('');
-}
-
-function deleteFeeRecord(id) {
-  if (!confirm('Delete this fee record?')) return;
-  feeRecords = feeRecords.filter(function(r){ return r.id !== id; });
-  renderFeeTable();
-  updateFeeStats();
-  showToast('Fee record deleted');
-}
-
-function updateFeeStats() {
-  var unique = new Set(feeRecords.map(function(r){ return r.studentId; }));
-  var paid   = feeRecords.filter(function(r){ return r.status==='paid'; });
-  var owing  = feeRecords.filter(function(r){ return r.status==='owing'||r.status==='partial'; });
-  var ts = document.getElementById('feeTotalStudents');
-  var pc = document.getElementById('feePaidCount');
-  var oc = document.getElementById('feeOwingCount');
-  if (ts) ts.textContent = unique.size;
-  if (pc) pc.textContent = paid.length;
-  if (oc) oc.textContent = owing.length;
-}
-
-function printFeeReceipt() {
-  var name = (document.getElementById('feeStudentName') || {}).textContent || '—';
-  var meta = (document.getElementById('feeStudentMeta') || {}).textContent || '—';
-  var bal  = (document.getElementById('feeBalance')     || {}).textContent || '₦0';
-  var items= (document.getElementById('feeItems')       || {}).innerHTML || '';
-  var year = (document.getElementById('feeYear')        || {}).value || '';
-  var term = (document.getElementById('feeTerm')        || {}).value || '';
-  var w    = window.open('','_blank');
-  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Fee Receipt</title>' +
-    '<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:30px;color:#222}' +
-    '.rec{max-width:500px;margin:0 auto;border:2px solid #006B35;border-radius:8px;overflow:hidden}' +
-    '.rec-head{background:#004D26;padding:18px 22px;color:white}.rec-head h1{font-size:16px;font-weight:900}' +
-    '.rec-head p{font-size:11px;color:rgba(255,255,255,.7);margin-top:3px}' +
-    '.rec-title{background:#C8981A;padding:7px 22px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;color:#004D26;letter-spacing:2px}' +
-    '.rec-info{padding:16px 22px;border-bottom:2px solid #eee}.rec-info h3{font-size:16px;font-weight:700;color:#004D26}.rec-info p{font-size:12px;color:#666;margin-top:3px}' +
-    '.rec-items{padding:16px 22px}.rec-total{padding:12px 22px;background:#f5f5f5;border-top:2px solid #eee;display:flex;justify-content:space-between;font-weight:700;font-size:15px}' +
-    '.rec-foot{padding:12px 22px;font-size:11px;color:#999;text-align:center;border-top:1px solid #eee}' +
-    '.btn{display:block;margin:16px auto;background:#006B35;color:white;border:none;padding:10px 28px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer}' +
-    '@media print{.btn{display:none}}</style></head><body>' +
-    '<div class="rec">' +
-    '<div class="rec-head"><h1>Christ the Foundation Model Academy</h1><p>Consolidated Knowledge Through Education · cfmsanambra.org</p></div>' +
-    '<div class="rec-title">Fee Payment Receipt</div>' +
-    '<div class="rec-info"><h3>' + name + '</h3><p>' + meta + ' &nbsp;|&nbsp; ' + term + ' · ' + year + '</p></div>' +
-    '<div class="rec-items">' + items + '</div>' +
-    '<div class="rec-total"><span>Balance Outstanding</span><span style="color:#E53E3E">' + bal + '</span></div>' +
-    '<div class="rec-foot">Printed: ' + new Date().toLocaleDateString('en-NG') + ' &nbsp;|&nbsp; +234 806 268 6710 &nbsp;|&nbsp; cfmsanambra@gmail.com</div>' +
-    '</div><button class="btn" onclick="window.print()">🖨 Print Receipt</button></body></html>');
-  w.document.close();
-}
 
 </script>
 
