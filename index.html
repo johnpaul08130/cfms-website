@@ -1834,6 +1834,7 @@ footer{background:var(--green-dark)}
           <div class="rh-f"><div class="rh-lbl">Class</div><div class="rh-v" id="summaryClass"></div></div>
           <div class="rh-f"><div class="rh-lbl">Term / Year</div><div class="rh-v" id="summaryTerm"></div></div>
           <div class="rh-f"><div class="rh-lbl">Average</div><div class="rh-v gold" id="summaryAvg"></div></div>
+          <div class="rh-f"><div class="rh-lbl">Position in Class</div><div class="rh-v gold" id="summaryPosition"></div></div>
           <div class="rcard-actions">
             <button class="ra-btn print" onclick="printResults()">🖨 Print</button>
             <button class="ra-btn close" onclick="closeResults()">✕ Close</button>
@@ -1841,9 +1842,14 @@ footer{background:var(--green-dark)}
         </div>
         <div class="rcard-table">
           <table class="rt">
-            <thead><tr><th>#</th><th>Subject</th><th>CA Score (40)</th><th>Exam Score (60)</th><th>Total (100)</th><th>Grade</th><th>Remarks</th></tr></thead>
+            <thead><tr><th>#</th><th>Subject</th><th>CA Score (40)</th><th>Exam Score (60)</th><th>Total (100)</th><th>Position</th><th>Grade</th><th>Remarks</th></tr></thead>
             <tbody id="resultsBody"></tbody>
           </table>
+        </div>
+        <div id="resultOthers" style="padding:16px 24px;border-top:1px solid var(--light-gray);display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:13px">
+          <div><div style="color:var(--gray);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:3px">Attendance</div><div id="summaryAttendance" style="font-weight:600;color:var(--green-dark)">—</div></div>
+          <div><div style="color:var(--gray);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:3px">Affective &amp; Psychomotor Skills</div><div id="summarySkills" style="font-weight:600;color:var(--green-dark)">—</div></div>
+          <div style="grid-column:1 / -1"><div style="color:var(--gray);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:3px">Teacher / Principal Comment</div><div id="summaryComment" style="font-weight:600;color:var(--green-dark)">—</div></div>
         </div>
       </div>
 
@@ -2056,203 +2062,6 @@ footer{background:var(--green-dark)}
 <hr class="sec-divider">
 
 <!-- ID CARDS -->
-<section id="idcards" style="display:none">
-  <div class="max-w">
-    <div class="section-header reveal" style="margin-bottom:40px">
-      <div class="sec-label">Student Identity</div>
-      <h2 class="sec-title">Student ID Card Generator</h2>
-      <p class="sec-desc">Fill in the student details, upload a passport photograph, and generate a professional CFMA identity card that can be printed or saved.</p>
-    </div>
-
-    <div class="idcard-layout">
-
-      <!-- FORM -->
-      <div class="idcard-form-box reveal">
-        <div class="idcard-form-head">
-          <h3>📋 Enter Student Details</h3>
-          <p>All fields marked * are required</p>
-        </div>
-        <div class="idcard-form-body">
-
-          <!-- Passport Upload -->
-          <div class="id-fg">
-            <label>Passport Photograph *</label>
-            <div class="passport-upload" id="passportUploadBox" onclick="document.getElementById('passportInput').click()">
-              <input type="file" id="passportInput" accept="image/*" onchange="loadPassport(this)" onclick="event.stopPropagation()">
-              <div id="passportPlaceholder">
-                <div class="passport-icon">📷</div>
-                <strong>Click to upload photo</strong>
-                <p>JPG, PNG — passport size recommended</p>
-              </div>
-              <img id="passportPreview" class="passport-preview" src="" alt="Passport" style="display:none">
-            </div>
-          </div>
-
-          <div class="id-frow">
-            <div class="id-fg">
-              <label>Surname *</label>
-              <input type="text" id="id_surname" placeholder="e.g. Okafor" oninput="livePreview()">
-            </div>
-            <div class="id-fg">
-              <label>First Name *</label>
-              <input type="text" id="id_firstname" placeholder="e.g. Chukwuemeka" oninput="livePreview()">
-            </div>
-          </div>
-
-          <div class="id-fg">
-            <label>Other Name</label>
-            <input type="text" id="id_othername" placeholder="e.g. Emmanuel (optional)" oninput="livePreview()">
-          </div>
-
-          <div class="id-frow">
-            <div class="id-fg">
-              <label>Student ID No. *</label>
-              <input type="text" id="id_idno" placeholder="e.g. CFMS-2025-001" oninput="livePreview()">
-            </div>
-            <div class="id-fg">
-              <label>Year of Entry *</label>
-              <input type="text" id="id_year" placeholder="e.g. 2024" maxlength="4" oninput="livePreview()">
-            </div>
-          </div>
-
-          <div class="id-frow">
-            <div class="id-fg">
-              <label>Class *</label>
-              <select id="id_class" onchange="livePreview()">
-                <option value="">Select Class</option>
-                <optgroup label="Nursery & Primary">
-                  <option>Creche</option>
-                  <option>Nursery 1</option>
-                  <option>Nursery 2</option>
-                  <option>Primary 1</option><option>Primary 2</option><option>Primary 3</option>
-                  <option>Primary 4</option><option>Primary 5</option><option>Primary 6</option>
-                </optgroup>
-                <optgroup label="Secondary">
-                  <option>JSS 1</option><option>JSS 2</option><option>JSS 3</option>
-                  <option>SS 1</option><option>SS 2</option><option>SS 3</option>
-                </optgroup>
-              </select>
-            </div>
-            <div class="id-fg">
-              <label>Campus</label>
-              <select id="id_campus" onchange="livePreview()">
-                <option value="Main Campus">Main Campus</option>
-                <option value="Campus 2 — Nkwo Okija">Campus 2 — Nkwo</option>
-                <option value="Campus 3 — Ihiala">Campus 3 — Ihiala</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="id-frow">
-            <div class="id-fg">
-              <label>Expiry Year</label>
-              <input type="text" id="id_expiry" placeholder="e.g. 2027" maxlength="4" oninput="livePreview()">
-            </div>
-            <div class="id-fg">
-              <label>Blood Group</label>
-              <select id="id_blood" onchange="livePreview()">
-                <option value="">—</option>
-                <option>A+</option><option>A-</option>
-                <option>B+</option><option>B-</option>
-                <option>AB+</option><option>AB-</option>
-                <option>O+</option><option>O-</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="id-fg">
-            <label>Emergency Contact (Phone)</label>
-            <input type="tel" id="id_emergency" placeholder="e.g. +234 806 268 6710" oninput="livePreview()">
-          </div>
-
-          <button class="id-gen-btn" onclick="generateCard()">
-            🪪 Generate ID Card
-          </button>
-        </div>
-      </div>
-
-      <!-- PREVIEW -->
-      <div class="idcard-preview-box reveal">
-        <h4>🪪 Live Card Preview</h4>
-        <div class="idcard-wrap">
-          <div id="old_idCardEmpty" class="idc-empty">
-            <div class="icon">🪪</div>
-            <p>Fill in the form to see<br>the ID card preview here</p>
-          </div>
-          <div id="old_idCardOutput" style="display:none">
-            <!-- FRONT -->
-            <div class="id-card" id="old_idcFront">
-              <div class="idc-front">
-                <div class="idc-type-badge" id="old_idc_typebadge">Student</div>
-                <div class="idc-front-header">
-                  <img src="data:image/jpeg;base64,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" alt="CFMA" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">
-                  <div>
-                    <div class="idc-school-name">Christ the Foundation Model Academy</div>
-                    <div class="idc-school-motto">Consolidated Knowledge Through Education</div>
-                  </div>
-                </div>
-                <div class="idc-body">
-                  <div>
-                    <div class="idc-passport" id="old_idc_passport">👤</div>
-                  </div>
-                  <div class="idc-info">
-                    <div class="idc-label">Full Name</div>
-                    <div class="idc-value large" id="old_idc_name">—</div>
-                    <div class="idc-label">Class</div>
-                    <div class="idc-value" id="old_idc_class">—</div>
-                    <div class="idc-label">Year of Entry</div>
-                    <div class="idc-value" id="old_idc_entry">—</div>
-                    <div class="idc-label">Campus</div>
-                    <div class="idc-value" id="old_idc_campus" style="font-size:10px">—</div>
-                  </div>
-                </div>
-                <div class="idc-id-band">
-                  <span>Student ID</span>
-                  <strong id="old_idc_idno">CFMS-0000-000</strong>
-                  <span>Okija · Anambra</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- BACK -->
-            <div class="id-card" id="old_idcBack" style="margin-top:12px">
-              <div class="idc-back">
-                <div class="idc-back-header">
-                  <p>Christ the Foundation Model Academy — Student Identity Card</p>
-                </div>
-                <div class="idc-back-body">
-                  <div class="idc-back-row"><span>Student ID</span><strong id="old_idc_b_idno">—</strong></div>
-                  <div class="idc-back-row"><span>Full Name</span><strong id="old_idc_b_name">—</strong></div>
-                  <div class="idc-back-row"><span>Class</span><strong id="old_idc_b_class">—</strong></div>
-                  <div class="idc-back-row"><span>Year of Entry</span><strong id="idc_b_year">—</strong></div>
-                  <div class="idc-back-row"><span>Blood Group</span><strong id="old_idc_b_blood">—</strong></div>
-                  <div class="idc-back-row"><span>Emergency</span><strong id="old_idc_b_emergency">—</strong></div>
-                  <div class="idc-back-row"><span>Expires</span><strong id="old_idc_b_expiry">—</strong></div>
-                </div>
-                <div class="idc-barcode">
-                  <div class="idc-barcode-lines" id="old_idcBarcodeLines"></div>
-                  <p id="old_idc_barcode_text">CFMS-0000-000</p>
-                </div>
-                <div class="idc-back-footer">
-                  📞 +234 806 268 6710 &nbsp;|&nbsp; ✉ cfmsanambra@gmail.com<br>
-                  Agbasike Umuohi, Okija, Ihiala, Anambra State<br>
-                  <em>If found, please return to the nearest CFMA campus</em>
-                </div>
-              </div>
-            </div>
-
-            <!-- ACTIONS -->
-            <div class="idcard-actions">
-              <button class="idc-btn print" onclick="printIDCard()">🖨 Print Card</button>
-              <button class="idc-btn download" onclick="saveIDCardPDF()">💾 Save as PDF</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <hr class="sec-divider">
 
@@ -2532,6 +2341,7 @@ footer{background:var(--green-dark)}
                 <div style="text-align:right">
                   <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px">Average Score</div>
                   <div id="prSummaryAvg" style="font-size:36px;font-weight:900;color:var(--gold);font-family:'Merriweather',serif"></div>
+                  <div id="prSummaryPosition" style="font-size:12px;color:white;font-weight:600;margin-top:2px"></div>
                 </div>
               </div>
 
@@ -2545,6 +2355,7 @@ footer{background:var(--green-dark)}
                       <th style="padding:11px 14px;text-align:center">CA (40)</th>
                       <th style="padding:11px 14px;text-align:center">Exam (60)</th>
                       <th style="padding:11px 14px;text-align:center">Total</th>
+                      <th style="padding:11px 14px;text-align:center">Position</th>
                       <th style="padding:11px 14px;text-align:center">Grade</th>
                       <th style="padding:11px 14px;text-align:left">Remarks</th>
                     </tr>
@@ -2554,6 +2365,7 @@ footer{background:var(--green-dark)}
                     <tr style="background:var(--off-white);font-weight:700">
                       <td colspan="4" style="padding:11px 14px;font-size:13px;color:var(--green-dark)">Overall Average</td>
                       <td id="prFooterAvg" style="padding:11px 14px;text-align:center;font-size:15px;color:var(--green-dark)"></td>
+                      <td id="prFooterPosition" style="padding:11px 14px;text-align:center;font-size:13px;color:var(--green-dark)"></td>
                       <td id="prFooterGrade" style="padding:11px 14px;text-align:center"></td>
                       <td id="prFooterRemark" style="padding:11px 14px;font-size:13px;color:var(--gray)"></td>
                     </tr>
@@ -2637,8 +2449,8 @@ footer{background:var(--green-dark)}
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div class="db-mfg">
-          <label>Student/Staff ID *</label>
-          <input type="text" id="dbStudentId" placeholder="e.g. CFMS-2025-001">
+          <label>Student/Staff ID <span style="color:var(--gray);font-weight:400;text-transform:none;letter-spacing:0">(auto-generated)</span></label>
+          <input type="text" id="dbStudentId" placeholder="Select role to generate ID" readonly style="background:var(--off-white);color:var(--green-dark);font-weight:700;cursor:not-allowed">
         </div>
         <div class="db-mfg">
           <label>Gender *</label>
@@ -2652,7 +2464,7 @@ footer{background:var(--green-dark)}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
         <div class="db-mfg">
           <label>Role / Division *</label>
-          <select id="dbRole" onchange="loadSubjectCheckboxes(this.value,[])">
+          <select id="dbRole" onchange="loadSubjectCheckboxes(this.value,[]); autoGenerateDbId();">
             <option value="">Select</option>
             <option value="nursery">Creche / Nursery</option>
             <option value="primary">Primary School</option>
@@ -2741,6 +2553,11 @@ footer{background:var(--green-dark)}
 
     <!-- Admin fee panel (hidden until logged in) -->
     <div id="feeAdminPanel" style="display:none">
+      <!-- Admin bar -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+        <div style="font-size:13px;color:var(--gray)">Logged in as <strong style="color:var(--green-dark)">CFMA Admin</strong></div>
+        <button onclick="adminLogoutGlobal()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
+      </div>
       <!-- Stats -->
       <div class="fee-summary-cards reveal">
         <div class="fee-stat"><strong id="feeTotalCount">0</strong><span>Total Records</span></div>
@@ -3568,6 +3385,61 @@ let resultsDB=[];
 function calcGrade(t){if(t>=75)return{grade:'A',remarks:'Excellent'};if(t>=60)return{grade:'B',remarks:'Very Good'};if(t>=50)return{grade:'C',remarks:'Good'};if(t>=40)return{grade:'D',remarks:'Pass'};return{grade:'F',remarks:'Fail'}}
 function gpill(g){return{A:'ga',B:'gb',C:'gc',D:'gd',F:'gf'}[g]||'gf'}
 
+/* ── RANKING HELPERS (computed live, always fresh) ──────────────────────── */
+function ordinal(n) {
+  var s = ['th','st','nd','rd'], v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+// Returns subject position (e.g. "1st") for a given student within their class/term/year/subject
+function computeSubjectPosition(studentId, cls, term, year, subject) {
+  var classmates = resultsDB.filter(function(r) {
+    return r.studentClass === cls && r.term === term && r.year === year && r.subject === subject;
+  });
+  if (classmates.length === 0) return '';
+  var sorted = classmates.slice().sort(function(a,b){ return b.total - a.total; });
+  var rank = 1;
+  for (var i = 0; i < sorted.length; i++) {
+    if (i > 0 && sorted[i].total < sorted[i-1].total) rank = i + 1;
+    if (sorted[i].studentId.toUpperCase() === studentId.toUpperCase()) return ordinal(rank);
+  }
+  return '';
+}
+
+// Returns { average, position } for a student across ALL their subjects in a given class/term/year
+function computeClassAverageAndPosition(studentId, cls, term, year) {
+  // Build per-student averages for everyone in this class/term/year
+  var classResults = resultsDB.filter(function(r) {
+    return r.studentClass === cls && r.term === term && r.year === year;
+  });
+  var byStudent = {};
+  classResults.forEach(function(r) {
+    var key = r.studentId.toUpperCase();
+    if (!byStudent[key]) byStudent[key] = [];
+    byStudent[key].push(r.total);
+  });
+  var averages = Object.keys(byStudent).map(function(sid) {
+    var scores = byStudent[sid];
+    var avg = scores.reduce(function(a,b){ return a+b; }, 0) / scores.length;
+    return { studentId: sid, average: avg };
+  });
+  if (averages.length === 0) return { average: 0, position: '' };
+
+  averages.sort(function(a,b){ return b.average - a.average; });
+  var myKey = studentId.toUpperCase();
+  var myAvg = 0, rank = '';
+  var currentRank = 1;
+  for (var i = 0; i < averages.length; i++) {
+    if (i > 0 && averages[i].average < averages[i-1].average) currentRank = i + 1;
+    if (averages[i].studentId === myKey) {
+      myAvg = averages[i].average;
+      rank = ordinal(currentRank);
+      break;
+    }
+  }
+  return { average: Math.round(myAvg * 10) / 10, position: rank, totalInClass: averages.length };
+}
+
 function searchResults(){
   const id=document.getElementById('studentId').value.trim().toUpperCase();
   const term=document.getElementById('termSelect').value;
@@ -3579,14 +3451,31 @@ function searchResults(){
   document.getElementById('resultCard').style.display=rows.length?'block':'none';
   document.getElementById('noResult').style.display=rows.length?'none':'block';
   if(!rows.length){showToast('No results found ❌');return}
-  const avg=Math.round(rows.reduce((s,r)=>s+r.total,0)/rows.length);
+  const cls = rows[0].studentClass || '';
+  const classStats = computeClassAverageAndPosition(id, cls, term, year);
+  const avg = classStats.average || Math.round(rows.reduce((s,r)=>s+r.total,0)/rows.length);
   const {grade:ag}=calcGrade(avg);
   document.getElementById('summaryName').textContent=rows[0].studentName;
   document.getElementById('summaryId').textContent=id;
-  document.getElementById('summaryClass').textContent=rows[0].studentClass||'—';
+  document.getElementById('summaryClass').textContent=cls||'—';
   document.getElementById('summaryTerm').textContent=term+' — '+year;
   document.getElementById('summaryAvg').textContent=avg+'% ('+ag+')';
-  document.getElementById('resultsBody').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><strong>${r.subject}</strong></td><td style="text-align:center">${r.ca}</td><td style="text-align:center">${r.exam}</td><td style="text-align:center"><strong>${r.total}</strong></td><td style="text-align:center"><span class="gpill ${gpill(r.grade)}">${r.grade}</span></td><td>${r.remarks}</td></tr>`).join('');
+  document.getElementById('summaryPosition').textContent = classStats.position
+    ? classStats.position + (classStats.totalInClass ? ' of '+classStats.totalInClass : '')
+    : '—';
+  document.getElementById('resultsBody').innerHTML=rows.map((r,i)=>`<tr><td>${i+1}</td><td><strong>${r.subject}</strong></td><td style="text-align:center">${r.ca}</td><td style="text-align:center">${r.exam}</td><td style="text-align:center"><strong>${r.total}</strong></td><td style="text-align:center;color:#555;font-weight:600">${r.subjectPosition||'—'}</td><td style="text-align:center"><span class="gpill ${gpill(r.grade)}">${r.grade}</span></td><td>${r.remarks}</td></tr>`).join('');
+
+  // "Others" section — most recent non-empty values across this term's subjects
+  let attendance='', teacherComment='', affectiveSkills='';
+  for (let i = rows.length - 1; i >= 0; i--) {
+    if (!attendance && rows[i].attendance) attendance = rows[i].attendance;
+    if (!teacherComment && rows[i].teacherComment) teacherComment = rows[i].teacherComment;
+    if (!affectiveSkills && rows[i].affectiveSkills) affectiveSkills = rows[i].affectiveSkills;
+  }
+  document.getElementById('summaryAttendance').textContent = attendance || '—';
+  document.getElementById('summarySkills').textContent     = affectiveSkills || '—';
+  document.getElementById('summaryComment').textContent    = teacherComment || '—';
+
   showToast('Results loaded for '+rows[0].studentName+' ✅');
 }
 function getGradeClass(grade) {
@@ -3624,22 +3513,51 @@ function parseCSV(text){const lines=text.trim().split(/\r?\n/),heads=lines[0].sp
 function col(row,...names){for(const n of names)for(const k of Object.keys(row))if(k.toLowerCase().replace(/[\s_]/g,'')=== n.toLowerCase().replace(/[\s_]/g,''))return String(row[k]||'').trim();return''}
 function ingestRows(rows,fname){
   let added=0,skipped=0;
+  const newlyAdded=[];
+  const touchedGroups=new Set(); // track unique class+term+year+subject combos to recompute positions for
   rows.forEach(row=>{
     const sid=col(row,'StudentID','Student ID','ID');
     const name=col(row,'StudentName','Student Name','Name');
+    const school=col(row,'School','Campus')||'Christ the Foundation Model Academy';
     const cls=col(row,'Class','Grade');
     const term=col(row,'Term');
     const year=col(row,'AcademicYear','Academic Year','Year');
     const subj=col(row,'Subject');
     const ca=parseFloat(col(row,'CAScore','CA Score','CA'))||0;
     const exam=parseFloat(col(row,'ExamScore','Exam Score','Exam'))||0;
+    const attendance=col(row,'Attendance','TimesPresent','Times Present');
+    const teacherComment=col(row,'TeacherComment','Teacher Comment','Comment');
+    const affectiveSkills=col(row,'AffectiveSkills','Affective Skills','Skills','Conduct');
     if(!sid||!name||!subj){skipped++;return}
     const total=ca+exam;const{grade,remarks}=calcGrade(total);
     const idx=resultsDB.findIndex(r=>r.studentId===sid.toUpperCase()&&r.term===term&&r.year===year&&r.subject===subj);
     if(idx>-1)resultsDB.splice(idx,1);
-    resultsDB.push({studentId:sid.toUpperCase(),studentName:name,studentClass:cls,term,year,subject:subj,ca,exam,total,grade,remarks});added++;
+    const record={studentId:sid.toUpperCase(),studentName:name,school,studentClass:cls,term,year,subject:subj,ca,exam,total,subjectPosition:'',grade,remarks,attendance,teacherComment,affectiveSkills};
+    resultsDB.push(record);
+    newlyAdded.push(record);
+    touchedGroups.add(cls+'|'+term+'|'+year+'|'+subj);
+    added++;
   });
+
+  // Recompute subject positions for every class/term/year/subject group affected by this upload
+  touchedGroups.forEach(function(key){
+    const [cls,term,year,subj] = key.split('|');
+    resultsDB.filter(function(r){
+      return r.studentClass===cls && r.term===term && r.year===year && r.subject===subj;
+    }).forEach(function(r){
+      r.subjectPosition = computeSubjectPosition(r.studentId, cls, term, year, subj);
+    });
+  });
+
   renderPreview();showToast(`✅ ${added} records uploaded (${skipped} skipped)`);document.getElementById('uploadPreview').style.display='block';
+  if (newlyAdded.length > 0) {
+    saveResultsToSheets(newlyAdded).then(function(){
+      showToast('💾 Results saved to Google Sheets ✅');
+    }).catch(function(e){
+      console.error('Could not save results to Sheets:', e);
+      showToast('⚠️ Results saved locally only — check internet connection');
+    });
+  }
 }
 function renderPreview(){
   const unique=new Set(resultsDB.map(r=>r.studentId)).size;
@@ -3723,7 +3641,7 @@ function downloadSmartTemplate() {
   if (students.length > 0) {
     // Use real students from database
     students.forEach(function(s) {
-      rows.push([s.studentId, s.name, cls, term, year, subject, '', '']);
+      rows.push([s.studentId, s.name, cls, term, year, subject, '', '', '', '', '']);
     });
   } else {
     // No students in DB yet — generate blank rows
@@ -3731,14 +3649,14 @@ function downloadSmartTemplate() {
       rows.push([
         'CFMS-' + new Date().getFullYear() + '-' + String(i).padStart(3,'0'),
         '',
-        cls, term, year, subject, '', ''
+        cls, term, year, subject, '', '', '', '', ''
       ]);
     }
   }
 
   // Build CSV
-  var header = 'Student ID,Student Name,Class,Term,Academic Year,Subject,CA Score (40),Exam Score (60)';
-  var note   = '# CFMA Results Template — ' + cls + ' | ' + subject + ' | ' + term + ' ' + year + (teacher?' | Teacher: '+teacher:'');
+  var header = 'Student ID,Student Name,Class,Term,Academic Year,Subject,CA Score,Exam Score,Attendance,Teacher Comment,Affective Skills';
+  var note   = '# CFMA Results Template — ' + cls + ' | ' + subject + ' | ' + term + ' ' + year + (teacher?' | Teacher: '+teacher:'') + ' | CA out of 40, Exam out of 60 | Attendance/Comment/Skills are optional';
   var csv    = note + '\n' + header + '\n';
   rows.forEach(function(r) {
     csv += r.map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(',') + '\n';
@@ -3789,266 +3707,6 @@ function switchSSStream(stream, btn) {
 
 /* ── ID CARD ── */
 let passportDataURL = '';
-
-function loadPassport(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    passportDataURL = e.target.result;
-    document.getElementById('passportPlaceholder').style.display = 'none';
-    const prev = document.getElementById('passportPreview');
-    prev.src = passportDataURL;
-    prev.style.display = 'block';
-    livePreview();
-  };
-  reader.readAsDataURL(file);
-}
-
-function livePreview() {
-  const surname   = document.getElementById('id_surname').value.trim();
-  const firstname = document.getElementById('id_firstname').value.trim();
-  const other     = document.getElementById('id_othername').value.trim();
-  if (!surname && !firstname) return;
-
-  // Guard: this legacy ID card section is hidden/superseded — exit safely if elements are missing
-  const emptyEl  = document.getElementById('idCardEmpty');
-  const outputEl = document.getElementById('idCardOutput');
-  if (!emptyEl || !outputEl) return;
-
-  const fullName  = [surname.toUpperCase(), firstname, other].filter(Boolean).join(' ');
-  const idno      = document.getElementById('id_idno').value.trim() || 'CFMS-0000-000';
-  const year      = document.getElementById('id_year').value.trim() || '—';
-  const cls       = document.getElementById('id_class').value || '—';
-  const campus    = document.getElementById('id_campus').value || 'Main Campus';
-  const blood     = document.getElementById('id_blood').value || '—';
-  const emergency = document.getElementById('id_emergency').value.trim() || '—';
-  const expiry    = document.getElementById('id_expiry').value.trim() || '—';
-
-  // Show card
-  document.getElementById('idCardEmpty').style.display  = 'none';
-  document.getElementById('idCardOutput').style.display = 'block';
-
-  // Front
-  document.getElementById('idc_name').textContent   = fullName;
-  document.getElementById('idc_class').textContent  = cls;
-  document.getElementById('idc_entry').textContent  = year;
-  document.getElementById('idc_campus').textContent = campus;
-  document.getElementById('idc_idno').textContent   = idno;
-  document.getElementById('idc_typebadge').textContent = cls.startsWith('JSS') || cls.startsWith('SS') ? 'Secondary' : cls.startsWith('Primary') ? 'Primary' : 'Nursery';
-
-  // Passport
-  const passEl = document.getElementById('idc_passport');
-  if (passportDataURL) {
-    passEl.outerHTML = '<img id="idc_passport" class="idc-passport" src="' + passportDataURL + '" alt="Passport">';
-  }
-
-  // Back
-  document.getElementById('idc_b_idno').textContent      = idno;
-  document.getElementById('idc_b_name').textContent      = fullName;
-  document.getElementById('idc_b_class').textContent     = cls;
-  document.getElementById('idc_b_year').textContent      = year;
-  document.getElementById('idc_b_blood').textContent     = blood;
-  document.getElementById('idc_b_emergency').textContent = emergency;
-  document.getElementById('idc_b_expiry').textContent    = expiry === '—' ? '—' : 'Dec ' + expiry;
-
-  // Barcode lines (decorative)
-  const bc = document.getElementById('idcBarcodeLines');
-  if (bc && bc.children.length === 0) {
-    const widths = [2,1,3,1,2,1,1,3,2,1,2,3,1,2,1,3,2,1,1,2,3,1,2,1,2,1,3,2,1,2];
-    widths.forEach((w,i) => {
-      const d = document.createElement('div');
-      d.style.width  = w + 'px';
-      d.style.height = (i % 3 === 0 ? 20 : 14) + 'px';
-      bc.appendChild(d);
-    });
-  }
-  document.getElementById('idc_barcode_text').textContent = idno;
-}
-
-function generateCard() {
-  const surname   = document.getElementById('id_surname').value.trim();
-  const firstname = document.getElementById('id_firstname').value.trim();
-  const idno      = document.getElementById('id_idno').value.trim();
-  const year      = document.getElementById('id_year').value.trim();
-  const cls       = document.getElementById('id_class').value;
-  if (!surname)   { showToast('Please enter Surname ⚠️'); return; }
-  if (!firstname) { showToast('Please enter First Name ⚠️'); return; }
-  if (!idno)      { showToast('Please enter Student ID Number ⚠️'); return; }
-  if (!year)      { showToast('Please enter Year of Entry ⚠️'); return; }
-  if (!cls)       { showToast('Please select a Class ⚠️'); return; }
-  if (!passportDataURL) { showToast('Please upload a passport photograph ⚠️'); return; }
-  livePreview();
-  showToast('ID Card generated! Click Print Card to print ✅');
-  const outputEl = document.getElementById('idCardOutput');
-  if (outputEl) outputEl.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
-function buildCardHTML(mode) {
-  // mode: 'print' or 'pdf'
-  const front = document.getElementById('idcFront');
-  const back  = document.getElementById('idcBack');
-  if (!front || !back) return null;
-
-  // CR80 standard ID card: 85.6mm x 54mm
-  const cardCSS = `
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:#e0e0e0;font-family:'Open Sans',Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding:20px;gap:16px}
-    .label{font-size:11px;color:#555;text-align:center;margin-bottom:4px}
-    .card-wrap{display:flex;flex-direction:column;gap:8px;align-items:center}
-    /* Exact CR80 ID card size */
-    .id-card{
-      width:85.6mm;
-      min-height:54mm;
-      border-radius:4px;
-      overflow:hidden;
-      box-shadow:0 2px 12px rgba(0,0,0,.25);
-      transform-origin:top center;
-    }
-    /* Scale all inner text to fit the smaller card */
-    .idc-front{background:linear-gradient(160deg,#004D26 0%,#006B35 60%,#008A44 100%);padding:0 0 8px;position:relative}
-    .idc-front-header{background:rgba(0,0,0,.2);padding:5px 8px;display:flex;align-items:center;gap:6px;border-bottom:1.5px solid #C8981A}
-    .idc-crest{width:22px;height:22px;background:#C8981A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:9px;color:#004D26;flex-shrink:0}
-    .idc-school-name{color:white;font-size:5.5px;font-weight:700;text-transform:uppercase;letter-spacing:.2px;line-height:1.3}
-    .idc-school-motto{color:rgba(255,255,255,.55);font-size:4.5px;font-style:italic;margin-top:1px}
-    .idc-body{padding:7px 8px 0;display:flex;gap:7px;align-items:flex-start}
-    .idc-passport{width:38px;height:46px;border-radius:3px;object-fit:cover;border:1.5px solid #C8981A;flex-shrink:0}
-    .idc-passport-empty{width:38px;height:46px;border-radius:3px;border:1.5px solid #C8981A;flex-shrink:0;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:16px}
-    .idc-info{flex:1}
-    .idc-label{font-size:4.5px;color:#F5C842;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:1px;margin-top:4px}
-    .idc-label:first-child{margin-top:0}
-    .idc-value{font-size:7px;color:white;font-weight:700;line-height:1.2}
-    .idc-value.large{font-size:8px}
-    .idc-id-band{background:#C8981A;margin:6px 8px 0;border-radius:2px;padding:3px 6px;display:flex;justify-content:space-between;align-items:center}
-    .idc-id-band span{font-size:4.5px;color:#004D26;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-    .idc-id-band strong{font-size:7.5px;color:#004D26;font-weight:900;letter-spacing:.5px}
-    .idc-type-badge{position:absolute;top:6px;right:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;font-size:4.5px;font-weight:700;padding:2px 5px;border-radius:2px;text-transform:uppercase;letter-spacing:.3px}
-    /* Back */
-    .idc-back{background:white;padding:0 0 8px}
-    .idc-back-header{background:#004D26;padding:5px 8px;border-bottom:1.5px solid #C8981A}
-    .idc-back-header p{color:rgba(255,255,255,.7);font-size:5px;text-align:center;letter-spacing:.3px;text-transform:uppercase}
-    .idc-back-body{padding:5px 8px}
-    .idc-back-row{display:flex;justify-content:space-between;align-items:center;padding:2.5px 0;border-bottom:1px solid #f0f0f0;font-size:6px}
-    .idc-back-row:last-child{border-bottom:none}
-    .idc-back-row span{color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.3px;font-size:5px}
-    .idc-back-row strong{color:#222;font-weight:700}
-    .idc-barcode{margin:5px 8px 0;background:#f5f5f5;border-radius:2px;padding:4px;text-align:center}
-    .idc-barcode-lines{display:flex;gap:1px;justify-content:center;margin-bottom:2px;height:12px;align-items:flex-end}
-    .idc-barcode-lines div{background:#222;border-radius:1px}
-    .idc-barcode p{font-size:5px;color:#888;letter-spacing:1.5px;font-family:monospace}
-    .idc-back-footer{margin:5px 8px 0;background:#f9f9f9;border:1px solid #eee;border-radius:2px;padding:4px 6px;font-size:5px;color:#888;line-height:1.5;text-align:center}
-    /* Print / PDF controls */
-    .actions{display:flex;gap:10px;margin-top:12px}
-    .actions button{padding:8px 20px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:'Open Sans',Arial,sans-serif}
-    .btn-print{background:#006B35;color:white}
-    .btn-pdf{background:#C8981A;color:#004D26}
-    @page{size:85.6mm 54mm;margin:0}
-    @media print{
-      body{background:white;padding:0;display:block}
-      .actions{display:none}
-      .label{display:none}
-      .card-wrap{gap:0}
-      .id-card{box-shadow:none;page-break-after:always;width:85.6mm;min-height:54mm}
-    }
-  `;
-
-  // Get passport src from the preview
-  const passEl = document.getElementById('idc_passport');
-  const passSrc = passEl && passEl.tagName === 'IMG' ? passEl.src : '';
-
-  const frontInner = front.innerHTML.replace(
-    /<div[^>]*class="idc-passport"[^>]*>👤<\/div>/,
-    '<div class="idc-passport-empty">👤</div>'
-  );
-  let backInner = back.innerHTML;
-
-  // Replace passport in front with actual image if available
-  let frontFinal = frontInner;
-  if (passSrc) {
-    frontFinal = frontFinal.replace(
-      /(<img[^>]*id="idc_passport_extra"[^>]*src=")[^"]*(")/,
-      '$1' + passSrc + '$2'
-    );
-  }
-
-  return `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>CFMA Student ID Card</title>
-<style>${cardCSS}</style>
-</head>
-<body>
-<div class="label">Christ the Foundation Model Academy — Student ID Card (CR80 Size)</div>
-<div class="card-wrap">
-  <div class="id-card">${frontFinal}</div>
-  <div class="id-card">${backInner}</div>
-</div>
-<div class="actions">
-  <button class="btn-print" onclick="window.print()">🖨 Print Card</button>
-  <button class="btn-pdf" onclick="window.print()">💾 Save as PDF</button>
-</div>
-<script>
-  // Auto-prompt save as PDF when opened in pdf mode
-  window.addEventListener('load', () => {
-    if (window.location.hash === '#pdf') {
-      setTimeout(() => window.print(), 500);
-    }
-  });
-<\/script>
-
-<!-- ADMIN LOGIN OVERLAY -->
-<div id="adminOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;transition:opacity .3s">
-  <div style="background:white;border-radius:10px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;font-family:'Open Sans',Arial,sans-serif">
-    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
-    <div style="text-align:center;margin-bottom:24px">
-      <div style="width:52px;height:52px;background:#006B35;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;margin:0 auto 12px">🔐</div>
-      <h3 style="font-size:18px;font-weight:700;color:#004D26;margin-bottom:4px">Admin Access</h3>
-      <p style="font-size:13px;color:#888">Christ the Foundation Model Academy</p>
-    </div>
-    <div style="margin-bottom:16px">
-      <label style="display:block;font-size:12px;font-weight:700;color:#004D26;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
-      <input id="adminPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:6px;font-size:14px;font-family:'Open Sans',Arial,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#006B35'" onblur="this.style.borderColor='#e0e0e0'">
-      <div id="adminPwdError" style="display:none;color:#dc2626;font-size:12px;margin-top:8px;font-weight:600">❌ Incorrect password. Please try again.</div>
-    </div>
-    <button onclick="submitAdminLogin()" style="width:100%;background:#006B35;color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',Arial,sans-serif;transition:background .2s" onmouseover="this.style.background='#004D26'" onmouseout="this.style.background='#006B35'">Enter Admin Panel</button>
-    <p style="text-align:center;font-size:11px;color:#bbb;margin-top:14px">This area is restricted to CFMA administrators only</p>
-  </div>
-</div>
-
-
-</body>
-</html>`;
-}
-
-function printIDCard() {
-  const html = buildCardHTML('print');
-  if (!html) { showToast('Please generate a card first ⚠️'); return; }
-  const w = window.open('', '_blank');
-  w.document.write(html);
-  w.document.close();
-}
-
-function saveIDCardPDF() {
-  const front = document.getElementById('idcFront');
-  if (!front) { showToast('Please generate a card first ⚠️'); return; }
-  const html = buildCardHTML('pdf');
-  const blob = new Blob([html], {type: 'text/html'});
-  const url  = URL.createObjectURL(blob);
-  // Open print window pre-set for PDF saving
-  const w = window.open(url + '#pdf', '_blank');
-  if (!w) {
-    showToast('Please allow pop-ups to save as PDF ⚠️');
-    return;
-  }
-  w.onload = () => {
-    setTimeout(() => {
-      w.print();
-    }, 800);
-  };
-  showToast('In the print dialog → choose "Save as PDF" as destination 💾');
-}
 
 /* ── PEOPLE DATABASE ── */
 let dbRecords = [];
@@ -4140,6 +3798,45 @@ function renderDB() {
 }
 
 /* Modal */
+/* ── AUTO-GENERATE STUDENT / STAFF ID ── */
+function autoGenerateDbId() {
+  // Don't regenerate when editing an existing record
+  if (document.getElementById('dbEditId').value) return;
+
+  var role = document.getElementById('dbRole').value;
+  var idField = document.getElementById('dbStudentId');
+  if (!role) {
+    idField.value = '';
+    idField.placeholder = 'Select role to generate ID';
+    return;
+  }
+
+  var year = new Date().getFullYear();
+  var prefix = (role === 'staff') ? 'CFMS-STF-' + year + '-' : 'CFMS-STU-' + year + '-';
+
+  // Find the highest existing number for this prefix (gap-safe, never duplicates)
+  var maxNum = 0;
+  dbRecords.forEach(function(r) {
+    if (r.studentId && r.studentId.indexOf(prefix) === 0) {
+      var num = parseInt(r.studentId.slice(prefix.length), 10);
+      if (!isNaN(num) && num > maxNum) maxNum = num;
+    }
+  });
+
+  // Safety net for multi-device use: keep incrementing past any ID that's
+  // already taken locally, in case another device just saved one we haven't synced yet
+  var candidate = maxNum + 1;
+  var taken = {};
+  dbRecords.forEach(function(r){ if (r.studentId) taken[r.studentId.toUpperCase()] = true; });
+  var newId = prefix + String(candidate).padStart(3, '0');
+  while (taken[newId.toUpperCase()]) {
+    candidate++;
+    newId = prefix + String(candidate).padStart(3, '0');
+  }
+
+  idField.value = newId;
+}
+
 function openDbModal(editId) {
   dbPassportData = '';
   document.getElementById('dbEditId').value = editId || '';
@@ -4173,13 +3870,21 @@ function openDbModal(editId) {
     document.getElementById('dbSurname').value   = '';
     document.getElementById('dbFirstname').value = '';
     document.getElementById('dbOthername').value = '';
-    document.getElementById('dbStudentId').value = 'CFMS-' + new Date().getFullYear() + '-' + String(dbRecords.length + 1).padStart(3,'0');
+    document.getElementById('dbStudentId').value = '';
+    document.getElementById('dbStudentId').placeholder = 'Select role to generate ID';
     document.getElementById('dbGender').value    = '';
     document.getElementById('dbRole').value      = '';
     document.getElementById('dbClass').value     = '';
     document.getElementById('dbCampus').value    = '';
     document.getElementById('dbPhone').value     = '';
     loadSubjectCheckboxes('', []);
+    // Quietly refresh from Sheets in the background so ID generation reflects
+    // records added by other devices since this session last synced
+    sheetsGet('get_students').then(function(data) {
+      if (data && data.ok && data.students && data.students.length > 0) {
+        dbRecords = data.students;
+      }
+    }).catch(function(){ /* offline — keep using local data */ });
   }
   document.getElementById('dbModal').classList.add('open');
 }
@@ -4226,10 +3931,20 @@ function saveDbRecord() {
 
   if (!surname)   { showToast('Please enter Surname ⚠️'); return; }
   if (!firstname) { showToast('Please enter First Name ⚠️'); return; }
-  if (!sid)       { showToast('Please enter ID Number ⚠️'); return; }
-  if (!gender)    { showToast('Please select Gender ⚠️'); return; }
   if (!role)      { showToast('Please select Role/Division ⚠️'); return; }
+  if (!sid)       { showToast('ID not generated — please re-select Role ⚠️'); return; }
+  if (!gender)    { showToast('Please select Gender ⚠️'); return; }
   if (!campus)    { showToast('Please select Campus ⚠️'); return; }
+
+  // Final safety net: if another device just saved this exact ID, refuse and ask to regenerate
+  if (!editId) {
+    var clash = dbRecords.find(function(r){ return r.studentId.toUpperCase() === sid.toUpperCase(); });
+    if (clash) {
+      showToast('⚠️ That ID was just taken by another device — regenerating, please save again');
+      autoGenerateDbId();
+      return;
+    }
+  }
 
   // Get selected subjects
   var selectedSubjects = [];
@@ -4770,7 +4485,8 @@ function adminSearchResults() {
   var studentName  = rows[0].studentName;
   var studentId    = rows[0].studentId;
   var studentClass = rows[0].studentClass || '—';
-  var avg = Math.round(rows.reduce(function(s,r){ return s+r.total; }, 0) / rows.length);
+  var classStats   = computeClassAverageAndPosition(studentId, studentClass, term, year);
+  var avg = classStats.average || Math.round(rows.reduce(function(s,r){ return s+r.total; }, 0) / rows.length);
   var gradeInfo = calcGrade(avg);
   prCurrentStudent = { name: studentName, id: studentId, cls: studentClass, term: term, year: year, avg: avg, grade: gradeInfo.grade };
 
@@ -4778,8 +4494,11 @@ function adminSearchResults() {
   document.getElementById('prSummaryName').textContent  = studentName;
   document.getElementById('prSummaryId').textContent    = studentId;
   document.getElementById('prSummaryClass').textContent = studentClass;
-  document.getElementById('prSummaryTerm').textContent  = term + ' — ' + year;
-  document.getElementById('prSummaryAvg').textContent   = avg + '%';
+  document.getElementById('prSummaryTerm').textContent   = term + ' — ' + year;
+  document.getElementById('prSummaryAvg').textContent    = avg + '%';
+  document.getElementById('prSummaryPosition').textContent = classStats.position
+    ? classStats.position + (classStats.totalInClass ? ' of ' + classStats.totalInClass + ' in class' : ' in class')
+    : '';
 
   // Try to find passport from dbRecords
   var personRecord = dbRecords.find(function(r){ return r.studentId.toUpperCase() === studentId.toUpperCase(); });
@@ -4791,9 +4510,10 @@ function adminSearchResults() {
   }
 
   // Footer summary
-  document.getElementById('prFooterAvg').textContent   = avg + '/100';
-  document.getElementById('prFooterGrade').innerHTML   = '<span class="grade-badge ' + getGradeClass(gradeInfo.grade) + '">' + gradeInfo.grade + '</span>';
-  document.getElementById('prFooterRemark').textContent = gradeInfo.remarks;
+  document.getElementById('prFooterAvg').textContent     = avg + '/100';
+  document.getElementById('prFooterPosition').textContent= classStats.position || '—';
+  document.getElementById('prFooterGrade').innerHTML     = '<span class="grade-badge ' + getGradeClass(gradeInfo.grade) + '">' + gradeInfo.grade + '</span>';
+  document.getElementById('prFooterRemark').textContent  = gradeInfo.remarks;
 
   // Table rows
   var body = document.getElementById('prResultsBody');
@@ -4804,6 +4524,7 @@ function adminSearchResults() {
       '<td style="padding:10px 14px;text-align:center">' + r.ca + '</td>' +
       '<td style="padding:10px 14px;text-align:center">' + r.exam + '</td>' +
       '<td style="padding:10px 14px;text-align:center;font-weight:700">' + r.total + '</td>' +
+      '<td style="padding:10px 14px;text-align:center;font-weight:600;color:#555">' + (r.subjectPosition || '—') + '</td>' +
       '<td style="padding:10px 14px;text-align:center"><span class="grade-badge ' + getGradeClass(r.grade) + '">' + r.grade + '</span></td>' +
       '<td style="padding:10px 14px;color:var(--gray)">' + r.remarks + '</td>' +
     '</tr>';
@@ -4820,6 +4541,7 @@ function buildResultSlipHTML(rows, student, forPDF) {
       '<td style="padding:8px 12px;text-align:center">' + r.ca + '</td>' +
       '<td style="padding:8px 12px;text-align:center">' + r.exam + '</td>' +
       '<td style="padding:8px 12px;text-align:center;font-weight:700;font-size:15px">' + r.total + '</td>' +
+      '<td style="padding:8px 12px;text-align:center;font-weight:600;color:#555">' + (r.subjectPosition || '—') + '</td>' +
       '<td style="padding:8px 12px;text-align:center"><span style="padding:3px 10px;border-radius:100px;font-size:12px;font-weight:700;background:' +
         (r.grade==='A'?'rgba(5,150,105,.1)':r.grade==='B'?'rgba(59,130,246,.1)':r.grade==='C'?'rgba(245,158,11,.1)':'rgba(239,68,68,.1)') + ';color:' +
         (r.grade==='A'?'#047857':r.grade==='B'?'#1D4ED8':r.grade==='C'?'#B45309':'#B91C1C') + '">' + r.grade + '</span></td>' +
@@ -4832,8 +4554,21 @@ function buildResultSlipHTML(rows, student, forPDF) {
     ? '<img src="'+personRecord.passport+'" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:2px solid #006B35">'
     : '<div style="width:80px;height:80px;border:2px solid #006B35;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#ccc;background:#f5f5f5">👤</div>';
 
-  var avg       = student.avg;
+  // Compute overall average and position in class live from resultsDB
+  var classStats = computeClassAverageAndPosition(student.id, student.cls, student.term, student.year);
+  var avg       = classStats.average || student.avg;
+  var posInClass= classStats.position || '—';
+  var totalInClass = classStats.totalInClass || '';
   var gradeInfo = calcGrade(avg);
+  var school    = (rows[0] && rows[0].school) ? rows[0].school : 'Christ the Foundation Model Academy';
+
+  // "Others" section — Attendance / Teacher Comment / Affective Skills (take from most recent row that has them)
+  var attendance = '', teacherComment = '', affectiveSkills = '';
+  for (var i = rows.length - 1; i >= 0; i--) {
+    if (!attendance && rows[i].attendance) attendance = rows[i].attendance;
+    if (!teacherComment && rows[i].teacherComment) teacherComment = rows[i].teacherComment;
+    if (!affectiveSkills && rows[i].affectiveSkills) affectiveSkills = rows[i].affectiveSkills;
+  }
 
   return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Result Slip — ' + student.name + '</title>' +
     '<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#222;background:white;padding:30px}' +
@@ -4846,14 +4581,20 @@ function buildResultSlipHTML(rows, student, forPDF) {
     '.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;flex:1}' +
     '.info-item{font-size:13px}.info-item .label{color:#888;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}' +
     '.info-item .val{font-weight:700;color:#004D26;font-size:15px;margin-top:2px}' +
-    '.avg-box{background:#004D26;color:white;padding:12px 18px;border-radius:6px;text-align:center;min-width:90px}' +
+    '.avg-box{background:#004D26;color:white;padding:12px 18px;border-radius:6px;text-align:center;min-width:110px}' +
     '.avg-box .label{font-size:10px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.5px}' +
     '.avg-box .val{font-size:28px;font-weight:900;color:#C8981A}' +
+    '.avg-box .pos{font-size:11px;color:white;font-weight:700;margin-top:4px}' +
     'table{width:100%;border-collapse:collapse}thead tr{background:#004D26;color:white}' +
     'th{padding:10px 12px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}' +
-    'th:nth-child(3),th:nth-child(4),th:nth-child(5),th:nth-child(6){text-align:center}' +
+    'th:nth-child(3),th:nth-child(4),th:nth-child(5),th:nth-child(6),th:nth-child(7){text-align:center}' +
     '.foot-row{background:#f5f5f5;font-weight:700}' +
     '.foot-row td{padding:10px 12px;font-size:13px;color:#004D26}' +
+    '.others-box{padding:16px 24px;border-top:2px solid #e0e0e0;background:#fafafa}' +
+    '.others-box h4{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-bottom:10px}' +
+    '.others-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}' +
+    '.others-item{font-size:13px}.others-item .ol{color:#888;font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:3px}' +
+    '.others-item .ov{color:#222;font-weight:600}' +
     '.slip-foot{padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-top:2px solid #e0e0e0;font-size:11px;color:#888;flex-wrap:wrap;gap:10px}' +
     '.stamp{border:2px solid #006B35;border-radius:4px;padding:6px 14px;color:#006B35;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:1px}' +
     '.btn{display:block;width:fit-content;margin:20px auto 0;background:#006B35;color:white;border:none;padding:12px 32px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer}' +
@@ -4861,7 +4602,7 @@ function buildResultSlipHTML(rows, student, forPDF) {
     '</style></head><body>' +
     '<div class="slip">' +
       '<div class="slip-head">' + passportImg +
-        '<div class="slip-school"><h1>Christ the Foundation Model Academy</h1><p>Consolidated Knowledge Through Education · Est. 1998 · cfmsanambra.org</p><p style="margin-top:4px;font-size:11px;color:rgba(255,255,255,.5)">Okija, Ihiala, Anambra State · +234 806 268 6710</p></div>' +
+        '<div class="slip-school"><h1>' + school + '</h1><p>Consolidated Knowledge Through Education · Est. 1998 · cfmsanambra.org</p><p style="margin-top:4px;font-size:11px;color:rgba(255,255,255,.5)">Okija, Ihiala, Anambra State · +234 806 268 6710</p></div>' +
       '</div>' +
       '<div class="slip-title">Student Academic Result Slip</div>' +
       '<div class="slip-info">' +
@@ -4871,12 +4612,21 @@ function buildResultSlipHTML(rows, student, forPDF) {
           '<div class="info-item"><div class="label">Class</div><div class="val">' + student.cls + '</div></div>' +
           '<div class="info-item"><div class="label">Term / Year</div><div class="val">' + student.term + ' · ' + student.year + '</div></div>' +
         '</div>' +
-        '<div class="avg-box"><div class="label">Average</div><div class="val">' + avg + '%</div><div style="font-size:11px;color:#C8981A;font-weight:700;margin-top:4px">' + gradeInfo.grade + ' — ' + gradeInfo.remarks + '</div></div>' +
+        '<div class="avg-box"><div class="label">Average</div><div class="val">' + avg + '%</div>' +
+          '<div class="pos">' + posInClass + (totalInClass ? ' of ' + totalInClass : '') + ' in class</div></div>' +
       '</div>' +
-      '<table><thead><tr><th>#</th><th>Subject</th><th style="text-align:center">CA (40)</th><th style="text-align:center">Exam (60)</th><th style="text-align:center">Total</th><th style="text-align:center">Grade</th><th>Remarks</th></tr></thead>' +
+      '<table><thead><tr><th>#</th><th>Subject</th><th style="text-align:center">CA (40)</th><th style="text-align:center">Exam (60)</th><th style="text-align:center">Total</th><th style="text-align:center">Position</th><th style="text-align:center">Grade</th><th>Remarks</th></tr></thead>' +
       '<tbody>' + gradeRows + '</tbody>' +
-      '<tfoot><tr class="foot-row"><td colspan="4">Overall Average Score</td><td style="text-align:center;font-size:15px">' + avg + '/100</td><td style="text-align:center;font-size:15px">' + gradeInfo.grade + '</td><td>' + gradeInfo.remarks + '</td></tr></tfoot>' +
+      '<tfoot><tr class="foot-row"><td colspan="4">Overall Average Score</td><td style="text-align:center;font-size:15px">' + avg + '/100</td><td style="text-align:center;font-size:13px">' + posInClass + '</td><td style="text-align:center;font-size:15px">' + gradeInfo.grade + '</td><td>' + gradeInfo.remarks + '</td></tr></tfoot>' +
       '</table>' +
+      '<div class="others-box">' +
+        '<h4>Other Remarks</h4>' +
+        '<div class="others-grid">' +
+          '<div class="others-item"><div class="ol">Attendance</div><div class="ov">' + (attendance || 'Not recorded') + '</div></div>' +
+          '<div class="others-item"><div class="ol">Affective &amp; Psychomotor Skills</div><div class="ov">' + (affectiveSkills || 'Not recorded') + '</div></div>' +
+          '<div class="others-item" style="grid-column:1 / -1"><div class="ol">Teacher / Principal Comment</div><div class="ov">' + (teacherComment || 'Not recorded') + '</div></div>' +
+        '</div>' +
+      '</div>' +
       '<div class="slip-foot">' +
         '<div><strong>Printed by:</strong> CFMA Admin &nbsp;|&nbsp; <strong>Date:</strong> ' + new Date().toLocaleDateString('en-NG') + '</div>' +
         '<div class="stamp">Official Result Slip</div>' +
@@ -4970,9 +4720,6 @@ function switchDbTab(tab, btn) {
 ══════════════════════════════════════════════ */
 var feeRecords = [];
 var feeAuthenticated = false;
-
-
-
 
 /* ══════════════════════════════════════════════
    FEE PAYMENT TRACKER — Single consistent implementation
@@ -5708,7 +5455,9 @@ function portalLogin() {
   document.getElementById('portalLoginWrap').style.display  = 'none';
   document.getElementById('portalDashboard').style.display = 'block';
   populatePortal();
-  showToast('Welcome, ' + student.name.split(' ')[1] + '! \ud83c\udf89');
+  var nameParts = student.name.trim().split(/\s+/);
+  var firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+  showToast('Welcome, ' + firstName + '! \ud83c\udf89');
 }
 
 function portalLogout() {
@@ -5965,14 +5714,20 @@ function loadPortalResults() {
 
   content_el.innerHTML = Object.keys(groups).map(function(key) {
     var rows = groups[key];
-    var avg  = Math.round(rows.reduce(function(a,r){ return a+r.total; },0)/rows.length);
+    var cls  = rows[0].studentClass || s.classPos || '';
+    var classStats = computeClassAverageAndPosition(s.studentId, cls, rows[0].term, rows[0].year);
+    var avg  = classStats.average || Math.round(rows.reduce(function(a,r){ return a+r.total; },0)/rows.length);
     var gi   = calcGrade(avg);
+    var posText = classStats.position
+      ? classStats.position + (classStats.totalInClass ? ' of ' + classStats.totalInClass : '')
+      : '—';
     return '<div style="background:white;border-radius:8px;overflow:hidden;border:1px solid var(--light-gray);margin-bottom:20px">'+
       '<div style="background:var(--green-dark);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">'+
         '<div><div style="color:var(--gold-light);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Term / Year</div>'+
         '<div style="color:white;font-size:16px;font-weight:700;margin-top:2px">'+key+'</div></div>'+
         '<div style="text-align:right"><div style="color:rgba(255,255,255,.6);font-size:11px">Average</div>'+
-        '<div style="color:var(--gold);font-size:26px;font-weight:900;font-family:\'Merriweather\',serif">'+avg+'%</div></div>'+
+        '<div style="color:var(--gold);font-size:26px;font-weight:900;font-family:\'Merriweather\',serif">'+avg+'%</div>'+
+        '<div style="color:white;font-size:11px;font-weight:600;margin-top:2px">Position: '+posText+'</div></div>'+
       '</div>'+
       '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:400px">'+
         '<thead><tr style="background:rgba(0,107,53,.08)">'+
@@ -5981,6 +5736,7 @@ function loadPortalResults() {
           '<th style="padding:10px 14px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">CA (40)</th>'+
           '<th style="padding:10px 14px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">Exam (60)</th>'+
           '<th style="padding:10px 14px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">Total</th>'+
+          '<th style="padding:10px 14px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">Position</th>'+
           '<th style="padding:10px 14px;text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">Grade</th>'+
           '<th style="padding:10px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green-dark)">Remarks</th>'+
         '</tr></thead>'+
@@ -5991,6 +5747,7 @@ function loadPortalResults() {
             '<td style="padding:10px 14px;text-align:center">'+r.ca+'</td>'+
             '<td style="padding:10px 14px;text-align:center">'+r.exam+'</td>'+
             '<td style="padding:10px 14px;text-align:center;font-weight:700;font-size:15px">'+r.total+'</td>'+
+            '<td style="padding:10px 14px;text-align:center;font-weight:600;color:#555">'+(r.subjectPosition||'—')+'</td>'+
             '<td style="padding:10px 14px;text-align:center"><span class="grade-badge '+getGradeClass(r.grade)+'">'+r.grade+'</span></td>'+
             '<td style="padding:10px 14px;color:var(--gray)">'+r.remarks+'</td>'+
           '</tr>';
@@ -5999,6 +5756,7 @@ function loadPortalResults() {
         '<tfoot><tr style="background:var(--off-white);font-weight:700">'+
           '<td colspan="4" style="padding:10px 14px;color:var(--green-dark)">Overall Average</td>'+
           '<td style="padding:10px 14px;text-align:center;font-size:15px;color:var(--green-dark)">'+avg+'/100</td>'+
+          '<td style="padding:10px 14px;text-align:center;font-size:13px;color:var(--green-dark)">'+posText+'</td>'+
           '<td style="padding:10px 14px;text-align:center"><span class="grade-badge '+getGradeClass(gi.grade)+'">'+gi.grade+'</span></td>'+
           '<td style="padding:10px 14px;color:var(--gray)">'+gi.remarks+'</td>'+
         '</tr></tfoot>'+
@@ -6019,17 +5777,11 @@ function printPortalResult() {
   if (rows.length === 0) { showToast('No results to print \u26a0\ufe0f'); return; }
   var avg = Math.round(rows.reduce(function(a,r){return a+r.total;},0)/rows.length);
   var gi  = calcGrade(avg);
-  var student = { name:s.name, id:s.studentId, cls:s.classPos||s.role||'—', term:term||'All Terms', year:year||'All Years', avg:avg, grade:gi.grade };
-  adminPrintResult && adminPrintResult();
-  // Use buildResultSlipHTML if available
-  if (typeof buildResultSlipHTML === 'function') {
-    var html = buildResultSlipHTML(rows, student, false);
-    var w = window.open('','_blank');
-    w.document.write(html);
-    w.document.close();
-  } else {
-    showToast('Please use the Print button on each result card \ud83d\uddb8');
-  }
+  var student = { name:s.name, id:s.studentId, cls:rows[0].studentClass||s.classPos||s.role||'—', term:term||'All Terms', year:year||'All Years', avg:avg, grade:gi.grade };
+  var html = buildResultSlipHTML(rows, student, false);
+  var w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
 }
 
 
@@ -6155,6 +5907,19 @@ async function saveCareerToSheets(data) {
   await sheetsRequest('save_career', data);
 }
 
+// ── Silent background load on page open ──────────────────────────────────────
+// Ensures students/parents using public features (Check Results, Student Portal,
+// Fee Status) see real data immediately, without needing an admin to log in first
+document.addEventListener('DOMContentLoaded', function() {
+  sheetsGet('get_all').then(function(data) {
+    if (data && data.ok) {
+      if (data.students && data.students.length > 0) dbRecords   = data.students;
+      if (data.results  && data.results.length  > 0) resultsDB   = data.results;
+      if (data.fees     && data.fees.length     > 0) feeRecords  = data.fees;
+    }
+  }).catch(function(){ /* offline — public features will show "not found" until reload */ });
+});
+
 var isTeacherLoggedIn = false;
 
 function teacherLogin() {
@@ -6240,12 +6005,7 @@ let adminAuthenticated = false;
 
 function openAdminLogin() {
   if (adminAuthenticated) {
-    document.getElementById('setupguide').style.display = 'block';
-    var feePanel = document.getElementById('feeAdminPanel');
-    var feePrompt = document.getElementById('feeLoginPrompt');
-    if (feePanel)  feePanel.style.display  = 'block';
-    if (feePrompt) feePrompt.style.display = 'none';
-    if (feePanel) { renderFeeTable(); updateFeeStats(); }
+    revealAdminPanelsIfAuthenticated();
     goTo('setupguide');
     return;
   }
@@ -6263,18 +6023,35 @@ function closeAdminOverlay() {
   setTimeout(function(){ overlay.style.display = 'none'; }, 300);
 }
 
+function revealAdminPanelsIfAuthenticated() {
+  if (!adminAuthenticated) return;
+  var setup = document.getElementById('setupguide');
+  if (setup) setup.style.display = 'block';
+  var feePanel  = document.getElementById('feeAdminPanel');
+  var feePrompt = document.getElementById('feeLoginPrompt');
+  if (feePanel)  feePanel.style.display  = 'block';
+  if (feePrompt) feePrompt.style.display = 'none';
+  if (feePanel) { renderFeeTable(); updateFeeStats(); }
+}
+
+function adminLogoutGlobal() {
+  adminAuthenticated = false;
+  var setup = document.getElementById('setupguide');
+  if (setup) setup.style.display = 'none';
+  var feePanel  = document.getElementById('feeAdminPanel');
+  var feePrompt = document.getElementById('feeLoginPrompt');
+  if (feePanel)  feePanel.style.display  = 'none';
+  if (feePrompt) feePrompt.style.display = 'block';
+  showToast('Logged out of admin panel');
+}
+
 function submitAdminLogin() {
   var pwd = document.getElementById('adminPwd').value;
   var ADMIN_PWD = 'cfmsadmin2025';
   if (pwd === ADMIN_PWD) {
     adminAuthenticated = true;
     closeAdminOverlay();
-    document.getElementById('setupguide').style.display = 'block';
-    var feePanel = document.getElementById('feeAdminPanel');
-    var feePrompt = document.getElementById('feeLoginPrompt');
-    if (feePanel)  feePanel.style.display  = 'block';
-    if (feePrompt) feePrompt.style.display = 'none';
-    if (feePanel) { renderFeeTable(); updateFeeStats(); }
+    revealAdminPanelsIfAuthenticated();
     setTimeout(function(){ goTo('setupguide'); }, 350);
     showToast('Admin access granted ✅');
   } else {
@@ -6315,12 +6092,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hero.addEventListener('mouseleave', () => { slideTimer = setInterval(nextSlide, 5000); });
   }
 });
-
-
-
-
-
-
 
 </script>
 
