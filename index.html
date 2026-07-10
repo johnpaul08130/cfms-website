@@ -2189,6 +2189,23 @@ footer{background:var(--green-dark)}
             <input id="qa_phone" type="tel" placeholder="+234 ..." style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
           </div>
         </div>
+
+        <!-- Passport upload row -->
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;padding:12px 14px;background:var(--off-white);border-radius:6px;border:1px solid var(--light-gray)">
+          <div style="flex-shrink:0">
+            <div id="qa_passport_preview" style="width:64px;height:64px;border-radius:50%;background:#e5e7eb;border:2px solid var(--light-gray);display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden">👤</div>
+          </div>
+          <div style="flex:1">
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Passport Photo (optional)</label>
+            <input type="file" id="qa_passport_input" accept="image/*" onchange="qaLoadPassport(this)" style="display:none">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button type="button" onclick="document.getElementById('qa_passport_input').click()" style="background:var(--green);color:white;border:none;padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">📷 Upload Photo</button>
+              <button type="button" onclick="qaClearPassport()" style="background:none;border:1px solid #ccc;color:var(--gray);padding:7px 14px;border-radius:4px;font-size:12px;cursor:pointer">✕ Clear</button>
+            </div>
+            <p style="font-size:11px;color:var(--gray);margin-top:4px">Photo appears on ID card and result slip. Clears automatically after each student.</p>
+          </div>
+        </div>
+
         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
           <div style="background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;padding:8px 14px;font-size:13px;min-width:200px">
             🪪 ID: <strong id="qa_id_preview" style="color:#1D4ED8;font-family:monospace">Select division to generate</strong>
@@ -3875,6 +3892,25 @@ function renderDB() {
 /* ── QUICK ADD MODE ─────────────────────────────────────────────────────── */
 var qaSessionCount = 0;
 
+var qaPassportData = '';
+
+function qaLoadPassport(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    qaPassportData = e.target.result;
+    var prev = document.getElementById('qa_passport_preview');
+    prev.innerHTML = '<img src="' + qaPassportData + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function qaClearPassport() {
+  qaPassportData = '';
+  document.getElementById('qa_passport_preview').innerHTML = '👤';
+  document.getElementById('qa_passport_input').value = '';
+}
+
 function toggleQuickAdd() {
   var panel = document.getElementById('quickAddPanel');
   var btn   = document.getElementById('quickAddToggleBtn');
@@ -3892,6 +3928,7 @@ function toggleQuickAdd() {
     document.getElementById('qa_class').innerHTML = '<option value="">Select Division First</option>';
     document.getElementById('qa_campus').value = '';
     document.getElementById('qa_id_preview').textContent = 'Select division to generate';
+    qaClearPassport();
     qaSessionCount = 0;
     document.getElementById('qa_count').textContent = '0 students added this session';
     document.getElementById('qa_surname').focus();
@@ -3991,7 +4028,7 @@ function quickSaveRecord() {
     classPos:  classPos,
     campus:    campus,
     phone:     phone,
-    passport:  '',
+    passport:  qaPassportData || '',
     subjects:  autoSubjects
   };
 
@@ -4003,13 +4040,14 @@ function quickSaveRecord() {
   renderDB();
   updateDbStats();
 
-  // Clear name fields only — keep division, class, campus, gender for next student (same class usually)
+  // Clear name/DOB fields only — keep division, class, campus, gender for next student
   document.getElementById('qa_surname').value   = '';
   document.getElementById('qa_firstname').value = '';
   document.getElementById('qa_othername').value = '';
   document.getElementById('qa_dob').value       = '';
+  qaClearPassport(); // clear passport for next student
   document.getElementById('qa_surname').focus();
-  qaGenerateId(); // refresh ID for next student
+  qaGenerateId();
 }
 
 /* ── AUTO-GENERATE STUDENT / STAFF ID ── */
