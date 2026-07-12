@@ -2077,9 +2077,10 @@ footer{background:var(--green-dark)}
       <!-- Header bar -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div style="font-size:14px;color:var(--gray)">Logged in as <strong style="color:var(--green-dark)">CFMA Admin</strong></div>
-        <div style="display:flex;gap:8px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button onclick="loadAllFromSheets()" style="background:rgba(37,99,235,.1);color:#1D4ED8;border:1px solid rgba(37,99,235,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🔄 Reload from Sheets</button>
-          <button onclick="dbLogout()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
+          <button onclick="clearAllDatabaseRecords()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🗑 Clear All Records</button>
+          <button onclick="dbLogout()" style="background:rgba(0,0,0,.06);color:#555;border:1px solid rgba(0,0,0,.1);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
         </div>
       </div>
 
@@ -6252,29 +6253,23 @@ async function sheetsGet(action, params) {
 async function loadAllFromSheets() {
   if (SHEETS_LOADING) return;
   SHEETS_LOADING = true;
-  showToast('Loading data from Google Sheets\u2026 \u23f3');
+  showToast('Loading data\u2026 \u23f3');
   try {
     var data = await sheetsGet('get_all');
     if (data.ok) {
-      // Load students
       if (data.students && data.students.length > 0) {
         dbRecords = data.students;
-        console.log('Loaded', dbRecords.length, 'students from Sheets');
       }
-      // Load results
       if (data.results && data.results.length > 0) {
         resultsDB = data.results;
-        console.log('Loaded', resultsDB.length, 'results from Sheets');
       }
-      // Load fees
       if (data.fees && data.fees.length > 0) {
         feeRecords = data.fees;
-        console.log('Loaded', feeRecords.length, 'fee records from Sheets');
       }
       renderDB();
       updateDbStats();
       renderFeeTable && renderFeeTable();
-      showToast('\u2705 Data loaded! ' + dbRecords.length + ' students, ' + feeRecords.length + ' fee records');
+      showToast('\u2705 ' + dbRecords.length + ' students, ' + resultsDB.length + ' results, ' + feeRecords.length + ' fee records loaded');
     } else {
       showToast('\u26a0\ufe0f Could not load from Sheets. Working offline.');
     }
@@ -6283,6 +6278,46 @@ async function loadAllFromSheets() {
     console.error(e);
   }
   SHEETS_LOADING = false;
+}
+
+// ── Clear entire database ─────────────────────────────────────────────────────
+async function clearAllDatabaseRecords() {
+  // Triple confirmation to prevent accidents
+  if (!confirm('⚠️ WARNING: This will permanently delete ALL student records from the database.\n\nThis CANNOT be undone.\n\nAre you absolutely sure?')) return;
+  if (!confirm('Second confirmation: All ' + dbRecords.length + ' student records will be erased.\n\nClick OK only if you are 100% sure.')) return;
+  var typed = prompt('Type "CLEAR" in capitals to confirm deletion:');
+  if (typed !== 'CLEAR') { showToast('Cancelled — database NOT cleared'); return; }
+
+  showToast('Clearing database\u2026 \u23f3');
+  try {
+    await sheetsRequest('clear_students', {});
+    dbRecords = [];
+    renderDB();
+    updateDbStats();
+    showToast('\u2705 All student records cleared successfully');
+  } catch(e) {
+    showToast('\u274c Failed to clear. Try again.');
+    console.error(e);
+  }
+}
+
+// ── Fetch full passport for a student only when needed (printing) ─────────────
+async function fetchStudentPhoto(studentId) {
+  // If already has a real base64 photo in local cache, use it
+  var local = dbRecords.find(function(r){ return r.studentId.toUpperCase() === studentId.toUpperCase(); });
+  if (local && local.passport && local.passport !== 'HAS_PHOTO') return local.passport;
+  if (local && local.passport === 'HAS_PHOTO') {
+    // Fetch from Sheets on demand
+    try {
+      var data = await sheetsGet('get_student_photo', { studentId: studentId });
+      if (data.ok && data.student && data.student.passport) {
+        // Cache it locally so subsequent prints don't need to fetch again
+        if (local) local.passport = data.student.passport;
+        return data.student.passport;
+      }
+    } catch(e) { /* Return empty if fetch fails */ }
+  }
+  return '';
 }
 
 // ── Save student to Sheets ────────────────────────────────────────────────────
