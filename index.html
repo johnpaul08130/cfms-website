@@ -1883,7 +1883,10 @@ footer{background:var(--green-dark)}
       <div class="upload-portal" id="uploadPortal" style="display:none">
         <div class="portal-head">
           <div><h4>Teacher Upload Dashboard</h4><p>Christ the Foundation Model Academy — Results Management</p></div>
-          <button class="logout-btn" onclick="logoutTeacher()">Logout</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button onclick="teacherRefreshStudents()" style="background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.2);padding:7px 14px;border-radius:3px;cursor:pointer;font-family:'Open Sans',sans-serif;font-size:12px;font-weight:600">🔄 Refresh Students</button>
+            <button class="logout-btn" onclick="logoutTeacher()">Logout</button>
+          </div>
         </div>
         <div class="portal-body">
 
@@ -3664,8 +3667,13 @@ function downloadTemplate() {
 /* ── DB student helper for template ── */
 function getStudentsForClass(cls) {
   if (!cls) return [];
+  var clsNorm = cls.trim().toLowerCase().replace(/\s+/g, ' ');
   return dbRecords.filter(function(r){
-    return (r.classPos||'').toLowerCase() === cls.toLowerCase();
+    var rCls = (r.classPos || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    return rCls === clsNorm;
+  }).sort(function(a, b) {
+    // Sort alphabetically by surname for consistent ordering
+    return (a.name || '').localeCompare(b.name || '');
   });
 }
 
@@ -6373,10 +6381,38 @@ function teacherLogin() {
     isTeacherLoggedIn = true;
     document.getElementById('teacherLogin').style.display  = 'none';
     document.getElementById('uploadPortal').style.display  = 'block';
-    showToast('Welcome! Upload portal is now open 🎉');
+    showToast('Welcome! Loading student list\u2026 \u23f3');
+
+    // Load students from Sheets so template generates with real names
+    sheetsGet('get_students').then(function(data) {
+      if (data && data.ok && data.students && data.students.length > 0) {
+        dbRecords = data.students;
+        showToast('\u2705 Portal ready! ' + dbRecords.length + ' students loaded.');
+      } else {
+        showToast('\u2705 Upload portal is ready \ud83c\udf89');
+      }
+    }).catch(function() {
+      showToast('\u2705 Upload portal is ready \ud83c\udf89');
+    });
+
   } else {
-    showToast('Incorrect username or password ❌');
+    showToast('Incorrect username or password \u274c');
   }
+}
+
+function teacherRefreshStudents() {
+  showToast('Refreshing student list\u2026 \u23f3');
+  sheetsGet('get_students').then(function(data) {
+    if (data && data.ok && data.students && data.students.length > 0) {
+      dbRecords = data.students;
+      updateTemplatePreview(); // refresh the preview table
+      showToast('\u2705 ' + dbRecords.length + ' students loaded. Now select your class.');
+    } else {
+      showToast('\u26a0\ufe0f Could not load students. Check internet connection.');
+    }
+  }).catch(function() {
+    showToast('\u26a0\ufe0f Connection error. Please try again.');
+  });
 }
 
 function logoutTeacher() {
