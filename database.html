@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database | Christ the Foundation Model Academy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#004D26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CFMA Portal">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-item"><span>📞</span>+234 806 268 6710</div>
+    <div class="topbar-item"><span>✉</span>cfmsanambra@gmail.com</div>
+    <div class="topbar-item"><span>🕐</span>Mon–Fri: 7:30am – 4:30pm</div>
+  </div>
+  <div class="topbar-right">
+    <div class="tsoc">f</div><div class="tsoc">in</div><div class="tsoc">tw</div>
+  </div>
+</div>
+
+<!-- SCHOOL HEADER -->
+<div class="site-header">
+  <div class="school-identity">
+    <div class="school-crest" style="background:none;border:none;padding:0;width:90px;height:90px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <img src="assets/img/img_00.jpg" alt="CFMA Logo" style="width:90px;height:90px;object-fit:contain">
+    </div>
+    <div>
+      <div class="school-name-main">Christ the <span>Foundation</span> Model Academy</div>
+      <div class="school-motto">"Consolidated Knowledge Through Education"</div>
+      <div class="school-location">📍 Okija, Ihiala, Anambra State, Nigeria</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-est">Founded <strong>1998</strong></div>
+    <div class="header-affil">
+      <span class="affil-badge gold">WAEC</span>
+      <span class="affil-badge">NECO</span>
+      <span class="affil-badge">Anambra State</span>
+      <span class="affil-badge gold">SSCE</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="academics.html">Nursery &amp; Primary</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="portal.html">&#127891; Portal</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-apply" href="admissions.html">Apply Now</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="academics.html">Academics</a>
+    <a href="academics.html">Nursery &amp; Primary</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="portal.html">🎓 Student Portal</a>
+    <a href="results.html">Check Results</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="setupguide" style="display:none" data-admin="true">
+  <div class="max-w">
+    <div class="sec-label" style="color:var(--gold-light)">Admin Setup</div>
+    <h2 class="sec-title" style="color:white">How to Activate Form Submissions</h2>
+    <p class="sec-desc" style="color:rgba(255,255,255,.6);max-width:700px">Follow these 3 steps to connect the application form to your Email, Google Sheets and WhatsApp. Each step takes about 5 minutes. You only do this once.</p>
+
+    <div class="setup-grid">
+
+      <!-- STEP 1: EmailJS -->
+      <div class="setup-card">
+        <div class="setup-card-head">
+          <div class="setup-num" style="background:var(--gold)">1</div>
+          <div>
+            <h4>📧 Email (EmailJS)</h4>
+            <p>Sends form to cfmsanambra@gmail.com</p>
+          </div>
+        </div>
+        <div class="setup-card-body">
+          <ol>
+            <li>Go to <strong>emailjs.com</strong> → Sign up free</li>
+            <li>Click <strong>Add New Service</strong> → choose Gmail → connect cfmsanambra@gmail.com</li>
+            <li>Copy the <strong>Service ID</strong> (e.g. service_abc123)</li>
+            <li>Go to <strong>Email Templates</strong> → Create Template → set "To Email" as <strong>cfmsanambra@gmail.com</strong></li>
+            <li>In the template body, add variables like <strong>{{student_name}}</strong>, <strong>{{phone}}</strong>, <strong>{{class}}</strong></li>
+            <li>Copy the <strong>Template ID</strong></li>
+            <li>Go to <strong>Account → API Keys</strong> → copy your <strong>Public Key</strong></li>
+            <li>Open the website HTML in VS Code → find <strong>CONFIG</strong> → paste your keys into <strong>emailjs_public_key</strong>, <strong>emailjs_service_id</strong>, <strong>emailjs_template_id</strong></li>
+          </ol>
+          <div class="setup-note"><strong>Free plan:</strong> 200 emails/month — plenty for a school admissions form.</div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Google Sheets -->
+      <div class="setup-card">
+        <div class="setup-card-head">
+          <div class="setup-num" style="background:#34A853">2</div>
+          <div>
+            <h4>📊 Google Sheets</h4>
+            <p>All submissions saved in a spreadsheet</p>
+          </div>
+        </div>
+        <div class="setup-card-body">
+          <ol>
+            <li>Open <strong>Google Sheets</strong> → create a new sheet called <strong>CFMS Applications</strong></li>
+            <li>Click <strong>Extensions → Apps Script</strong></li>
+            <li>Delete all existing code, then paste the script below</li>
+            <li>Click <strong>Save</strong> (💾), then click <strong>Deploy → New Deployment</strong></li>
+            <li>Set type: <strong>Web App</strong>, Execute as: <strong>Me</strong>, Who has access: <strong>Anyone</strong></li>
+            <li>Click <strong>Deploy</strong> → copy the <strong>Web App URL</strong></li>
+            <li>In your website HTML, paste the URL into <strong>CONFIG.sheets_url</strong></li>
+          </ol>
+          <div style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:6px;padding:16px;font-size:13px;color:#92400E;line-height:1.7">
+            ⚠️ <strong>Note:</strong> Your Apps Script backend is already set up and deployed with full support for students, results, fees, and applications (<code>CFMS_AppsScript.js</code>).
+            <br><br>
+            If you ever need to update it: open your Google Sheet → <strong>Extensions → Apps Script</strong> → paste the latest <code>CFMS_AppsScript.js</code> file → <strong>Deploy → Manage Deployments → New Version → Deploy</strong>.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:22px 26px;margin-top:28px;display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+      <div style="font-size:28px">⚙️</div>
+      <div>
+        <div style="color:white;font-weight:700;font-size:15px;margin-bottom:6px">Where to Find the CONFIG in VS Code</div>
+        <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8">Open <strong style="color:var(--gold-light)">CFMS_Final.html</strong> in VS Code → Press <strong style="color:var(--gold-light)">Ctrl+F</strong> (Windows) or <strong style="color:var(--gold-light)">Cmd+F</strong> (Mac) → Search for <strong style="color:var(--gold-light)">const CONFIG</strong> → You will see all three sections clearly labelled with comments. Replace each <strong style="color:var(--gold-light)">YOUR_..._KEY</strong> placeholder with your real key. Save the file. Done!</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section id="database">
+  <div class="max-w">
+    <div class="section-header reveal" style="margin-bottom:32px">
+      <div class="sec-label">Admin Only</div>
+      <h2 class="sec-title">CFMA People Database</h2>
+      <p class="sec-desc">Manage all students, pupils and staff records across all three campuses. Accessible to authorised administrators only.</p>
+    </div>
+
+    <!-- Login box (shown when not authenticated) -->
+    <div id="dbLoginBox" class="db-login-box reveal">
+      <div style="font-size:48px;margin-bottom:12px">🔐</div>
+      <h3>Admin Access Required</h3>
+      <p>This section is restricted to CFMA administrators only. Please enter your admin password to continue.</p>
+      <div style="margin-bottom:16px;text-align:left">
+        <label style="display:block;font-size:12px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
+        <input id="dbPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:11px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'" onkeypress="if(event.key==='Enter')dbAuth()">
+        <div id="dbPwdErr" style="display:none;color:#B71C1C;font-size:12px;margin-top:6px;font-weight:600">❌ Incorrect password</div>
+      </div>
+      <button onclick="dbAuth()" style="width:100%;background:var(--green);color:white;border:none;padding:13px;border-radius:4px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Unlock Database</button>
+    </div>
+
+    <!-- Database Panel (shown after auth) -->
+    <div id="dbPanel" class="db-admin-only">
+
+      <!-- Header bar -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+        <div style="font-size:14px;color:var(--gray)">Logged in as <strong style="color:var(--green-dark)">CFMA Admin</strong></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button onclick="loadAllFromSheets()" style="background:rgba(37,99,235,.1);color:#1D4ED8;border:1px solid rgba(37,99,235,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🔄 Reload from Sheets</button>
+          <button onclick="clearAllDatabaseRecords()" style="background:rgba(183,28,28,.1);color:#B71C1C;border:1px solid rgba(183,28,28,.2);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🗑 Clear All Records</button>
+          <button onclick="dbLogout()" style="background:rgba(0,0,0,.06);color:#555;border:1px solid rgba(0,0,0,.1);padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">Logout</button>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="db-stats-bar" id="dbStatsBar">
+        <div class="db-stat"><strong id="dbTotalCount">0</strong>Total Records</div>
+        <div class="db-stat"><strong id="dbStudentCount">0</strong>Secondary Students</div>
+        <div class="db-stat"><strong id="dbPrimaryCount">0</strong>Primary Pupils</div>
+        <div class="db-stat"><strong id="dbNurseryCount">0</strong>Nursery/Creche</div>
+        <div class="db-stat"><strong id="dbStaffCount">0</strong>Staff Members</div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="db-tabs">
+        <button class="db-tab active" onclick="switchDbTab('all',this)">All Records</button>
+        <button class="db-tab" onclick="switchDbTab('secondary',this)">Secondary</button>
+        <button class="db-tab" onclick="switchDbTab('primary',this)">Primary</button>
+        <button class="db-tab" onclick="switchDbTab('nursery',this)">Nursery/Creche</button>
+        <button class="db-tab" onclick="switchDbTab('staff',this)">Staff</button>
+        <button class="db-tab" onclick="switchDbTab('idcard',this)" style="color:var(--gold);border-bottom-color:transparent">🪪 ID Card Generator</button>
+        <button class="db-tab" onclick="switchDbTab('printresults',this)" style="color:#2563EB;border-bottom-color:transparent">🖨 Print Results</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="db-controls">
+        <input class="db-search" type="text" id="dbSearchInput" placeholder="🔍 Search by name or ID..." oninput="renderDB()">
+        <select class="db-filter" id="dbCampusFilter" onchange="renderDB()">
+          <option value="">All Campuses</option>
+          <option value="Main Campus">Main Campus — Okija</option>
+          <option value="Campus 2">Campus 2 — Nkwo Okija</option>
+          <option value="Campus 3">Campus 3 — Ihiala</option>
+        </select>
+        <select class="db-filter" id="dbGenderFilter" onchange="renderDB()">
+          <option value="">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+        <button class="db-add-btn" onclick="openDbModal()">➕ Add Record</button>
+        <button class="db-add-btn" onclick="toggleQuickAdd()" style="background:#1D4ED8" id="quickAddToggleBtn">⚡ Quick Add</button>
+        <button class="db-add-btn" onclick="toggleUpgradePanel()" style="background:#7C3AED" id="upgradePanelBtn">🎓 Upgrade Classes</button>
+        <button class="db-add-btn" onclick="toggleStaffPanel()" style="background:#0891B2" id="staffPanelBtn">🔐 Staff Accounts</button>
+        <button class="db-export-btn" onclick="exportCSV()">📥 Export CSV</button>
+      </div>
+
+      <!-- Class Upgrade Panel -->
+      <div id="upgradePanel" style="display:none;background:white;border:2px solid #7C3AED;border-radius:8px;padding:24px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+          <div>
+            <h4 style="color:#7C3AED;font-size:15px;font-weight:700">🎓 Automatic Class Upgrade</h4>
+            <p style="font-size:12px;color:var(--gray);margin-top:3px">Promote all students to their next class at the start of a new academic session. Students who have completed SSS 3 will be marked as <strong>Graduated</strong>.</p>
+          </div>
+          <button onclick="toggleUpgradePanel()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+        </div>
+
+        <!-- Upgrade map preview -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px">
+          <div style="background:#f5f3ff;border-radius:6px;padding:12px;text-align:center;border:1px solid #DDD6FE">
+            <div style="font-size:11px;color:#7C3AED;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Nursery</div>
+            <div style="font-size:12px;margin-top:6px;color:#555;line-height:1.8">
+              Pre-Nursery → Nursery 1<br>Nursery 1 → Nursery 2<br>Nursery 2 → Nursery 3<br>Nursery 3 → Primary 1
+            </div>
+          </div>
+          <div style="background:#eff6ff;border-radius:6px;padding:12px;text-align:center;border:1px solid #BFDBFE">
+            <div style="font-size:11px;color:#1D4ED8;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Primary</div>
+            <div style="font-size:12px;margin-top:6px;color:#555;line-height:1.8">
+              Primary 1 → Primary 2<br>Primary 2 → Primary 3<br>Primary 3 → Primary 4<br>Primary 4 → Primary 5<br>Primary 5 → Primary 6<br>Primary 6 → JSS 1
+            </div>
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:12px;text-align:center;border:1px solid #BBF7D0">
+            <div style="font-size:11px;color:#15803D;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Secondary</div>
+            <div style="font-size:12px;margin-top:6px;color:#555;line-height:1.8">
+              JSS 1 → JSS 2<br>JSS 2 → JSS 3<br>JSS 3 → SSS 1<br>SSS 1 → SSS 2<br>SSS 2 → SSS 3<br>SSS 3 → <strong style="color:#B91C1C">Graduated</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Options -->
+        <div style="background:#fafafa;border-radius:6px;padding:16px;margin-bottom:16px;border:1px solid #eee">
+          <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:12px">Upgrade Options</div>
+          <div style="display:flex;flex-wrap:wrap;gap:16px;font-size:13px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" id="upg_nursery" checked style="width:16px;height:16px;accent-color:#7C3AED">
+              <span>Nursery students</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" id="upg_primary" checked style="width:16px;height:16px;accent-color:#7C3AED">
+              <span>Primary students</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" id="upg_secondary" checked style="width:16px;height:16px;accent-color:#7C3AED">
+              <span>Secondary students</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="checkbox" id="upg_update_subjects" checked style="width:16px;height:16px;accent-color:#7C3AED">
+              <span>Auto-update subjects for new class</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Preview count -->
+        <div id="upgradePreview" style="background:#f5f3ff;border-radius:6px;padding:12px;margin-bottom:16px;font-size:13px;color:#7C3AED;border:1px solid #DDD6FE">
+          Click "Preview Upgrade" to see how many students will be affected.
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button onclick="previewUpgrade()" style="background:#7C3AED;color:white;border:none;padding:10px 22px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">👁 Preview Upgrade</button>
+          <button onclick="executeUpgrade()" id="executeUpgradeBtn" style="background:#15803D;color:white;border:none;padding:10px 22px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif;display:none">✅ Apply Upgrade Now</button>
+          <span style="font-size:12px;color:#B91C1C;align-self:center">⚠️ This cannot be undone. Make sure to export a backup CSV first.</span>
+        </div>
+      </div>
+
+      <!-- Staff Accounts Panel -->
+      <div id="staffPanel" style="display:none;background:white;border:2px solid #0891B2;border-radius:8px;padding:24px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+          <div>
+            <h4 style="color:#0891B2;font-size:15px;font-weight:700">🔐 Staff Accounts &amp; Passwords</h4>
+            <p style="font-size:12px;color:var(--gray);margin-top:3px">Create individual logins for each teacher, or change your own admin password.</p>
+          </div>
+          <button onclick="toggleStaffPanel()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+        </div>
+
+        <!-- Change my own password -->
+        <div style="background:#ECFEFF;border:1px solid #A5F3FC;border-radius:6px;padding:16px;margin-bottom:20px">
+          <div style="font-size:13px;font-weight:700;color:#0E7490;margin-bottom:10px">🔑 Change My Password</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end">
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">My Username</label>
+              <input type="text" id="myUsername" placeholder="e.g. admin" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">New Password</label>
+              <input type="password" id="myNewPassword" placeholder="New password" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
+            </div>
+            <button onclick="changeMyPassword()" style="background:#0891B2;color:white;border:none;padding:9px 18px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">Update</button>
+          </div>
+        </div>
+
+        <!-- Add new staff -->
+        <div style="background:#fafafa;border:1px solid var(--light-gray);border-radius:6px;padding:16px;margin-bottom:20px">
+          <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:10px">➕ Create New Staff Account</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px">
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">Username</label>
+              <input type="text" id="newStaffUsername" placeholder="e.g. mrs_okoro" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">Password</label>
+              <input type="password" id="newStaffPassword" placeholder="Temporary password" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">Full Name</label>
+              <input type="text" id="newStaffFullName" placeholder="e.g. Mrs. Okoro" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">Role</label>
+              <select id="newStaffRole" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px;background:white">
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+          <button onclick="createNewStaff()" style="background:var(--green-dark);color:white;border:none;padding:9px 20px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">Create Account</button>
+        </div>
+
+        <!-- Staff list -->
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-size:13px;font-weight:700;color:#374151">All Staff Accounts</div>
+            <button onclick="loadStaffList()" style="background:rgba(0,107,53,.1);color:var(--green-dark);border:1px solid rgba(0,107,53,.2);padding:6px 14px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">🔄 Refresh</button>
+          </div>
+          <div id="staffListContainer"></div>
+        </div>
+      </div>
+
+      <!-- Quick Add Panel -->
+      <div id="quickAddPanel" style="display:none;background:white;border:2px solid #1D4ED8;border-radius:8px;padding:20px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div>
+            <h4 style="color:#1D4ED8;font-size:15px;font-weight:700">⚡ Quick Add Students</h4>
+            <p style="font-size:12px;color:var(--gray);margin-top:2px">Fill and Save — form stays open for the next student. Passport &amp; subjects are set automatically.</p>
+          </div>
+          <button onclick="toggleQuickAdd()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Surname *</label>
+            <input id="qa_surname" type="text" placeholder="e.g. Okafor" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">First Name *</label>
+            <input id="qa_firstname" type="text" placeholder="e.g. Chukwuemeka" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Other Name</label>
+            <input id="qa_othername" type="text" placeholder="(optional)" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Date of Birth *</label>
+            <input id="qa_dob" type="date" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Gender *</label>
+            <select id="qa_gender" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Division *</label>
+            <select id="qa_role" onchange="qaUpdateClass()" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+              <option value="">Select</option>
+              <option value="nursery">Nursery</option>
+              <option value="primary">Primary</option>
+              <option value="secondary">Secondary</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Class *</label>
+            <select id="qa_class" onchange="qaGenerateId()" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+              <option value="">Select Division First</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Campus *</label>
+            <select id="qa_campus" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+              <option value="">Select Campus</option>
+              <option value="Main Campus">Main Campus — Okija</option>
+              <option value="Campus 2">Campus 2 — Nkwo Okija</option>
+              <option value="Campus 3">Campus 3 — Ihiala</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Phone (optional)</label>
+            <input id="qa_phone" type="tel" placeholder="+234 ..." style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
+          </div>
+        </div>
+
+        <!-- Passport upload row -->
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;padding:12px 14px;background:var(--off-white);border-radius:6px;border:1px solid var(--light-gray)">
+          <div style="flex-shrink:0">
+            <div id="qa_passport_preview" style="width:64px;height:64px;border-radius:50%;background:#e5e7eb;border:2px solid var(--light-gray);display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden">👤</div>
+          </div>
+          <div style="flex:1">
+            <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Passport Photo (optional)</label>
+            <input type="file" id="qa_passport_input" accept="image/*" onchange="qaLoadPassport(this)" style="display:none">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button type="button" onclick="document.getElementById('qa_passport_input').click()" style="background:var(--green);color:white;border:none;padding:7px 16px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer">📷 Upload Photo</button>
+              <button type="button" onclick="qaClearPassport()" style="background:none;border:1px solid #ccc;color:var(--gray);padding:7px 14px;border-radius:4px;font-size:12px;cursor:pointer">✕ Clear</button>
+            </div>
+            <p style="font-size:11px;color:var(--gray);margin-top:4px">Photo appears on ID card and result slip. Clears automatically after each student.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <div style="background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;padding:8px 14px;font-size:13px;min-width:200px">
+            🪪 ID: <strong id="qa_id_preview" style="color:#1D4ED8;font-family:monospace">Select division to generate</strong>
+          </div>
+          <button onclick="quickSaveRecord()" style="background:#1D4ED8;color:white;border:none;padding:10px 28px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">
+            💾 Save &amp; Next Student
+          </button>
+          <span id="qa_count" style="font-size:12px;color:var(--gray)">0 students added this session</span>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <!-- ID Card Generator Panel (shown when idcard tab selected) -->
+      <div id="dbIdCardPanel" style="display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+          <!-- Search & Select Student -->
+          <div style="background:white;border:1px solid var(--light-gray);border-radius:6px;overflow:hidden">
+            <div style="background:var(--green-dark);padding:16px 20px">
+              <h4 style="color:white;font-size:15px;font-weight:700">🔍 Select Student / Staff</h4>
+              <p style="color:rgba(255,255,255,.6);font-size:12px;margin-top:4px">Search database or fill manually</p>
+            </div>
+            <div style="padding:20px">
+              <input type="text" id="dbIdSearch" placeholder="Search by name or ID..." oninput="dbIdSearchRender()"
+                style="width:100%;padding:10px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none;margin-bottom:12px"
+                onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'">
+              <div id="dbIdSearchResults" style="max-height:200px;overflow-y:auto;border:1px solid var(--light-gray);border-radius:4px;display:none"></div>
+              <div style="margin-top:16px;border-top:1px solid var(--light-gray);padding-top:16px">
+                <div style="font-size:12px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Or Fill Manually</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">SURNAME</label>
+                    <input id="idf_surname" type="text" placeholder="Okafor" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">FIRST NAME</label>
+                    <input id="idf_firstname" type="text" placeholder="Emeka" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">STUDENT ID</label>
+                    <input id="idf_idno" type="text" placeholder="CFMS-2025-001" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">YEAR OF ENTRY</label>
+                    <input id="idf_year" type="text" placeholder="2024" maxlength="4" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">CLASS</label>
+                    <input id="idf_class" type="text" placeholder="JSS 2" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                  <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">EXPIRY YEAR</label>
+                    <input id="idf_expiry" type="text" placeholder="2027" maxlength="4" oninput="dbLiveCard()"
+                      style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
+                      onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
+                </div>
+                <div style="margin-top:10px"><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">CAMPUS</label>
+                  <select id="idf_campus" onchange="dbLiveCard()"
+                    style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                    <option value="Main Campus">Main Campus</option>
+                    <option value="Campus 2 — Nkwo Okija">Campus 2 — Nkwo</option>
+                    <option value="Campus 3 — Ihiala">Campus 3 — Ihiala</option>
+                  </select>
+                </div>
+                <!-- Passport upload -->
+                <div style="margin-top:12px">
+                  <label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:6px">PASSPORT PHOTO</label>
+                  <div onclick="document.getElementById('idf_passport_input').click()"
+                    style="border:2px dashed var(--light-gray);border-radius:4px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;position:relative"
+                    onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--light-gray)'">
+                    <input type="file" id="idf_passport_input" accept="image/*" style="display:none" onchange="dbLoadIdPassport(this)">
+                    <div id="idf_passport_ph" style="font-size:13px;color:var(--gray)">📷 Click to upload photo</div>
+                    <img id="idf_passport_prev" src="" style="display:none;width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--green);margin:0 auto">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Preview -->
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">🪪 Live Card Preview</div>
+            <div id="dbIdCardEmpty" style="text-align:center;padding:40px 20px;color:var(--gray);background:white;border:2px dashed var(--light-gray);border-radius:8px">
+              <div style="font-size:40px;margin-bottom:10px">🪪</div>
+              <p style="font-size:14px">Fill in student details to preview the ID card</p>
+            </div>
+            <div id="dbIdCardOutput" style="display:none">
+              <div class="id-card" id="dbIdcFront">
+                <div class="idc-front">
+                  <div class="idc-type-badge" id="dbidc_type">Student</div>
+                  <div class="idc-front-header">
+                    <img src="" alt="CFMA" id="dbNavLogo" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">
+                    <div>
+                      <div class="idc-school-name">Christ the Foundation Model Academy</div>
+                      <div class="idc-school-motto">Consolidated Knowledge Through Education</div>
+                    </div>
+                  </div>
+                  <div class="idc-body">
+                    <div class="idc-passport" id="dbidc_passport">👤</div>
+                    <div class="idc-info">
+                      <div class="idc-label">Full Name</div>
+                      <div class="idc-value large" id="dbidc_name">—</div>
+                      <div class="idc-label">Class</div>
+                      <div class="idc-value" id="dbidc_class">—</div>
+                      <div class="idc-label">Year of Entry</div>
+                      <div class="idc-value" id="dbidc_entry">—</div>
+                      <div class="idc-label">Campus</div>
+                      <div class="idc-value" id="dbidc_campus" style="font-size:10px">—</div>
+                    </div>
+                  </div>
+                  <div class="idc-id-band">
+                    <span>Student ID</span>
+                    <strong id="dbidc_idno">CFMS-0000-000</strong>
+                    <span>Okija · Anambra</span>
+                  </div>
+                </div>
+              </div>
+              <div class="id-card" id="dbIdcBack" style="margin-top:10px">
+                <div class="idc-back">
+                  <div class="idc-back-header"><p>Christ the Foundation Model Academy — Student Identity Card</p></div>
+                  <div class="idc-back-body">
+                    <div class="idc-back-row"><span>Student ID</span><strong id="dbidc_b_idno">—</strong></div>
+                    <div class="idc-back-row"><span>Full Name</span><strong id="dbidc_b_name">—</strong></div>
+                    <div class="idc-back-row"><span>Class</span><strong id="dbidc_b_class">—</strong></div>
+                    <div class="idc-back-row"><span>Campus</span><strong id="dbidc_b_campus">—</strong></div>
+                    <div class="idc-back-row"><span>Expires</span><strong id="dbidc_b_expiry">—</strong></div>
+                  </div>
+                  <div class="idc-barcode">
+                    <div class="idc-barcode-lines" id="dbIdcBarcodeLines"></div>
+                    <p id="dbidc_barcode_text">CFMS-0000-000</p>
+                  </div>
+                  <div class="idc-back-footer">
+                    📞 +234 806 268 6710 &nbsp;|&nbsp; ✉ cfmsanambra@gmail.com<br>
+                    Agbasike Umuohi, Okija, Ihiala, Anambra State
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:14px">
+                <button onclick="dbPrintIdCard()" style="flex:1;background:var(--green);color:white;border:none;padding:11px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">🖨 Print Card</button>
+                <button onclick="dbSavePdf()" style="flex:1;background:var(--gold);color:var(--green-dark);border:none;padding:11px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif">💾 Save PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRINT RESULTS PANEL -->
+      <div id="dbPrintResultsPanel" style="display:none">
+        <div style="background:white;border:1px solid var(--light-gray);border-radius:6px;overflow:hidden;margin-bottom:28px">
+          <div style="background:var(--green-dark);padding:18px 24px;display:flex;align-items:center;gap:14px">
+            <div style="font-size:28px">🖨</div>
+            <div>
+              <h4 style="color:white;font-size:16px;font-weight:700">Admin Result Printer</h4>
+              <p style="color:rgba(255,255,255,.6);font-size:12px;margin-top:3px">Search any student and print their official result slip</p>
+            </div>
+          </div>
+          <div style="padding:24px">
+            <!-- Search bar -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Student ID / Name</label>
+                <input type="text" id="prStudentId" placeholder="e.g. CFMS-2025-001" oninput="prAutoSuggest()"
+                  style="width:100%;padding:10px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none"
+                  onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'" onkeypress="if(event.key==='Enter')adminSearchResults()">
+                <div id="prAutoSuggestBox" style="border:1px solid var(--light-gray);border-radius:4px;display:none;max-height:160px;overflow-y:auto;margin-top:4px;background:white;position:relative;z-index:10"></div>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Term</label>
+                <select id="prTerm" style="width:100%;padding:10px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Term</option>
+                  <option value="First Term">First Term</option>
+                  <option value="Second Term">Second Term</option>
+                  <option value="Third Term">Third Term</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Academic Year</label>
+                <select id="prYear" style="width:100%;padding:10px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none;background:white">
+                  <option value="">Select Year</option>
+                  <option value="">Select Year</option>
+                  <option value="2024/2025">2024/2025</option>
+                  <option value="2025/2026" selected>2025/2026 (Current)</option>
+                  <option value="2026/2027">2026/2027</option>
+                  <option value="2027/2028">2027/2028</option>
+                  <option value="2028/2029">2028/2029</option>
+                  <option value="2029/2030">2029/2030</option>
+                  </select>
+              </div>
+              <div style="display:flex;align-items:flex-end">
+                <button onclick="adminSearchResults()" style="background:var(--green);color:white;border:none;padding:11px 22px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif;white-space:nowrap;transition:background .2s" onmouseover="this.style.background='var(--green-dark)'" onmouseout="this.style.background='var(--green)'">🔍 Search</button>
+              </div>
+            </div>
+
+            <!-- No results message -->
+            <div id="prNoResults" style="display:none;text-align:center;padding:30px;background:var(--off-white);border-radius:6px;color:var(--gray)">
+              <div style="font-size:36px;margin-bottom:10px">📋</div>
+              <p style="font-size:14px">No results found. Make sure the teacher has uploaded results for this student, term and year.</p>
+            </div>
+
+            <!-- Results preview -->
+            <div id="prResultsPreview" style="display:none">
+              <!-- Student summary card -->
+              <div id="prSummaryCard" style="background:var(--green-dark);border-radius:6px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin-bottom:16px">
+                <div id="prStudentPassport" style="width:60px;height:60px;border-radius:50%;border:3px solid var(--gold);background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden"></div>
+                <div style="flex:1">
+                  <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px">Student Name</div>
+                  <div id="prSummaryName" style="font-size:20px;font-weight:700;color:white;font-family:'Merriweather',serif"></div>
+                  <div style="display:flex;gap:16px;margin-top:6px;flex-wrap:wrap">
+                    <div><span style="font-size:10px;color:rgba(255,255,255,.5)">ID: </span><span id="prSummaryId" style="font-size:13px;color:var(--gold-light);font-weight:700"></span></div>
+                    <div><span style="font-size:10px;color:rgba(255,255,255,.5)">Class: </span><span id="prSummaryClass" style="font-size:13px;color:white;font-weight:600"></span></div>
+                    <div><span style="font-size:10px;color:rgba(255,255,255,.5)">Term: </span><span id="prSummaryTerm" style="font-size:13px;color:white;font-weight:600"></span></div>
+                  </div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px">Average Score</div>
+                  <div id="prSummaryAvg" style="font-size:36px;font-weight:900;color:var(--gold);font-family:'Merriweather',serif"></div>
+                  <div id="prSummaryPosition" style="font-size:12px;color:white;font-weight:600;margin-top:2px"></div>
+                </div>
+              </div>
+
+              <!-- Results table -->
+              <div style="overflow-x:auto;border-radius:6px;border:1px solid var(--light-gray);margin-bottom:16px">
+                <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:500px">
+                  <thead>
+                    <tr style="background:var(--green-dark);color:white">
+                      <th style="padding:11px 14px;text-align:left">#</th>
+                      <th style="padding:11px 14px;text-align:left">Subject</th>
+                      <th style="padding:11px 14px;text-align:center">CA (40)</th>
+                      <th style="padding:11px 14px;text-align:center">Exam (60)</th>
+                      <th style="padding:11px 14px;text-align:center">Total</th>
+                      <th style="padding:11px 14px;text-align:center">Position</th>
+                      <th style="padding:11px 14px;text-align:center">Grade</th>
+                      <th style="padding:11px 14px;text-align:left">Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody id="prResultsBody"></tbody>
+                  <tfoot>
+                    <tr style="background:var(--off-white);font-weight:700">
+                      <td colspan="4" style="padding:11px 14px;font-size:13px;color:var(--green-dark)">Overall Average</td>
+                      <td id="prFooterAvg" style="padding:11px 14px;text-align:center;font-size:15px;color:var(--green-dark)"></td>
+                      <td id="prFooterPosition" style="padding:11px 14px;text-align:center;font-size:13px;color:var(--green-dark)"></td>
+                      <td id="prFooterGrade" style="padding:11px 14px;text-align:center"></td>
+                      <td id="prFooterRemark" style="padding:11px 14px;font-size:13px;color:var(--gray)"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <!-- Action buttons -->
+              <div style="display:flex;gap:12px;flex-wrap:wrap">
+                <button onclick="adminPrintResult()" style="background:var(--green);color:white;border:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif;display:flex;align-items:center;gap:8px;transition:background .2s" onmouseover="this.style.background='var(--green-dark)'" onmouseout="this.style.background='var(--green)'">🖨 Print Result Slip</button>
+                <button onclick="adminSaveResultPDF()" style="background:var(--gold);color:var(--green-dark);border:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif;display:flex;align-items:center;gap:8px">💾 Save as PDF</button>
+                <button onclick="adminPrintAllResults()" style="background:white;color:var(--green-dark);border:2px solid var(--green);padding:12px 28px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Open Sans',sans-serif;display:flex;align-items:center;gap:8px">📋 Print All Students</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="db-table-wrap" id="dbTableWrap">
+        <table class="db-table">
+          <thead>
+            <tr>
+              <th>Passport</th>
+              <th>Name</th>
+              <th>ID Number</th>
+              <th>Role</th>
+              <th>Gender</th>
+              <th>Campus</th>
+              <th>Phone</th>
+              <th>Subjects</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="dbTableBody"></tbody>
+        </table>
+      </div></div>
+      <div class="db-empty" id="dbEmpty" style="display:none">
+        <div class="icon">📂</div>
+        <p>No records found. Click <strong>Add Record</strong> to get started.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<div class="db-modal-overlay" id="dbModal">
+  <div class="db-modal">
+    <div class="db-modal-head">
+      <h3 id="dbModalTitle">Add New Record</h3>
+      <button class="db-modal-close" onclick="closeDbModal()">✕</button>
+    </div>
+    <div class="db-modal-body">
+      <input type="hidden" id="dbEditId">
+      <!-- Passport -->
+      <div class="db-mfg">
+        <label>Passport Photograph</label>
+        <div class="db-passport-upload-wrap" onclick="document.getElementById('dbPassportInput').click()">
+          <input type="file" id="dbPassportInput" accept="image/*" onchange="dbLoadPassport(this)" onclick="event.stopPropagation()">
+          <div id="dbPassportPlaceholder">
+            <div style="font-size:32px;margin-bottom:6px">📷</div>
+            <div style="font-size:13px;font-weight:600;color:var(--green)">Click to upload photo</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:4px">JPG or PNG — passport size</div>
+          </div>
+          <img id="dbPassportPreview" src="" alt="Passport" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--green);margin:0 auto">
+        </div>
+      </div>
+      <!-- Fields -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="db-mfg">
+          <label>Surname *</label>
+          <input type="text" id="dbSurname" placeholder="e.g. Okafor">
+        </div>
+        <div class="db-mfg">
+          <label>First Name *</label>
+          <input type="text" id="dbFirstname" placeholder="e.g. Chukwuemeka">
+        </div>
+      </div>
+      <div class="db-mfg">
+        <label>Other Name</label>
+        <input type="text" id="dbOthername" placeholder="(optional)">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="db-mfg">
+          <label>Student/Staff ID <span style="color:var(--gray);font-weight:400;text-transform:none;letter-spacing:0">(auto-generated)</span></label>
+          <input type="text" id="dbStudentId" placeholder="Select role to generate ID" readonly style="background:var(--off-white);color:var(--green-dark);font-weight:700;cursor:not-allowed">
+        </div>
+        <div class="db-mfg">
+          <label>Gender *</label>
+          <select id="dbGender">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="db-mfg">
+          <label>Date of Birth *</label>
+          <input type="date" id="dbDOB">
+          <p style="font-size:11px;color:var(--gray);margin-top:4px">Used as the student's portal login password</p>
+        </div>
+        <div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="db-mfg">
+          <label>Role / Division *</label>
+          <select id="dbRole" onchange="updateDbClassField(); loadSubjectCheckboxes(this.value,[]); autoGenerateDbId();">
+            <option value="">Select</option>
+            <option value="nursery">Creche / Nursery</option>
+            <option value="primary">Primary School</option>
+            <option value="secondary">Secondary School</option>
+            <option value="staff">Staff</option>
+          </select>
+        </div>
+        <div class="db-mfg">
+          <label>Class / Position</label>
+          <select id="dbClass" style="display:block" onchange="onDbClassChanged()">
+            <option value="">Select Role/Division First</option>
+          </select>
+          <input type="text" id="dbClassText" placeholder="e.g. Teacher, Bursar, Security" style="display:none">
+        </div>
+      </div>
+      <div class="db-mfg">
+        <label>Campus *</label>
+        <select id="dbCampus">
+          <option value="">Select Campus</option>
+          <option value="Main Campus">Main Campus — Agbasike Umuohi, Okija</option>
+          <option value="Campus 2">Campus 2 — SU House, Nkwo Okija</option>
+          <option value="Campus 3">Campus 3 — Ihiala Main Market</option>
+        </select>
+      </div>
+      <div class="db-mfg">
+        <label>Phone Number</label>
+        <input type="tel" id="dbPhone" placeholder="e.g. +234 806 268 6710">
+      </div>
+
+      <!-- SUBJECTS -->
+      <div class="db-mfg" id="dbSubjectsWrap" style="display:none">
+        <label>Subjects Offered</label>
+        <div style="background:var(--off-white,#f5f7f5);border:1.5px solid var(--light-gray);border-radius:4px;padding:12px 14px;max-height:280px;overflow-y:auto">
+          <div id="dbSubjectsInner">
+            <div style="color:var(--gray);font-size:13px">Select a Role/Division first to see subjects.</div>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <div style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Selected Subjects:</div>
+          <div class="subj-tags-wrap" id="dbSelectedSubjTags"><span style="color:var(--gray);font-size:12px">None selected</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="db-modal-foot">
+      <button class="db-cancel-btn" onclick="closeDbModal()">Cancel</button>
+      <button class="db-save-btn" onclick="saveDbRecord()">💾 Save Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="adminOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;transition:opacity .3s">
+  <div style="background:white;border-radius:10px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;font-family:'Open Sans',Arial,sans-serif">
+    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:52px;height:52px;background:#006B35;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;margin:0 auto 12px">🔐</div>
+      <h3 style="font-size:18px;font-weight:700;color:#004D26;margin-bottom:4px">Admin Access</h3>
+      <p style="font-size:13px;color:#888">Christ the Foundation Model Academy</p>
+    </div>
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:12px;font-weight:700;color:#004D26;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
+      <input id="adminPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:6px;font-size:14px;font-family:'Open Sans',Arial,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#006B35'" onblur="this.style.borderColor='#e0e0e0'">
+      <div id="adminPwdError" style="display:none;color:#dc2626;font-size:12px;margin-top:8px;font-weight:600">❌ Incorrect password. Please try again.</div>
+    </div>
+    <button onclick="submitAdminLogin()" style="width:100%;background:#006B35;color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',Arial,sans-serif;transition:background .2s" onmouseover="this.style.background='#004D26'" onmouseout="this.style.background='#006B35'">Enter Admin Panel</button>
+    <p style="text-align:center;font-size:11px;color:#bbb;margin-top:14px">This area is restricted to CFMA administrators only</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <div class="fb-name">Christ the Foundation Model Academy</div>
+      <div class="fb-motto">"Consolidated Knowledge Through Education"</div>
+      <p>Providing quality, Christ-centred secondary education across three campuses in Anambra State since 1998. Affiliated with WAEC, NECO and the Anambra State Ministry of Education.</p>
+    </div>
+    <div class="fcol reveal">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a onclick="goTo('about')">About Us</a></li>
+        <li><a onclick="goTo('academics')">Academics</a></li>
+      <li><a onclick="goTo('earlyyears')">Nursery &amp; Primary</a></li>
+        <li><a onclick="goTo('admissions')">Admissions</a></li>
+        <li><a onclick="goTo('portal')">🎓 Student Portal</a></li>
+      
+<li><a onclick="goTo('database')">Database</a></li>
+        <li><a onclick="goTo('contact')">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="fcol reveal">
+      <h5>Our Campuses</h5>
+      <ul>
+        <li><a>Main — Agbasike Umuohi, Okija</a></li>
+        <li><a>Campus 2 — Nkwo Okija</a></li>
+        <li><a>Campus 3 — Ihiala Market</a></li>
+      </ul>
+      <h5 style="margin-top:22px">Examinations</h5>
+      <ul>
+        <li><a>WAEC SSCE</a></li><li><a>NECO SSCE</a></li>
+        <li><a>JAMB / UTME</a></li><li><a>BECE (JSS3)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Christ the Foundation Model Academy, Okija, Anambra State. All rights reserved.</p>
+    <div class="ng-flag"><div class="nf g"></div><div class="nf w"></div><div class="nf g"></div></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      console.log('CFMA Service Worker registered');
+    }).catch(function(err) {
+      console.log('Service Worker registration failed:', err);
+    });
+  });
+}
+
+// Install prompt handling
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var btn = document.getElementById('installAppBtn');
+  if (btn) btn.style.display = 'inline-flex';
+});
+
+function installCFMAApp() {
+  if (!deferredPrompt) {
+    alert('To install: tap your browser menu (⋮ or Share icon) and select "Add to Home Screen"');
+    return;
+  }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choice) {
+    if (choice.outcome === 'accepted') {
+      var btn = document.getElementById('installAppBtn');
+      if (btn) btn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  });
+}
+</script>
+</body>
+</html>

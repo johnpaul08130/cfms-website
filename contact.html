@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Christ the Foundation Model Academy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#004D26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CFMA Portal">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-item"><span>📞</span>+234 806 268 6710</div>
+    <div class="topbar-item"><span>✉</span>cfmsanambra@gmail.com</div>
+    <div class="topbar-item"><span>🕐</span>Mon–Fri: 7:30am – 4:30pm</div>
+  </div>
+  <div class="topbar-right">
+    <div class="tsoc">f</div><div class="tsoc">in</div><div class="tsoc">tw</div>
+  </div>
+</div>
+
+<!-- SCHOOL HEADER -->
+<div class="site-header">
+  <div class="school-identity">
+    <div class="school-crest" style="background:none;border:none;padding:0;width:90px;height:90px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <img src="assets/img/img_00.jpg" alt="CFMA Logo" style="width:90px;height:90px;object-fit:contain">
+    </div>
+    <div>
+      <div class="school-name-main">Christ the <span>Foundation</span> Model Academy</div>
+      <div class="school-motto">"Consolidated Knowledge Through Education"</div>
+      <div class="school-location">📍 Okija, Ihiala, Anambra State, Nigeria</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-est">Founded <strong>1998</strong></div>
+    <div class="header-affil">
+      <span class="affil-badge gold">WAEC</span>
+      <span class="affil-badge">NECO</span>
+      <span class="affil-badge">Anambra State</span>
+      <span class="affil-badge gold">SSCE</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="academics.html">Nursery &amp; Primary</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="portal.html">&#127891; Portal</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <button class="nav-apply" href="admissions.html">Apply Now</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="academics.html">Academics</a>
+    <a href="academics.html">Nursery &amp; Primary</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="portal.html">🎓 Student Portal</a>
+    <a href="results.html">Check Results</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="contact">
+  <div class="max-w">
+    <div class="con-grid">
+      <div class="reveal">
+        <div class="sec-label">Contact</div>
+        <h2 class="sec-title">Find Us</h2>
+        <div class="campuses">
+          <div class="camp main">
+            <div class="camp-badge">★ Main Campus</div>
+            <h4>Agbasike Umuohi Campus</h4>
+            <p>Agbasike Umuohi, Okija, Ihiala, Anambra State, Nigeria</p>
+          </div>
+          <div class="camp">
+            <div class="camp-badge">Campus 2</div>
+            <h4>Nkwo Okija Campus</h4>
+            <p>SU House, Nkwo Okija, Anambra State, Nigeria</p>
+          </div>
+          <div class="camp">
+            <div class="camp-badge">Campus 3</div>
+            <h4>Ihiala Campus</h4>
+            <p>Opposite Timber Shed, Ihiala Main Market, Anambra State</p>
+          </div>
+        </div>
+        <div class="cdetails">
+          <div class="cdet"><div class="cdet-icon">📞</div><div><h5>Phone Number</h5><p>+234 806 268 6710<br>Mon–Sat, 7:30am – 5:00pm</p></div></div>
+          <div class="cdet"><div class="cdet-icon">✉</div><div><h5>Email Address</h5><p>cfmsanambra@gmail.com</p></div></div>
+          <div class="cdet"><div class="cdet-icon">🕐</div><div><h5>Office Hours</h5><p>Monday – Friday: 7:30am – 4:30pm<br>Saturday: 9:00am – 1:00pm</p></div></div>
+          <div class="cdet"><div class="cdet-icon">📍</div><div><h5>State / LGA</h5><p>Anambra State — Ihiala Local Government Area</p></div></div>
+        </div>
+      </div>
+      <div class="con-form reveal">
+        <h3>Send Us a Message</h3>
+        <div class="fg"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
+        <div class="fg"><label>Phone Number</label><input type="tel" placeholder="+234 ..."></div>
+        <div class="fg"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="fg"><label>Subject</label>
+          <select>
+            <option>General Enquiry</option><option>Admission Enquiry</option>
+            <option>Result / Examination</option><option>School Fees</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea placeholder="Write your message here..."></textarea></div>
+        <button class="csend" onclick="showToast('Message sent! We will respond within 24 hours ✅')">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="adminOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;transition:opacity .3s">
+  <div style="background:white;border-radius:10px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;font-family:'Open Sans',Arial,sans-serif">
+    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:52px;height:52px;background:#006B35;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;margin:0 auto 12px">🔐</div>
+      <h3 style="font-size:18px;font-weight:700;color:#004D26;margin-bottom:4px">Admin Access</h3>
+      <p style="font-size:13px;color:#888">Christ the Foundation Model Academy</p>
+    </div>
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:12px;font-weight:700;color:#004D26;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
+      <input id="adminPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:6px;font-size:14px;font-family:'Open Sans',Arial,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#006B35'" onblur="this.style.borderColor='#e0e0e0'">
+      <div id="adminPwdError" style="display:none;color:#dc2626;font-size:12px;margin-top:8px;font-weight:600">❌ Incorrect password. Please try again.</div>
+    </div>
+    <button onclick="submitAdminLogin()" style="width:100%;background:#006B35;color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',Arial,sans-serif;transition:background .2s" onmouseover="this.style.background='#004D26'" onmouseout="this.style.background='#006B35'">Enter Admin Panel</button>
+    <p style="text-align:center;font-size:11px;color:#bbb;margin-top:14px">This area is restricted to CFMA administrators only</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <div class="fb-name">Christ the Foundation Model Academy</div>
+      <div class="fb-motto">"Consolidated Knowledge Through Education"</div>
+      <p>Providing quality, Christ-centred secondary education across three campuses in Anambra State since 1998. Affiliated with WAEC, NECO and the Anambra State Ministry of Education.</p>
+    </div>
+    <div class="fcol reveal">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a onclick="goTo('about')">About Us</a></li>
+        <li><a onclick="goTo('academics')">Academics</a></li>
+      <li><a onclick="goTo('earlyyears')">Nursery &amp; Primary</a></li>
+        <li><a onclick="goTo('admissions')">Admissions</a></li>
+        <li><a onclick="goTo('portal')">🎓 Student Portal</a></li>
+      
+<li><a onclick="goTo('database')">Database</a></li>
+        <li><a onclick="goTo('contact')">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="fcol reveal">
+      <h5>Our Campuses</h5>
+      <ul>
+        <li><a>Main — Agbasike Umuohi, Okija</a></li>
+        <li><a>Campus 2 — Nkwo Okija</a></li>
+        <li><a>Campus 3 — Ihiala Market</a></li>
+      </ul>
+      <h5 style="margin-top:22px">Examinations</h5>
+      <ul>
+        <li><a>WAEC SSCE</a></li><li><a>NECO SSCE</a></li>
+        <li><a>JAMB / UTME</a></li><li><a>BECE (JSS3)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Christ the Foundation Model Academy, Okija, Anambra State. All rights reserved.</p>
+    <div class="ng-flag"><div class="nf g"></div><div class="nf w"></div><div class="nf g"></div></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      console.log('CFMA Service Worker registered');
+    }).catch(function(err) {
+      console.log('Service Worker registration failed:', err);
+    });
+  });
+}
+
+// Install prompt handling
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var btn = document.getElementById('installAppBtn');
+  if (btn) btn.style.display = 'inline-flex';
+});
+
+function installCFMAApp() {
+  if (!deferredPrompt) {
+    alert('To install: tap your browser menu (⋮ or Share icon) and select "Add to Home Screen"');
+    return;
+  }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choice) {
+    if (choice.outcome === 'accepted') {
+      var btn = document.getElementById('installAppBtn');
+      if (btn) btn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  });
+}
+</script>
+</body>
+</html>
