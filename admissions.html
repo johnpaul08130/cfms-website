@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admissions | Christ the Foundation Model Academy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzAwNEQyNiIvPjx0ZXh0IHg9IjMyIiB5PSI0NCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMzYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IiNDODk4MUEiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkM8L3RleHQ+PC9zdmc+">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#004D26">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CFMA Portal">
+<link rel="apple-touch-icon" href="assets/img/icon-192.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-item"><span>📞</span>+234 806 268 6710</div>
+    <div class="topbar-item"><span>✉</span>cfmsanambra@gmail.com</div>
+    <div class="topbar-item"><span>🕐</span>Mon–Fri: 7:30am – 4:30pm</div>
+  </div>
+  <div class="topbar-right">
+    <div class="tsoc">f</div><div class="tsoc">in</div><div class="tsoc">tw</div>
+  </div>
+</div>
+
+<!-- SCHOOL HEADER -->
+<div class="site-header">
+  <div class="school-identity">
+    <div class="school-crest" style="background:none;border:none;padding:0;width:90px;height:90px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+      <img src="assets/img/img_00.jpg" alt="CFMA Logo" style="width:90px;height:90px;object-fit:contain">
+    </div>
+    <div>
+      <div class="school-name-main">Christ the <span>Foundation</span> Model Academy</div>
+      <div class="school-motto">"Consolidated Knowledge Through Education"</div>
+      <div class="school-location">📍 Okija, Ihiala, Anambra State, Nigeria</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-est">Founded <strong>1998</strong></div>
+    <div class="header-affil">
+      <span class="affil-badge gold">WAEC</span>
+      <span class="affil-badge">NECO</span>
+      <span class="affil-badge">Anambra State</span>
+      <span class="affil-badge gold">SSCE</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="academics.html">Academics</a></li>
+      <li><a href="academics.html">Nursery &amp; Primary</a></li>
+      <li><a href="admissions.html" class="active">Admissions</a></li>
+      <li><a href="portal.html">&#127891; Portal</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-apply" href="admissions.html" class="active">Apply Now</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="academics.html">Academics</a>
+    <a href="academics.html">Nursery &amp; Primary</a>
+    <a href="admissions.html" class="active">Admissions</a>
+    <a href="portal.html">🎓 Student Portal</a>
+    <a href="results.html">Check Results</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="admissions">
+  <div class="max-w">
+    <div class="adm-grid">
+      <div class="reveal">
+        <div class="sec-label">Admissions</div>
+        <h2 class="sec-title">How to Apply</h2>
+        <p class="sec-desc">We welcome applications from qualified candidates into JSS 1 and SS 1. Admissions are subject to availability and entrance assessment.</p>
+        <div class="req-list">
+          <div class="req"><div class="req-num">1</div><div><h4>Obtain Application Form</h4><p>Visit any campus or submit the form online. Application forms cost ₦2,000 (non-refundable).</p></div></div>
+          <div class="req"><div class="req-num">2</div><div><h4>Entrance Examination</h4><p>All applicants sit an entrance exam in English and Mathematics at the Main Campus.</p></div></div>
+          <div class="req"><div class="req-num">3</div><div><h4>Submit Documents</h4><p>PSLE Certificate (for JSS1), previous report cards, birth certificate and 4 passport photographs.</p></div></div>
+          <div class="req"><div class="req-num">4</div><div><h4>Pay School Fees</h4><p>Upon receiving an offer, complete acceptance and pay the required fees to secure your place.</p></div></div>
+        </div>
+        <div class="fees-box">
+          <h4>📌 Fees Guide (Per Term)</h4>
+          <div class="fee-row"><span>JSS 1 – JSS 3</span><span>Contact School</span></div>
+          <div class="fee-row"><span>SS 1 – SS 3</span><span>Contact School</span></div>
+          <div class="fee-row"><span>WAEC / NECO Registration</span><span>Separate Charge</span></div>
+          <div class="fee-row"><span>Application Form</span><span>₦2,000</span></div>
+        </div>
+      </div>
+      <div class="adm-form reveal" id="admFormWrap">
+        <h3>Application Form</h3>
+        <p class="fsub">Submissions are sent to your email, Google Sheets and WhatsApp automatically.</p>
+
+        <!-- Submission status indicators -->
+        <div id="submitStatus" style="display:none;margin-bottom:18px;border-radius:4px;padding:14px 16px;font-size:13px;font-weight:600;border-left:4px solid var(--green);background:rgba(0,107,53,.07);color:var(--green-dark)">
+          <span id="statusIcon">⏳</span> <span id="statusMsg">Submitting...</span>
+        </div>
+
+        <!-- Delivery indicators -->
+        <div id="deliveryStatus" style="display:none;margin-bottom:18px">
+          <div style="font-size:11px;font-weight:700;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Delivery Status</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <div id="ds-email" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>📧</span> Email <span id="ds-email-ic">⏳</span></div>
+            <div id="ds-sheets" style="display:flex;align-items:center;gap:6px;background:var(--off-white);border:1px solid var(--light-gray);border-radius:3px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--gray)"><span>📊</span> Google Sheets <span id="ds-sheets-ic">⏳</span></div></div>
+        </div>
+
+        <div id="appForm">
+          <div class="frow2">
+            <div class="fg"><label>Surname *</label><input type="text" id="f_surname" placeholder="e.g. Okafor" required></div>
+            <div class="fg"><label>First Name *</label><input type="text" id="f_firstname" placeholder="e.g. Chukwuemeka" required></div>
+          </div>
+          <div class="frow2">
+            <div class="fg"><label>Date of Birth *</label><input type="date" id="f_dob" required></div>
+            <div class="fg"><label>Gender *</label><select id="f_gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+          </div>
+          <div class="fg"><label>Division *</label>
+            <select id="f_division" onchange="updateClassOptions()">
+              <option value="">Select Division</option>
+              <option value="nursery">Creche / Nursery</option>
+              <option value="primary">Primary School</option>
+              <option value="secondary">Secondary School</option>
+            </select>
+          </div>
+          <div class="fg"><label>Class Applying For *</label>
+            <select id="f_class">
+              <option value="">Select Division First</option>
+            </select>
+          </div>
+          <div class="fg"><label>Preferred Campus *</label>
+            <select id="f_campus">
+              <option value="">Select Campus</option>
+              <option>Main Campus — Agbasike Umuohi, Okija</option>
+              <option>Campus 2 — SU House, Nkwo Okija</option>
+              <option>Campus 3 — Ihiala Main Market</option>
+            </select>
+          </div>
+          <div class="fg"><label>Parent/Guardian Full Name *</label><input type="text" id="f_parent" placeholder="e.g. Mr. Emmanuel Okafor" required></div>
+          <div class="fg"><label>Parent/Guardian Phone *</label><input type="tel" id="f_phone" placeholder="+234 806 000 0000" required></div>
+          <div class="fg"><label>Parent/Guardian Email</label><input type="email" id="f_email" placeholder="parent@email.com"></div>
+          <div class="fg"><label>Previous School</label><input type="text" id="f_prevschool" placeholder="Name of last school attended"></div>
+          <div class="fg"><label>Additional Information</label><textarea id="f_extra" placeholder="Any medical conditions, special needs or questions..."></textarea></div>
+
+          <button class="sbtn" id="submitBtn" onclick="submitApplication()">
+            📨 Submit Application
+          </button>
+        </div>
+
+        <!-- Success screen -->
+        <div id="successScreen" style="display:none;text-align:center;padding:30px 10px">
+          <div style="font-size:60px;margin-bottom:16px">🎉</div>
+          <h3 style="color:var(--green-dark);margin-bottom:8px">Application Submitted!</h3>
+          <p style="color:var(--gray);font-size:14px;line-height:1.7;margin-bottom:20px">Your application has been sent to CFMA via Email, Google Sheets and WhatsApp. We will contact you within 48 hours.</p>
+          <div id="refNumber" style="background:var(--off-white);border:1px solid var(--light-gray);border-radius:4px;padding:14px;font-size:13px;color:var(--gray);margin-bottom:20px"></div>
+          <button class="sbtn" onclick="resetForm()" style="max-width:200px;margin:0 auto">Submit Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="adminOverlay" style="display:none;opacity:0;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;transition:opacity .3s">
+  <div style="background:white;border-radius:10px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative;font-family:'Open Sans',Arial,sans-serif">
+    <button onclick="closeAdminOverlay()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:52px;height:52px;background:#006B35;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;margin:0 auto 12px">🔐</div>
+      <h3 style="font-size:18px;font-weight:700;color:#004D26;margin-bottom:4px">Admin Access</h3>
+      <p style="font-size:13px;color:#888">Christ the Foundation Model Academy</p>
+    </div>
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:12px;font-weight:700;color:#004D26;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Admin Password</label>
+      <input id="adminPwd" type="password" placeholder="Enter admin password" style="width:100%;padding:12px 16px;border:2px solid #e0e0e0;border-radius:6px;font-size:14px;font-family:'Open Sans',Arial,sans-serif;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#006B35'" onblur="this.style.borderColor='#e0e0e0'">
+      <div id="adminPwdError" style="display:none;color:#dc2626;font-size:12px;margin-top:8px;font-weight:600">❌ Incorrect password. Please try again.</div>
+    </div>
+    <button onclick="submitAdminLogin()" style="width:100%;background:#006B35;color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Open Sans',Arial,sans-serif;transition:background .2s" onmouseover="this.style.background='#004D26'" onmouseout="this.style.background='#006B35'">Enter Admin Panel</button>
+    <p style="text-align:center;font-size:11px;color:#bbb;margin-top:14px">This area is restricted to CFMA administrators only</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <div class="fb-name">Christ the Foundation Model Academy</div>
+      <div class="fb-motto">"Consolidated Knowledge Through Education"</div>
+      <p>Providing quality, Christ-centred secondary education across three campuses in Anambra State since 1998. Affiliated with WAEC, NECO and the Anambra State Ministry of Education.</p>
+    </div>
+    <div class="fcol reveal">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a onclick="goTo('about')">About Us</a></li>
+        <li><a onclick="goTo('academics')">Academics</a></li>
+      <li><a onclick="goTo('earlyyears')">Nursery &amp; Primary</a></li>
+        <li><a onclick="goTo('admissions')">Admissions</a></li>
+        <li><a onclick="goTo('portal')">🎓 Student Portal</a></li>
+      
+<li><a onclick="goTo('database')">Database</a></li>
+        <li><a onclick="goTo('contact')">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="fcol reveal">
+      <h5>Our Campuses</h5>
+      <ul>
+        <li><a>Main — Agbasike Umuohi, Okija</a></li>
+        <li><a>Campus 2 — Nkwo Okija</a></li>
+        <li><a>Campus 3 — Ihiala Market</a></li>
+      </ul>
+      <h5 style="margin-top:22px">Examinations</h5>
+      <ul>
+        <li><a>WAEC SSCE</a></li><li><a>NECO SSCE</a></li>
+        <li><a>JAMB / UTME</a></li><li><a>BECE (JSS3)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Christ the Foundation Model Academy, Okija, Anambra State. All rights reserved.</p>
+    <div class="ng-flag"><div class="nf g"></div><div class="nf w"></div><div class="nf g"></div></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      console.log('CFMA Service Worker registered');
+    }).catch(function(err) {
+      console.log('Service Worker registration failed:', err);
+    });
+  });
+}
+
+// Install prompt handling
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  var btn = document.getElementById('installAppBtn');
+  if (btn) btn.style.display = 'inline-flex';
+});
+
+function installCFMAApp() {
+  if (!deferredPrompt) {
+    alert('To install: tap your browser menu (⋮ or Share icon) and select "Add to Home Screen"');
+    return;
+  }
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(function(choice) {
+    if (choice.outcome === 'accepted') {
+      var btn = document.getElementById('installAppBtn');
+      if (btn) btn.style.display = 'none';
+    }
+    deferredPrompt = null;
+  });
+}
+</script>
+</body>
+</html>
