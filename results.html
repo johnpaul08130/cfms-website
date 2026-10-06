@@ -103,7 +103,7 @@
       <div class="search-box reveal">
         <h4>🔍 Search Your Results</h4>
         <div class="srow">
-          <div class="fg"><label>Student ID</label><input type="text" id="studentId" placeholder="e.g. CFMS-2025-001" onkeypress="if(event.key==='Enter') searchResults()"></div>
+          <div class="fg"><label>Student ID</label><input type="text" id="studentId" placeholder="e.g. CFMS-SEC-2025-001" onkeypress="if(event.key==='Enter') searchResults()"></div>
           <div class="fg"><label>Term</label>
             <select id="termSelect">
               <option value="">Select Term</option>
@@ -159,7 +159,7 @@
       </div>
 
       <div style="background:rgba(0,107,53,.06);border:1px solid rgba(0,107,53,.2);border-left:4px solid var(--green);border-radius:3px;padding:14px 18px;margin-top:22px;font-size:13px;color:var(--gray)" class="reveal">
-        <strong style="color:var(--green-dark)">💡 Demo:</strong> Try Student ID <strong>CFMS-2025-001</strong>, <strong>CFMS-2025-002</strong>, or <strong>CFMS-2025-003</strong> with <em>First Term / 2024/2025</em> to see a sample result.
+        <strong style="color:var(--green-dark)">📋 Format:</strong> Your Student ID looks like <strong>CFMS-SEC-2025-001</strong> (or CFMS-PRY-, CFMS-NUR- for Primary/Nursery). It's on your ID card or admission letter. Select the correct Term and Academic Year before searching.
       </div>
     </div>
 
@@ -191,7 +191,7 @@
           <div class="instr" style="margin-bottom:0;border-radius:6px 6px 0 0">
             <h5>📋 Step 1 — Select Your Class &amp; Subject</h5>
             <p style="font-size:13px;color:var(--gray);margin-bottom:16px">Choose the class you teach and the subject you are uploading results for. This pre-fills your template automatically.</p>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px">
+            <div class="grid-3" style="gap:14px;margin-bottom:16px">
               <div>
                 <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Term *</label>
                 <select id="tpl_term" onchange="updateTemplatePreview()" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">
@@ -384,7 +384,7 @@
               </div>
             </div>
 
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px">
+            <div class="grid-4" style="gap:14px;margin-bottom:14px">
               <div>
                 <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Class *</label>
                 <select id="asg_class" style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none;background:white">

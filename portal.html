@@ -108,7 +108,7 @@
           <div id="portalLoginErr" class="portal-login-err">❌ Student ID not found. Please check your ID and try again.</div>
           <div class="pl-fg">
             <label>Student ID Number</label>
-            <input type="text" id="portalStudentId" placeholder="e.g. CFMS-2025-001" onkeypress="if(event.key==='Enter')portalLogin()">
+            <input type="text" id="portalStudentId" placeholder="e.g. CFMS-SEC-2025-001" onkeypress="if(event.key==='Enter')portalLogin()">
           </div>
           <div class="pl-fg">
             <label>Date of Birth</label>
@@ -168,7 +168,7 @@
               <div class="pqs"><div class="pqs-num" id="pqs-feestatus">—</div><div class="pqs-label">Fee Status</div></div>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+          <div class="grid-2" style="gap:20px">
             <div onclick="switchPortalTab('profile',document.querySelector('.portal-nav-tab:nth-child(2)'))"
               style="background:white;border:1px solid var(--light-gray);border-radius:10px;padding:28px;cursor:pointer;transition:all .2s;display:flex;gap:16px;align-items:center"
               onmouseover="this.style.boxShadow='0 6px 24px rgba(0,107,53,.1)'" onmouseout="this.style.boxShadow='none'">

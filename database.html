@@ -328,7 +328,7 @@
         <!-- Add new staff -->
         <div style="background:#fafafa;border:1px solid var(--light-gray);border-radius:6px;padding:16px;margin-bottom:20px">
           <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:10px">➕ Create New Staff Account</div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px">
+          <div class="grid-2" style="margin-bottom:10px">
             <div>
               <label style="font-size:11px;color:var(--gray);display:block;margin-bottom:4px">Username</label>
               <input type="text" id="newStaffUsername" placeholder="e.g. mrs_okoro" style="width:100%;padding:8px 10px;border:1px solid var(--light-gray);border-radius:4px;font-size:13px">
@@ -371,7 +371,7 @@
           </div>
           <button onclick="toggleQuickAdd()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999">✕</button>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px">
+        <div class="grid-3" style="margin-bottom:10px">
           <div>
             <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Surname *</label>
             <input id="qa_surname" type="text" placeholder="e.g. Okafor" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
@@ -385,7 +385,7 @@
             <input id="qa_othername" type="text" placeholder="(optional)" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px">
+        <div class="grid-4" style="margin-bottom:10px">
           <div>
             <label style="font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Date of Birth *</label>
             <input id="qa_dob" type="date" style="width:100%;padding:8px 10px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none">
@@ -486,7 +486,7 @@
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
                   <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">STUDENT ID</label>
-                    <input id="idf_idno" type="text" placeholder="CFMS-2025-001" oninput="dbLiveCard()"
+                    <input id="idf_idno" type="text" placeholder="CFMS-SEC-2025-001" oninput="dbLiveCard()"
                       style="width:100%;padding:9px 12px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:13px;font-family:'Open Sans',sans-serif;outline:none"
                       onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'"></div>
                   <div><label style="font-size:11px;font-weight:700;color:var(--gray);display:block;margin-bottom:4px">YEAR OF ENTRY</label>
@@ -609,7 +609,7 @@
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;margin-bottom:20px;flex-wrap:wrap">
               <div>
                 <label style="display:block;font-size:11px;font-weight:700;color:var(--green-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Student ID / Name</label>
-                <input type="text" id="prStudentId" placeholder="e.g. CFMS-2025-001" oninput="prAutoSuggest()"
+                <input type="text" id="prStudentId" placeholder="e.g. CFMS-SEC-2025-001" oninput="prAutoSuggest()"
                   style="width:100%;padding:10px 14px;border:1.5px solid var(--light-gray);border-radius:4px;font-size:14px;font-family:'Open Sans',sans-serif;outline:none"
                   onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--light-gray)'" onkeypress="if(event.key==='Enter')adminSearchResults()">
                 <div id="prAutoSuggestBox" style="border:1px solid var(--light-gray);border-radius:4px;display:none;max-height:160px;overflow-y:auto;margin-top:4px;background:white;position:relative;z-index:10"></div>
